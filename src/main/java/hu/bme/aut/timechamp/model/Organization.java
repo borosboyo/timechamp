@@ -10,4 +10,5 @@ import java.util.ArrayList;
 public class Organization {
     private String name;
     private ArrayList<Team> teams;
+    private Place headQuarters;
 }
