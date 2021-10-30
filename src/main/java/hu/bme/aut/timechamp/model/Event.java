@@ -11,4 +11,5 @@ public class Event {
     private String name;
     private User creator;
     private ArrayList<User> participants;
+    private ArrayList<Todo> todoList;
 }
