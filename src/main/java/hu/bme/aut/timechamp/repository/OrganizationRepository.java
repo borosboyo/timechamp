@@ -1,4 +1,4 @@
 package hu.bme.aut.timechamp.repository;
 
-public class OrganizationRepository {
+public interface OrganizationRepository {
 }
