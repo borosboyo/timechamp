@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class Place {
     private String name;
+    private String googleCode;
     private double longitude;
     private double latitude;
 }
