@@ -3,11 +3,9 @@ package hu.bme.aut.timechamp.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-
 @Getter
 @Setter
-public class Organization {
+public class Event {
     private String name;
-    private ArrayList<Team> teams;
+    private User creator;
 }
