@@ -1,18 +1,40 @@
 package hu.bme.aut.timechamp.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Event {
+
+    @Id
+    @GeneratedValue
+    private long id;
+
+    @Basic
     private String name;
+
+    @ManyToOne
     private Team team;
+
+    @Basic
     private LocalDateTime time;
-    private ArrayList<User> creators;
+
+    @ManyToOne
+    private User creator;
+
+    @ManyToMany(mappedBy = "event")
     private ArrayList<User> participants;
-    private ArrayList<Todo> todoList;
+
 }
+
