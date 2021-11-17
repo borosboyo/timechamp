@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -35,6 +36,9 @@ public class Event {
 
     @ManyToMany(mappedBy = "event")
     private ArrayList<User> participants;
+
+    public Event(String name, LocalDateTime time) { this.name = name; this.time = time; }
+
 
 }
 

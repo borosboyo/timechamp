@@ -1,6 +1,6 @@
 package hu.bme.aut.timechamp;
 
-import hu.bme.aut.timechamp.service.SampleService;
+import hu.bme.aut.timechamp.service.PostponeEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WebshopApplication implements CommandLineRunner {
 
     @Autowired
-    SampleService sampleService;
+    PostponeEventService postponeEventService;
 
     public static void main(String[] args) {
         SpringApplication.run(WebshopApplication.class, args);
@@ -19,6 +19,6 @@ public class WebshopApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        sampleService.sampleMethod();
+        postponeEventService.sampleMethod();
     }
 }
