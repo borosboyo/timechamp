@@ -2,6 +2,7 @@ package hu.bme.aut.timechamp.service;
 
 import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.repository.EventRepository;
+import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +14,7 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
+import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class PostponeEventTest {
@@ -34,7 +36,7 @@ public class PostponeEventTest {
         postponeEventService.postponeByMinute("sampleevent",30);
 
         //ASSERT
-        Assertions.assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 0));
+        Assertions.assertEquals(LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 0),event.getTime());
 
     }
 
@@ -49,7 +51,7 @@ public class PostponeEventTest {
         postponeEventService.postponeByHour("sampleevent",1);
 
         //ASSERT
-        Assertions.assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 30));
+        Assertions.assertEquals(LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 30),event.getTime());
     }
 
     @Test
@@ -63,6 +65,6 @@ public class PostponeEventTest {
         postponeEventService.postponeByDay("sampleevent",1);
 
         //ASSERT
-        Assertions.assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 18, 21, 30));
+        Assertions.assertEquals(LocalDateTime.of(2021, Month.NOVEMBER, 18, 21, 30),event.getTime());
     }
 }
