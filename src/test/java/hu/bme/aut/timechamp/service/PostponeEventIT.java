@@ -2,7 +2,6 @@ package hu.bme.aut.timechamp.service;
 
 import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.repository.EventRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
@@ -38,7 +39,7 @@ public class PostponeEventIT {
         postponeEventService.postponeByMinute("sampleevent",30);
 
         //ASSERT
-        Assertions.assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 0));
+        assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 0));
 
     }
 
@@ -53,7 +54,7 @@ public class PostponeEventIT {
         postponeEventService.postponeByHour("sampleevent",1);
 
         //ASSERT
-        Assertions.assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 30));
+        assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 30));
 
     }
 
@@ -68,7 +69,7 @@ public class PostponeEventIT {
         postponeEventService.postponeByDay("sampleevent",1);
 
         //ASSERT
-        Assertions.assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 18, 21, 30));
+        assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 18, 21, 30));
 
     }
 }

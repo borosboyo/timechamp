@@ -2,7 +2,6 @@ package hu.bme.aut.timechamp.service;
 
 import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.repository.EventRepository;
-import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,7 +13,6 @@ import static org.mockito.Mockito.when;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
-import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
 public class PostponeEventTest {
