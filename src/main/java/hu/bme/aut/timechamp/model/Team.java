@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,14 +19,13 @@ public class Team {
     @GeneratedValue
     private long id;
 
-    @Basic
     private String name;
 
     @OneToMany(mappedBy = "team")
-    private ArrayList<User> adminUsers;
+    private List<User> adminUsers;
 
     @OneToMany(mappedBy = "team")
-    private ArrayList<User> users;
+    private List<User> users;
     
     @ManyToOne
     @JoinColumn(name = "organization_id")

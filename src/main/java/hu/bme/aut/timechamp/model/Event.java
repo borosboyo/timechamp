@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -22,20 +20,18 @@ public class Event {
     @GeneratedValue
     private long id;
 
-    @Basic
     private String name;
 
     @ManyToOne
     private Team team;
 
-    @Basic
     private LocalDateTime time;
 
     @ManyToOne
     private User creator;
 
     @ManyToMany(mappedBy = "event")
-    private ArrayList<User> participants;
+    private List<User> participants;
 
     public Event(String name, LocalDateTime time) { this.name = name; this.time = time; }
 

@@ -19,13 +19,10 @@ public class User {
     @GeneratedValue
     private long id;
 
-    @Basic
     private String email;
 
-    @Basic
     private String userName;
 
-    @Basic
     private String password;
 
     @ManyToMany
