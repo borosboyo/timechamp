@@ -35,6 +35,5 @@ public class Event {
 
     public Event(String name, LocalDateTime time) { this.name = name; this.time = time; }
 
-
 }
 

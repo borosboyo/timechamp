@@ -10,8 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.Arrays;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
@@ -39,7 +42,8 @@ public class PostponeEventIT {
         postponeEventService.postponeByMinute("sampleevent",30);
 
         //ASSERT
-        assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 0));
+        Event eventFromDb = eventRepository.findById(event.getId()).get();
+        assertEquals(LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 0),eventFromDb.getTime());
 
     }
 
@@ -54,7 +58,8 @@ public class PostponeEventIT {
         postponeEventService.postponeByHour("sampleevent",1);
 
         //ASSERT
-        assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 30));
+        Event eventFromDb = eventRepository.findById(event.getId()).get();
+        assertEquals(LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 30),eventFromDb.getTime());
 
     }
 
@@ -69,7 +74,8 @@ public class PostponeEventIT {
         postponeEventService.postponeByDay("sampleevent",1);
 
         //ASSERT
-        assertEquals(event.getTime(),LocalDateTime.of(2021, Month.NOVEMBER, 18, 21, 30));
+        Event eventFromDb = eventRepository.findById(event.getId()).get();
+        assertEquals(LocalDateTime.of(2021, Month.NOVEMBER, 18, 21, 30),eventFromDb.getTime());
 
     }
 }

@@ -15,26 +15,26 @@ public class PostponeEventService {
     private EventRepository eventRepository;
 
     @Transactional
-    public void postponeByMinute(String eventName, int timeDifference){
-        List<Event> eventList = eventRepository.findByName(eventName);
-        for (Event event : eventList) {
-            event.setTime(event.getTime().plusMinutes(timeDifference));
+    public void postponeByMinute(String name, int timeDifference){
+        List<Event> eventList = eventRepository.findByName(name);
+        for (Event e : eventList) {
+            e.setTime(e.getTime().plusMinutes(timeDifference));
         }
     }
 
     @Transactional
-    public void postponeByHour(String eventName, int timeDifference){
-        List<Event> eventList = eventRepository.findByName(eventName);
-        for (Event event : eventList) {
-            event.setTime(event.getTime().plusHours(timeDifference));
+    public void postponeByHour(String name, int timeDifference){
+        List<Event> eventList = eventRepository.findByName(name);
+        for (Event e : eventList) {
+            e.setTime(e.getTime().plusHours(timeDifference));
         }
     }
 
     @Transactional
-    public void postponeByDay(String eventName, int timeDifference){
-        List<Event> eventList = eventRepository.findByName(eventName);
-        for (Event event : eventList) {
-            event.setTime(event.getTime().plusDays(timeDifference));
+    public void postponeByDay(String name, int timeDifference){
+        List<Event> eventList = eventRepository.findByName(name);
+        for (Event e : eventList) {
+            e.setTime(e.getTime().plusDays(timeDifference));
         }
     }
 

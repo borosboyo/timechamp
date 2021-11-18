@@ -27,12 +27,12 @@ public class User {
 
     @ManyToMany
     @JoinTable(name = "user_event",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "event_id"))
+            joinColumns = @JoinColumn(name = "user_id"))
     private List<Event> event;
 
     @ManyToMany
     @JoinTable(name = "user_todo",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "todo_id"))
+            joinColumns = @JoinColumn(name = "user_id"))
     private List<Todo> todo;
 
     @ManyToOne
