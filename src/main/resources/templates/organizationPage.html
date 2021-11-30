@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Organizations</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>HeadQuarters</td>
+        </tr>
+        <tr th:each ="organization : ${organizations}">
+            <td th:text="${organization.name}">Name</td>
+            <td th:text="${organization.headQuarters}">HeadQuarters</td>
+        </tr>
+    </table>
+
+    <form th:action="@{/createOrganization}" th:object="${organization}" method="post">
+        Name: <input th:field="*{name}"/><br/>
+        <input type="submit" value="Add"/>
+    </form>
+
+</body>
+</html>

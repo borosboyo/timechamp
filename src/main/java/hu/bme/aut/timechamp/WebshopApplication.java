@@ -19,6 +19,6 @@ public class WebshopApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //postponeEventService.sampleMethod();
+//        sampleDataService.addSampleData();
     }
 }
