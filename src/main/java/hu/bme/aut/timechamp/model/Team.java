@@ -22,10 +22,10 @@ public class Team {
     private String name;
 
     @OneToMany(mappedBy = "team")
-    private List<User> adminUsers;
+    private List<AppUser> adminAppUsers;
 
     @OneToMany(mappedBy = "team")
-    private List<User> users;
+    private List<AppUser> appUsers;
     
     @ManyToOne
     @JoinColumn(name = "organization_id")

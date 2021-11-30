@@ -22,7 +22,7 @@ public class Todo {
     private String name;
 
     @ManyToMany(mappedBy = "todo")
-    private List<User> leaders;
+    private List<AppUser> leaders;
 
     @ManyToOne
     private Event event;

@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue
@@ -26,13 +26,13 @@ public class User {
     private String password;
 
     @ManyToMany
-    @JoinTable(name = "user_event",
-            joinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "appuser_event",
+            joinColumns = @JoinColumn(name = "appuser_id"))
     private List<Event> event;
 
     @ManyToMany
-    @JoinTable(name = "user_todo",
-            joinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(name = "appuser_todo",
+            joinColumns = @JoinColumn(name = "appuser_id"))
     private List<Todo> todo;
 
     @ManyToOne
