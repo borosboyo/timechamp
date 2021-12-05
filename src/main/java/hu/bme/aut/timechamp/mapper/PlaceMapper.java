@@ -8,7 +8,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PlaceMapper {
-
     public PlaceDto placeToDto(Place place);
     public List<PlaceDto> placesToDto(List<Place> places);
 }
