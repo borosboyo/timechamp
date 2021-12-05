@@ -1,14 +1,12 @@
-package hu.bme.aut.timechamp.controller.restcontroller;
+package hu.bme.aut.timechamp.web.controller.restcontroller;
 
 import hu.bme.aut.timechamp.model.Organization;
-import hu.bme.aut.timechamp.model.Place;
-import hu.bme.aut.timechamp.model.Team;
 import hu.bme.aut.timechamp.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/organizations")
@@ -17,9 +15,12 @@ public class OrganizationRestController {
     @Autowired
     OrganizationRepository organizationRepository;
 
-    /**
+/*
+    */
+/**
      * Azért transactional mert különben nem tudjuk lekérni a Teams listát a lazy initialization miatt (borosboyo)
-     */
+     *//*
+
     @GetMapping
     @Transactional
     public List<Organization> findAll(){
@@ -39,6 +40,7 @@ public class OrganizationRestController {
             p.setOrganization(null);
         }
     }
+*/
 
     @PostMapping
     public Organization createOrganization(@RequestBody Organization organization){

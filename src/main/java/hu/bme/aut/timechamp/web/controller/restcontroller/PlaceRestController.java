@@ -1,11 +1,15 @@
-package hu.bme.aut.timechamp.controller.restcontroller;
+package hu.bme.aut.timechamp.web.controller.restcontroller;
 
 
-import hu.bme.aut.timechamp.model.Organization;
+import hu.bme.aut.timechamp.dto.PlaceDto;
+import hu.bme.aut.timechamp.mapper.PlaceMapper;
 import hu.bme.aut.timechamp.model.Place;
 import hu.bme.aut.timechamp.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -15,8 +19,10 @@ public class PlaceRestController {
 
     @Autowired
     PlaceRepository placeRepository;
+    @Autowired
+    PlaceMapper placeMapper;
 
-    @GetMapping
+/*    @GetMapping
     public List<Place> findAll(){
         List<Place> places = placeRepository.findAll();
 
@@ -30,6 +36,13 @@ public class PlaceRestController {
             org.setHeadQuarters(null);
         }
     }
+*/
+    public List<PlaceDto> findAll() {
+        List<Place> places = placeRepository.findAll();
+        return placeMapper.placesToDto(places);
+    }
+
+
     @PostMapping
     public Place createPlace(@RequestBody Place place){
         return placeRepository.save(place);

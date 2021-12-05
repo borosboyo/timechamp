@@ -1,4 +1,4 @@
-package hu.bme.aut.timechamp.controller;
+package hu.bme.aut.timechamp.web.controller.normalcontroller;
 
 import hu.bme.aut.timechamp.model.Organization;
 import hu.bme.aut.timechamp.repository.OrganizationRepository;
@@ -16,7 +16,7 @@ public class OrganizationController {
     @Autowired
     OrganizationRepository organizationRepository;
 
-    @GetMapping("/")
+    @GetMapping("/organizations")
     public String home(Map<String, Object> model){
         List<Organization> organizations = organizationRepository.findAll();
         model.put("organizations", organizations);
@@ -27,6 +27,6 @@ public class OrganizationController {
     @PostMapping("/createOrganization")
     public String createOrganization(Organization organization){
         organizationRepository.save(organization);
-        return "redirect:/";
+        return "redirect:/organizations";
     }
 }
