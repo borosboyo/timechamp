@@ -5,14 +5,13 @@
     <title>Organizations</title>
 </head>
 <body>
+
     <table>
         <tr>
-            <td>Name</td>
-            <td>HeadQuarters</td>
+            <th>Name</th>
         </tr>
         <tr th:each ="organization : ${organizations}">
             <td th:text="${organization.name}">Name</td>
-            <td th:text="${organization.headQuarters}">HeadQuarters</td>
         </tr>
     </table>
 
