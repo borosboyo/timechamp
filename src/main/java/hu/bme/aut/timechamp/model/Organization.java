@@ -25,5 +25,5 @@ public class Organization {
     private List<Team> teams;
 
     @OneToOne
-    private Place headQuarters;
+    private Place headQuarter;
 }

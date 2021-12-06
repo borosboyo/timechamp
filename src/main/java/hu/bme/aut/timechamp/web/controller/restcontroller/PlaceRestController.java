@@ -19,6 +19,7 @@ public class PlaceRestController {
 
     @Autowired
     PlaceRepository placeRepository;
+
     @Autowired
     PlaceMapper placeMapper;
 

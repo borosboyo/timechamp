@@ -1,5 +1,6 @@
 package hu.bme.aut.timechamp.web.controller.restcontroller;
 
+import hu.bme.aut.timechamp.mapper.OrganizationMapper;
 import hu.bme.aut.timechamp.model.Organization;
 import hu.bme.aut.timechamp.repository.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ public class OrganizationRestController {
 
     @Autowired
     OrganizationRepository organizationRepository;
+
+    @Autowired
+    OrganizationMapper organizationMapper;
 
 /*
     */
