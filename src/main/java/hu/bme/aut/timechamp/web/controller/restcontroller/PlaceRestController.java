@@ -6,10 +6,7 @@ import hu.bme.aut.timechamp.mapper.PlaceMapper;
 import hu.bme.aut.timechamp.model.Place;
 import hu.bme.aut.timechamp.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,8 +35,9 @@ public class PlaceRestController {
         }
     }
 */
+    @GetMapping
     public List<PlaceDto> findAll() {
-        List<Place> places = placeRepository.findAll();
+        List<Place> places = placeRepository.findAllWithOrganizationPlaces();
         return placeMapper.placesToDto(places);
     }
 

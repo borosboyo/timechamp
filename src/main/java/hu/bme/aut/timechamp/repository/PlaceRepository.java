@@ -1,7 +1,9 @@
 package hu.bme.aut.timechamp.repository;
 
 import hu.bme.aut.timechamp.model.Place;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,5 +12,9 @@ import java.util.List;
 public interface PlaceRepository extends JpaRepository<Place, Long> {
 
     List<Place> findByName(String name);
+
+    @EntityGraph(attributePaths = "organization.headQuarter")
+    @Query("SELECT p FROM Place p")
+    List<Place> findAllWithOrganizationPlaces();
 
 }

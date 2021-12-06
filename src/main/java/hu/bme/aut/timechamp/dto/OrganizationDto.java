@@ -12,6 +12,5 @@ public class OrganizationDto {
     private long id;
     private String name;
     private List<TeamDto> teams;
-
     private PlaceDto headQuarter;
 }
