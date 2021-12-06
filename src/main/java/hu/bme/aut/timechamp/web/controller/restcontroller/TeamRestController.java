@@ -6,10 +6,9 @@ import hu.bme.aut.timechamp.mapper.TeamMapper;
 import hu.bme.aut.timechamp.model.Team;
 import hu.bme.aut.timechamp.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -23,8 +22,14 @@ public class TeamRestController {
     TeamMapper teamMapper;
 
     @GetMapping
+    @Transactional
     public List<TeamDto> findAll(){
-        List<Team> teams = teamRepository.findAllWithOrganizationTeams();
+        List<Team> teams = teamRepository.findAll();
         return teamMapper.teamsToDto(teams);
+    }
+
+    @PostMapping
+    public Team createTeam(@RequestBody Team team){
+        return teamRepository.save(team);
     }
 }

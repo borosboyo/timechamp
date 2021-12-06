@@ -26,14 +26,14 @@ public class AppUser {
     private String password;
 
     @ManyToMany
-    @JoinTable(name = "appuser_event",
+    @JoinTable(name = "appuser_events",
             joinColumns = @JoinColumn(name = "appuser_id"))
-    private List<Event> event;
+    private List<Event> events;
 
     @ManyToMany
-    @JoinTable(name = "appuser_todo",
+    @JoinTable(name = "appuser_todos",
             joinColumns = @JoinColumn(name = "appuser_id"))
-    private List<Todo> todo;
+    private List<Todo> todos;
 
     @ManyToOne
     @JoinColumn(name = "team_id")

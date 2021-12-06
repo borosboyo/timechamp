@@ -21,11 +21,6 @@ public class OrganizationRestController {
     OrganizationMapper organizationMapper;
 
 /*
-    */
-/**
-     * Azért transactional mert különben nem tudjuk lekérni a Teams listát a lazy initialization miatt (borosboyo)
-     *//*
-
     @GetMapping
     @Transactional
     public List<Organization> findAll(){
@@ -46,7 +41,9 @@ public class OrganizationRestController {
         }
     }
 */
-
+    /**
+     * Azért transactional mert különben nem tudjuk lekérni a Teams listát a lazy initialization miatt (borosboyo)
+     */
     @GetMapping
     @Transactional
     public List<OrganizationDto> findAll(){

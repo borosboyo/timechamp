@@ -16,4 +16,12 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     @EntityGraph(attributePaths = "organization.teams")
     @Query("SELECT t FROM Team t")
     List<Team> findAllWithOrganizationTeams();
+
+    @EntityGraph(attributePaths = "app_user.team")
+    @Query("SELECT t FROM Team t")
+    List<Team> findAllWithAppUserTeams();
+
+    @EntityGraph(attributePaths = "event.team")
+    @Query("SELECT t FROM Team t")
+    List<Team> findAllWithEventTeams();
 }

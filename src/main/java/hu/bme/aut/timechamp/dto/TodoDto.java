@@ -14,5 +14,4 @@ public class TodoDto {
     private String description;
     private List<AppUserDto> leaders;
     private EventDto event;
-
 }

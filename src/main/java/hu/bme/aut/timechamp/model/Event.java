@@ -30,7 +30,10 @@ public class Event {
     @ManyToOne
     private AppUser creator;
 
-    @ManyToMany(mappedBy = "event")
+    @OneToMany
+    private List<Todo> todos;
+
+    @ManyToMany(mappedBy = "events")
     private List<AppUser> participants;
 
     public Event(String name, LocalDateTime time) { this.name = name; this.time = time; }

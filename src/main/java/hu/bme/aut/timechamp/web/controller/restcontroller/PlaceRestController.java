@@ -8,6 +8,7 @@ import hu.bme.aut.timechamp.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -36,11 +37,11 @@ public class PlaceRestController {
     }
 */
     @GetMapping
+    @Transactional
     public List<PlaceDto> findAll() {
-        List<Place> places = placeRepository.findAllWithOrganizationPlaces();
+        List<Place> places = placeRepository.findAll();
         return placeMapper.placesToDto(places);
     }
-
 
     @PostMapping
     public Place createPlace(@RequestBody Place place){

@@ -21,7 +21,7 @@ public class Todo {
 
     private String name;
 
-    @ManyToMany(mappedBy = "todo")
+    @ManyToMany(mappedBy = "todos")
     private List<AppUser> leaders;
 
     @ManyToOne

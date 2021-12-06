@@ -15,6 +15,7 @@ public class EventDto{
     private TeamDto team;
     private LocalDateTime time;
     private AppUserDto creator;
+    private List<TodoDto> todos;
     private List<AppUserDto> participants;
 
     public EventDto(String name, LocalDateTime time) { this.name = name; this.time = time; }
