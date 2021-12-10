@@ -20,7 +20,7 @@ Egy csapat adminja(i) létrehozhatnak, törölhetnek csapatspecifikus események
 ### Effective Java //MAX 1 OLDAL
 ### Clean code
 ### Spring MVC
-Egy olyan requrest-driven MVC framework, amely a Szervlet API-ra épül és web alkalmazásokat készíthetünk velük. 
+Egy olyan requrest-driven MVC framework, amely a Servlet API-ra épül és web alkalmazásokat készíthetünk vele. 
 
 #### Általános jellemzői:
 - Az objektumok felelősségeinek jó szétválasztása (MVC,validátorok, stb.)
