@@ -124,7 +124,7 @@ Egy parancssori build automatizáló eszköz, amely igen elterjedt, számos best
 - Képes függőségek letöltésére, akár tranzitívan is
 - Különböző fejlesztői környezetekkel is szerkeszthető ugyanaz a projekt
 - Build szerverek (pl.: Jenkins) is tudnak buildelni
-- 
+
 #### Hogyan kell használni a Mavent?
 A konfig fájl a `pom.xml`, amely a projekt gyökerében található. Ennek főbb, a projektben is használt elemei:
 - `<groupId>`, `<artifactId>`: azonosítják a projektet
