@@ -55,12 +55,12 @@ Egy parancssori build automatizáló eszköz, amely igen elterjedt, számos best
 - Különböző fejlesztői környezetekkel is szerkeszthető ugyanaz a projekt
 - Build szerverek (pl.: Jenkins) is tudnak buildelni
 #### Hogyan kell használni a Mavent?
-A konfig fájl a **pom.xml**, amely a projekt gyökerében található. Ennek főbb, a projektben is használt elemei:
-- <groupId>, <artifactId>: azonosítják a projektet
-- <version>: verzió
-- <dependencies>: függőségek
-- <build>: a build testreszabása, jellemzően pluginekkel
-- <properties>: konfigolható placeholderek
+A konfig fájl a `pom.xml`, amely a projekt gyökerében található. Ennek főbb, a projektben is használt elemei:
+- `<groupId>`, `<artifactId>`: azonosítják a projektet
+- `<version>`: verzió
+- `<dependencies>`: függőségek
+- `<build>`: a build testreszabása, jellemzően pluginekkel
+- `<properties>`: konfigolható placeholderek
 
 Az open source projektek egy része Mavent használ, és ezek lebuildelt verziója felkerül a Maven publikus repositoryba. A projektünkben függőségeket deklarálhatunk a következő módon:
 ```
@@ -70,7 +70,7 @@ Az open source projektek egy része Mavent használ, és ezek lebuildelt verzió
   <version>4.3.10.Final</version>
 </dependency>
 ```
-A függőségeket a publikus repositorybl próbálja meg letölteni a Maven, és mivel ezek a függőségek is rendelkeznek **pom.xml**-el, ezért tranzitívan telepítődik a többi függőség is.
+A függőségeket a publikus repositorybl próbálja meg letölteni a Maven, és mivel ezek a függőségek is rendelkeznek `pom.xml`-el, ezért tranzitívan telepítődik a többi függőség is.
   
 Egyéb repository-kat is deklarálhatunk (cégen belüli, saját repokban publikált projektek): 
 ```
@@ -83,14 +83,14 @@ Egyéb repository-kat is deklarálhatunk (cégen belüli, saját repokban publik
 ```
 #### Build életciklus
 Default életciklus:
-- validate: projekt validálása
-- compile: src/main/java alatti java fájlok fordítása
-- test: unit tesztek lefuttatása (hiba esetén leáll)
-- package: a main-ből fordított class fájlok és a src/main/resources (war esetén src/main/webapp is) alatti fájlok csomagolása jar/war formátumba
-- integration-test: integrációs tesztek előkészítése (pl. telepítés teszt szerverre)
-- verify: minőségi ellenőrzés
-- install: kész termék másolása a local repositoryba
-- deploy: kész termék feltöltése egy távoli repositoryba
+- `validate`: projekt validálása
+- `compile`: `src/main/java` alatti java fájlok fordítása
+- `test`: unit tesztek lefuttatása (hiba esetén leáll)
+- `package`: a `main`-ből fordított class fájlok és a `src/main/resources` (`war` esetén `src/main/webapp` is) alatti fájlok csomagolása `.jar`/`war` formátumba
+- `integration-test`: integrációs tesztek előkészítése (pl. telepítés teszt szerverre)
+- `verify`: minőségi ellenőrzés
+- `install`: kész termék másolása a local repositoryba
+- `deploy`: kész termék feltöltése egy távoli repositoryba
 
 Minden kimeneti fájl, jar, war a projekt target könyvtárba kerül. Az `mvn clean` paranccsal viszont törölhetjük ezt, illetve a verziókezelőben is ignorálhatjuk.
   
