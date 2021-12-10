@@ -20,7 +20,7 @@ Egy csapat adminja(i) létrehozhatnak, törölhetnek csapatspecifikus események
 ### Effective Java //MAX 1 OLDAL
 ### Clean code
 ### Spring MVC
-Egy olyan requrest-driven MVC framework, amely a Szervlet API-ra épül és web alkalmazásokat készíthetünk velük. 
+Egy olyan requrest-driven MVC framework, amely a Servlet API-ra épül és web alkalmazásokat készíthetünk vele. 
 
 #### Általános jellemzői:
 - Az objektumok felelősségeinek jó szétválasztása (MVC,validátorok, stb.)
@@ -69,6 +69,49 @@ URL leképezésért felelős: tetszőleges számú handler metódusa lehet, amel
 HTTP kérés törzsét lehet leképezni vele objektummá, a `@RequestBody` `@ResponseBody` annotációk (bemenő paraméterek) esetében, így ez nagy jelentőséggel bír REST stílusű webalkalmazások esetében.
 
 ### Thymeleaf
+A Thymeleaf egy Java XML/XHTML/HTML5 template engine, mely képes működni a weben is (servlet-based) és nem webes környezetekben is. Jobban illik hozzá a XHTML/HTML5 kiszolgálása, view layerként egy MVC-based web applikációban, de bármilyen XML fájlt képes feldolgozni offline környezetekben is. Teljes Spring Framework integrációt kínál. Rugalmasan bővíthető dialektusokkal, saját DOM implementáció tartalmaz, működése során pedig a parszolt template-eket cache-eli. A `spring-boot-starter-thymeleaf` autokonfigolja.
+Az alábbiakban mutatunk pár példát a használatára.
+
+Form adatok modellhez kötése:
+```
+<form action="saveCustomer.html" th:action="@{/saveCustomer}" th:object="${customer}"
+method="post">
+  <input type="hidden" th:field="*{id}" />
+  <label for="firstName">First name:</label>
+  
+  <input type="text" th:field="*{firstName}" value="John" />
+  <label for="lastName">Last name:</label>
+  
+  <input type="text" th:field="*{lastName}" value="Wayne" />
+  <label for="balance">Balance (dollars):</label>
+  
+  <input type="text" th:field="*{balance}" size="10" value="2500" />
+  <input type="submit" />
+</form>
+```
+
+Iteráció:
+```
+<table>
+  <tr>
+    <th>NAME</th>
+    <th>PRICE</th>
+  </tr>
+    <tr th:each="prod : ${prods}">
+    <td th:text="${prod.name}">Onions</td>
+    <td th:text="${prod.price}">2.41</td>
+  </tr>
+</table>
+```
+
+Feltételes kifejezések:
+```
+<div th:switch="${user.role}">
+  <p th:case="'admin'">User is an administrator</p>
+  <p th:case="#{roles.manager}">User is a manager</p>
+  <p th:case="*">User is some other thing</p>
+</div>
+```
 ### REST
 ### Maven
 
@@ -81,7 +124,7 @@ Egy parancssori build automatizáló eszköz, amely igen elterjedt, számos best
 - Képes függőségek letöltésére, akár tranzitívan is
 - Különböző fejlesztői környezetekkel is szerkeszthető ugyanaz a projekt
 - Build szerverek (pl.: Jenkins) is tudnak buildelni
-- 
+
 #### Hogyan kell használni a Mavent?
 A konfig fájl a `pom.xml`, amely a projekt gyökerében található. Ennek főbb, a projektben is használt elemei:
 - `<groupId>`, `<artifactId>`: azonosítják a projektet
