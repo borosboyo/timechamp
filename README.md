@@ -69,8 +69,8 @@ Minden kimeneti fájl, jar, war a projekt target könyvtárba kerül. Az `mvn cl
   
 #### Maven modulok
 Egy Maven projektnek lehet szülője vagy gyermeke egy másiknak:
-- <modules> tag a szülőben
-- <parent> tag a gyerekben
+- `<modules>` tag a szülőben
+- `<parent>` tag a gyerekben
 
 Ha egy szülőt buildelünk, akkor a gyerek buildelése is végbemegy, ugyan azzal a goal-lal. Ha a gyerekek között van függőség akkor ez a buildelési folyamat tranzitív.
 Miért jó ez? Hát azért, mert a szülő megadhatja a közösen használt dependency-k verzióit (természetes magukat a modulokat ugyanúgy bele kell rakni a gyermekek konfig fájlába, de elég verzió nélkül).
