@@ -12,3 +12,11 @@ Az alkalmazás tartalmaz továbbá csapatokat és azok tagjait, melyek egy kül�
 A csapat létrehozója admin joggal rendelkezik a csapaton belül, azonban más csapattagokat is felruházhat vele, továbbá csatlakozhat a csapatával egy szervezethez.
 
 Egy csapat adminja(i) létrehozhatnak, törölhetnek csapatspecifikus eseményeket, melyre minden csapattag jelentkezni tud. Az esemény létrehozója testreszabhatja az eseményt egyedi leírás megadásával. Az eseményeknél megtekinthetőek, hogy kik a jelenlegi résztvevők. Az eseményekhez elvégzendő feladatok is kötődhetnek, amelynek vannak felelősei, illetve egy esemény helyhez kötött, amelyhez hozzá lehet rendelni Google Maps kódot, nevet, hosszúságot, illetve szélességet.
+# Mit tanultunk a félév során?
+## Effective Java //MAX 1 OLDAL
+## Clean code
+## Spring
+## Maven
+## JPA
+## REST
+## Lombok, Mapstruct 
