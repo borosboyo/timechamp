@@ -16,8 +16,35 @@ Egy csapat adminja(i) létrehozhatnak, törölhetnek csapatspecifikus események
 ## Mit tanultunk a félév során?
 ### Effective Java //MAX 1 OLDAL
 ### Clean code
+### Spring MVC
+Egy olyan requrest-driven MVC framework, amely a Szervlet API-ra épül és web alkalmazásokat készíthetünk velük. 
+#### Általános jellemzői:
+- Az objektumok felelősségeinek jó szétválasztása (MVC,validátorok, stb.)
+- Rugalmasan konfigurálható
+- Nincsenek előírt ősosztályok, interfészek
+- Annotációk támogatása
+- Testre szabható validáció
+- Több megjelenítési technológia támogatása (JSP, Thymeleaf)
+- Nincs UI komponens modellje
+
+A Controller egy központti résztvevője a Spring MVC-nek, hiszen a különböző HTML kérések (pl.: `GET`, `POST`, `DELETE`, `PUT`) feldolgozását is ő végzi.
+#### Konfigurációja
+Spring Boot nélkül XML és/vagy JavaConfigra lenne szükség a SpringMVC, és a Thymeleaf bekonfigurálásához, de Spring Boot esetén csupán két függőséget kell hozzáadni a **pom.xml**-hez:
+```
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>
+```
+
+Az alkalmazás belépési pontja pedig a `@SpringBootApplication` annotációval ellátot osztály lesz. A Controler osztályainkat a `root` csomagba, vagy valamely alcsomagjába kell helyeznünk. A Thymeleaf-es `.html` fájlokat az `src\main\resources\templates` alá kell helyeznünk.
+
 ### Spring Boot
-### Spring Boot
+#### Webalkalmazás futtatása
 ### Maven
 #### Mi a Maven?
 Egy parancssori build automatizáló eszköz, amely igen elterjedt, számos best practice-t integrál, külső pluginokat is be lehet importálni, például Lombok vagy Mapstruct.
