@@ -29,7 +29,7 @@ Egy olyan requrest-driven MVC framework, amely a Szervlet API-ra épül és web 
 
 A Controller egy központti résztvevője a Spring MVC-nek, hiszen a különböző HTML kérések (pl.: `GET`, `POST`, `DELETE`, `PUT`) feldolgozását is ő végzi.
 #### Konfigurációja
-Spring Boot nélkül XML és/vagy JavaConfigra lenne szükség a SpringMVC, és a Thymeleaf bekonfigurálásához, de Spring Boot esetén csupán két függőséget kell hozzáadni a **pom.xml**-hez:
+Spring Boot nélkül XML és/vagy JavaConfigra lenne szükség a SpringMVC, és a Thymeleaf bekonfigurálásához, de Spring Boot esetén csupán két függőséget kell hozzáadni a `pom.xml`-hez:
 ```
 <dependency>
   <groupId>org.springframework.boot</groupId>
