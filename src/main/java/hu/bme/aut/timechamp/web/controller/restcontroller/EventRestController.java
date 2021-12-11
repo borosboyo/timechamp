@@ -32,22 +32,49 @@ public class EventRestController {
 
     @PutMapping
     public EventDto createEvent(@RequestParam String name, @RequestParam long teamId, @RequestParam long creatorId) {
-        return eventService.createEvent(name, teamId, creatorId);
+        try {
+            EventDto eventDto = eventService.createEvent(name, teamId, creatorId);
+
+            if(eventDto == null) {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+            return eventDto;
+        }
+        catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad parameters");
+        }
     }
 
 
     @GetMapping("/{id}")
     public EventDto getEventById(@PathVariable long id) {
-        return eventService.findById(id);
+        EventDto eventDto = eventService.findById(id);
+        if(eventDto == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return eventDto;
     }
 
 
-    @PostMapping("/{id}/addparticipant")
+    @PostMapping("/{id}/participant/add")
     public EventDto addParticipant(@PathVariable long id, @RequestParam long appUserId) {
-        return eventService.addParticipant(id, appUserId);
+        try {
+            EventDto eventDto = eventService.addParticipant(id, appUserId);
+
+            if(eventDto == null) {
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+            return eventDto;
+        }
+        catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad parameters");
+        }
     }
 
-    @PostMapping("/{id}/removeparticipant")
+    @PostMapping("/{id}/participant/remove")
     public EventDto removeParticipant(@PathVariable long id, @RequestParam long appUserId) {
         return eventService.removeParticipant(id, appUserId);
     }
