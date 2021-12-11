@@ -6,9 +6,9 @@ import hu.bme.aut.timechamp.mapper.TeamMapper;
 import hu.bme.aut.timechamp.model.Team;
 import hu.bme.aut.timechamp.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController

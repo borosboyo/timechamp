@@ -1,5 +1,6 @@
 package hu.bme.aut.timechamp.service;
 
+import hu.bme.aut.timechamp.dto.TodoDto;
 import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.model.Todo;
@@ -22,6 +23,10 @@ public class TodoService {
     @Autowired
     EventRepository eventRepository;
 
+    @Transactional
+    public List<Todo> findAll(){
+        return todoRepository.findAll();
+    }
 
     @Transactional
     public Todo createTodoToEvent(long eventId, String todoName) {

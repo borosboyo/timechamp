@@ -7,17 +7,14 @@ import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.repository.AppUserRepository;
 import hu.bme.aut.timechamp.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/appusers")
 public class AppUserRestController {
-
-    @Autowired
-    AppUserRepository appUserRepository;
 
     @Autowired
     AppUserService appUserService;
@@ -26,10 +23,8 @@ public class AppUserRestController {
     AppUserMapper appUserMapper;
 
     @GetMapping
-    @Transactional
     public List<AppUserDto> findAll(){
-        List<AppUser> appUsers = appUserRepository.findAll();
-        return appUserMapper.appUsersToDto(appUsers);
+        return appUserMapper.appUsersToDto(appUserService.findAll());
     }
     @PostMapping
     public AppUserDto createAppUser(@RequestParam String email, @RequestParam String username,@RequestParam String password){

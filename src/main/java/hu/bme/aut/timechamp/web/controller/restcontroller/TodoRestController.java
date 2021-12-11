@@ -4,31 +4,24 @@ import hu.bme.aut.timechamp.dto.TodoDto;
 import hu.bme.aut.timechamp.mapper.TodoMapper;
 import hu.bme.aut.timechamp.model.Todo;
 import hu.bme.aut.timechamp.repository.TodoRepository;
+import hu.bme.aut.timechamp.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/todos")
 public class TodoRestController {
-
     @Autowired
-    TodoRepository todoRepository;
+    TodoService todoService;
 
     @Autowired
     TodoMapper todoMapper;
 
     @GetMapping
-    @Transactional
     public List<TodoDto> findAll(){
-        List<Todo> todos = todoRepository.findAll();
-        return todoMapper.todosToDto(todos);
-    }
-
-    @PostMapping
-    public Todo createPlace(@RequestBody Todo todo){
-        return todoRepository.save(todo);
+        return todoMapper.todosToDto(todoService.findAll());
     }
 }

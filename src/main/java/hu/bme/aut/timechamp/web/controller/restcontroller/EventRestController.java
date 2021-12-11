@@ -20,19 +20,14 @@ import java.util.Optional;
 public class EventRestController {
 
     @Autowired
-    EventRepository eventRepository;
-
-    @Autowired
     EventService eventService;
 
     @Autowired
     EventMapper eventMapper;
 
     @GetMapping
-    @Transactional
     public List<EventDto> findAll(){
-        List<Event> events = eventRepository.findAll();
-        return eventMapper.eventsToDto(events);
+        return eventMapper.eventsToDto(eventService.findAll());
     }
 
 

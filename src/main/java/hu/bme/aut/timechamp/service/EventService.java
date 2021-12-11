@@ -1,5 +1,6 @@
 package hu.bme.aut.timechamp.service;
 
+import hu.bme.aut.timechamp.dto.EventDto;
 import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.model.Team;
@@ -25,6 +26,11 @@ public class EventService {
 
     @Autowired
     TeamRepository teamRepository;
+
+    @Transactional
+    public List<Event> findAll(){
+        return eventRepository.findAll();
+    }
 
     @Transactional
     public Event createEvent(String name, long teamId, long creatorId) {

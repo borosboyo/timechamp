@@ -1,5 +1,6 @@
 package hu.bme.aut.timechamp.service;
 
+import hu.bme.aut.timechamp.dto.AppUserDto;
 import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.repository.AppUserRepository;
 import hu.bme.aut.timechamp.repository.EventRepository;
@@ -8,10 +9,17 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class AppUserService {
     @Autowired
     private AppUserRepository appUserRepository;
+
+    @Transactional
+    public List<AppUser> findAll(){
+        return appUserRepository.findAll();
+    }
 
     public AppUser createUser(String email, String username, String password){
         return appUserRepository.save(new AppUser(email, username, password));

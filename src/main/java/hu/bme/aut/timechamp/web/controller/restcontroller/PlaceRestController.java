@@ -7,17 +7,14 @@ import hu.bme.aut.timechamp.model.Place;
 import hu.bme.aut.timechamp.repository.PlaceRepository;
 import hu.bme.aut.timechamp.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/places")
 public class PlaceRestController {
-
-    @Autowired
-    PlaceRepository placeRepository;
 
     @Autowired
     PlaceMapper placeMapper;
@@ -26,10 +23,8 @@ public class PlaceRestController {
     private PlaceService placeService;
 
     @GetMapping
-    @Transactional
     public List<PlaceDto> findAll() {
-        List<Place> places = placeRepository.findAll();
-        return placeMapper.placesToDto(places);
+        return placeMapper.placesToDto(placeService.findAll());
     }
 
     @PostMapping
