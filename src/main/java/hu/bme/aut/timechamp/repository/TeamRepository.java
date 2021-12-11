@@ -24,4 +24,6 @@ public interface TeamRepository extends JpaRepository<Team, Long> {
     @EntityGraph(attributePaths = "event.team")
     @Query("SELECT t FROM Team t")
     List<Team> findAllWithEventTeams();
+
+    Team findById(long id);
 }

@@ -21,4 +21,6 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
     @Query("SELECT t FROM Todo t")
     List<Todo> findAllWithEventTodos();
 
+
+    Todo findById(long id);
 }

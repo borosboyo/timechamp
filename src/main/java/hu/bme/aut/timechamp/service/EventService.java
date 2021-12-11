@@ -38,8 +38,12 @@ public class EventService {
 
     @Transactional
     public EventDto createEvent(String name, long teamId, long creatorId) {
-        Team team = teamRepository.getById(teamId);
-        AppUser creator = appUserRepository.getById(creatorId);
+        Team team = teamRepository.findById(teamId);
+        AppUser creator = appUserRepository.findById(creatorId);
+
+        if(team == null || creator == null) {
+            throw new IllegalArgumentException();
+        }
 
         Event event = new Event();
         event.setName(name);
@@ -48,23 +52,29 @@ public class EventService {
 
         Event savedEvent = eventRepository.save(event);
         team.getEvents().add(savedEvent);
-        creator.getEvents().add(savedEvent);
         teamRepository.save(team);
+        creator.getEvents().add(savedEvent);
+        appUserRepository.save(creator);
 
         return eventMapper.eventToDto(savedEvent);
     }
 
 
     @Transactional
-    public EventDto getById(long id) {
-        return eventMapper.eventToDto(eventRepository.getById(id));
+    public EventDto findById(long id) {
+        return eventMapper.eventToDto(eventRepository.findById(id));
     }
 
 
     @Transactional
     public EventDto addParticipant(long id, long userId) {
-        Event event = eventRepository.getById(id);
-        AppUser user = appUserRepository.getById(userId);
+        Event event = eventRepository.findById(id);
+        AppUser user = appUserRepository.findById(userId);
+
+        if(event == null || user == null) {
+            throw new IllegalArgumentException();
+        }
+
         event.getParticipants().add(user);
 
         Event savedEvent = eventRepository.save(event);
@@ -76,8 +86,8 @@ public class EventService {
 
     @Transactional
     public EventDto removeParticipant(long id, long userId) {
-        Event event = eventRepository.getById(id);
-        AppUser user = appUserRepository.getById(userId);
+        Event event = eventRepository.findById(id);
+        AppUser user = appUserRepository.findById(userId);
         event.getParticipants().remove(user);
 
         Event savedEvent = eventRepository.save(event);
@@ -89,7 +99,7 @@ public class EventService {
 
     @Transactional
     public EventDto setTimeById(long id, LocalDateTime time) {
-        Event event = eventRepository.getById(id);
+        Event event = eventRepository.findById(id);
         event.setTime(time);
         return eventMapper.eventToDto(eventRepository.save(event));
     }

@@ -38,7 +38,7 @@ public class TodoService {
 
     @Transactional
     public TodoDto createTodoToEvent(String todoName, long eventId) {
-        Event event = eventRepository.getById(eventId);
+        Event event = eventRepository.findById(eventId);
         Todo todo = new Todo();
         todo.setName(todoName);
         todo.setEvent(event);
@@ -57,14 +57,14 @@ public class TodoService {
     }
 
     @Transactional
-    public TodoDto getById(long id) {
-        return todoMapper.todoToDto(todoRepository.getById(id));
+    public TodoDto findById(long id) {
+        return todoMapper.todoToDto(todoRepository.findById(id));
     }
 
     @Transactional
     public TodoDto assignLeader(long todoId, long userId) {
-        Todo todo = todoRepository.getById(todoId);
-        AppUser user = appUserRepository.getById(userId);
+        Todo todo = todoRepository.findById(todoId);
+        AppUser user = appUserRepository.findById(userId);
         todo.getLeaders().add(user);
 
         Todo savedTodo = todoRepository.save(todo);
@@ -75,7 +75,7 @@ public class TodoService {
 
     @Transactional
     public TodoDto setDescription(long todoId, String description) {
-        Todo todo = todoRepository.getById(todoId);
+        Todo todo = todoRepository.findById(todoId);
         todo.setDescription(description);
 
         return todoMapper.todoToDto(todoRepository.save(todo));
