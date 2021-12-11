@@ -22,6 +22,28 @@ public class TodoRestController {
 
     @GetMapping
     public List<TodoDto> findAll(){
-        return todoMapper.todosToDto(todoService.findAll());
+        return todoService.findAll();
+    }
+
+
+    @PutMapping
+    public TodoDto createTodoToEvent(@RequestParam String todoName, @RequestParam long eventId) {
+        return todoService.createTodoToEvent(todoName, eventId);
+    }
+
+    @GetMapping("/{id}")
+    public TodoDto getTodoById(@PathVariable long id) {
+        return todoService.getById(id);
+    }
+
+
+    @PostMapping("/{id}/addleader")
+    public TodoDto assignLeader(@PathVariable long id, @RequestParam long userId) {
+        return todoService.assignLeader(id, userId);
+    }
+
+    @PostMapping("/{id}/description")
+    public TodoDto setDescription(@PathVariable long id, @RequestParam String description) {
+        return todoService.setDescription(id, description);
     }
 }
