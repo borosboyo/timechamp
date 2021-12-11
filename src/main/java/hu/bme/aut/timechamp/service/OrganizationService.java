@@ -35,8 +35,9 @@ public class OrganizationService {
     }
 
     @Transactional
-    public long createOrganization(String name){
-        return organizationRepository.save(new Organization(name)).getId();
+    public OrganizationDto createOrganization(String name){
+        Organization saved = organizationRepository.save(new Organization(name));
+        return organizationMapper.organizationToDto(saved);
     }
 
     @Transactional
@@ -44,6 +45,7 @@ public class OrganizationService {
         Organization org =  organizationRepository.findById(orgId);
         Place place = placeRepository.findById(placeId);
         org.setHeadQuarter(place);
+        place.setOrganization(org);
         organizationRepository.flush();
         placeRepository.flush();
     }

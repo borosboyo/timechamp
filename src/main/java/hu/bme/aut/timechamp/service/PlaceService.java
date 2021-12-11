@@ -24,8 +24,9 @@ public class PlaceService {
     }
 
     @Transactional
-    public long createPlace(String name, String googleCode, double longitude, double latitude){
-        return placeRepository.save(new Place(name, googleCode, longitude, latitude)).getId();
+    public PlaceDto createPlace(String name, String googleCode, double longitude, double latitude){
+        Place place = placeRepository.save(new Place(name, googleCode, longitude, latitude));
+        return placeMapper.placeToDto(place);
     }
 
     @Transactional
