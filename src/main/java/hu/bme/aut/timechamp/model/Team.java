@@ -28,7 +28,7 @@ public class Team {
     private List<AppUser> adminAppUsers = new ArrayList<>();
 
     @OneToMany(mappedBy = "team")
-    private List<AppUser> appUsers;
+    private List<AppUser> appUsers = new ArrayList<>();
     
     @ManyToOne
     @JoinColumn(name = "organization_id")
