@@ -24,9 +24,6 @@ public class EventRestController {
     @Autowired
     EventService eventService;
 
-    @Autowired
-    EventMapper eventMapper;
-
     @GetMapping
     public List<EventDto> findAll(){
         return eventService.findAll();

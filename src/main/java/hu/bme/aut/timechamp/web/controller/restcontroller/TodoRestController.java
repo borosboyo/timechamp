@@ -17,9 +17,6 @@ public class TodoRestController {
     @Autowired
     TodoService todoService;
 
-    @Autowired
-    TodoMapper todoMapper;
-
     @GetMapping
     public List<TodoDto> findAll(){
         return todoService.findAll();
