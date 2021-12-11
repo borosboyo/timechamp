@@ -5,6 +5,7 @@ import hu.bme.aut.timechamp.dto.AppUserDto;
 import hu.bme.aut.timechamp.mapper.AppUserMapper;
 import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.repository.AppUserRepository;
+import hu.bme.aut.timechamp.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,9 @@ public class AppUserRestController {
     AppUserRepository appUserRepository;
 
     @Autowired
+    AppUserService appUserService;
+
+    @Autowired
     AppUserMapper appUserMapper;
 
     @GetMapping
@@ -28,7 +32,12 @@ public class AppUserRestController {
         return appUserMapper.appUsersToDto(appUsers);
     }
     @PostMapping
-    public AppUser createAppUser(@RequestBody AppUser apppUser){
-        return appUserRepository.save(apppUser);
+    public AppUserDto createAppUser(@RequestParam String email, @RequestParam String username,@RequestParam String password){
+        return appUserMapper.appUserToDto(appUserService.createUser(email, username, password));
+    }
+
+    @GetMapping("/{id}")
+    public AppUserDto findById(@PathVariable long id){
+        return appUserMapper.appUserToDto(appUserService.findById(id));
     }
 }

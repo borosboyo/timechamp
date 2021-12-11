@@ -13,8 +13,8 @@ public class AppUserDto {
     private String email;
     private String userName;
     private String password;
-    private List<EventDto> events;
+   /* private List<EventDto> events;
     private List<TodoDto> todos;
-    private TeamDto team;
+    private TeamDto team;*/
 
 }
