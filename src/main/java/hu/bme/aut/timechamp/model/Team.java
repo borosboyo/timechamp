@@ -31,4 +31,7 @@ public class Team {
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
+    @OneToMany(mappedBy = "team")
+    private List<Event> events;
+
 }
