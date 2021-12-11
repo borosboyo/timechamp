@@ -18,12 +18,4 @@ public interface AppUserMapper {
    AppUserDto appUserToDto(AppUser appUser);
    List<AppUserDto> appUsersToDto(List<AppUser> appUsers);
 
-   @Mapping(target = "appUsers", ignore =  true)
-   TeamDto teamUserToDto(Team team);
-
-   @Mapping(target = "participants", ignore =  true)
-   EventDto eventParticipantToDto(Event event);
-
-   @Mapping(target = "leaders", ignore =  true)
-   TodoDto todoToDto(Todo todo);
 }

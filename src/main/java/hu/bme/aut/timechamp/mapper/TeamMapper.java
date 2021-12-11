@@ -17,13 +17,4 @@ import java.util.List;
 public interface TeamMapper {
     TeamDto teamToDto(Team team);
     List<TeamDto> teamsToDto(List<Team> teams);
-
-    @Mapping(target = "teams", ignore =  true)
-    OrganizationDto organizationToDto(Organization organization);
-
-    @Mapping(target = "team", ignore =  true)
-    AppUserDto appUserToDto(AppUser appUser);
-
-    @Mapping(target = "team", ignore =  true)
-    EventDto eventToDto(Event event);
 }

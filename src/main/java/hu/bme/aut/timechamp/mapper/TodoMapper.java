@@ -15,10 +15,4 @@ import java.util.List;
 public interface TodoMapper {
     TodoDto todoToDto(Todo todo);
     List<TodoDto> todosToDto(List<Todo> todos);
-
-    @Mapping(target = "todos", ignore =  true)
-    AppUserDto appUserToDto(AppUser appUser);
-
-    @Mapping(target = "todos", ignore =  true)
-    EventDto eventToDto(Event event);
 }

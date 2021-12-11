@@ -14,12 +14,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface EventMapper {
     EventDto eventToDto(Event event);
+
     List<EventDto> eventsToDto(List<Event> events);
-
-    @Mapping(target = "event", ignore =  true)
-    TodoDto todoToDto(Todo todo);
-
-    @Mapping(target = "events", ignore =  true)
-    AppUserDto appUserToDto(AppUser appUser);
 }
 
