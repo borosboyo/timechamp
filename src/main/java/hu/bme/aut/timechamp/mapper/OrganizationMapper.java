@@ -15,4 +15,10 @@ import java.util.List;
 public interface OrganizationMapper {
     OrganizationDto organizationToDto(Organization organization);
     List<OrganizationDto> organizationsToDto(List<Organization> organizations);
+
+    @Mapping(target = "organization", ignore =  true)
+    PlaceDto placeToDto(Place place);
+
+    @Mapping(target = "organization", ignore =  true)
+    TeamDto teamToDto(Team team);
 }

@@ -13,4 +13,7 @@ import java.util.List;
 public interface PlaceMapper {
     PlaceDto placeToDto(Place place);
     List<PlaceDto> placesToDto(List<Place> places);
+
+    @Mapping(target = "headQuarter", ignore =  true)
+    OrganizationDto organizationToDto(Organization organization);
 }
