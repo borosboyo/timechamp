@@ -88,6 +88,11 @@ public class EventService {
     public EventDto removeParticipant(long id, long userId) {
         Event event = eventRepository.findById(id);
         AppUser user = appUserRepository.findById(userId);
+
+        if(event == null || user == null) {
+            throw new IllegalArgumentException();
+        }
+
         event.getParticipants().remove(user);
 
         Event savedEvent = eventRepository.save(event);
