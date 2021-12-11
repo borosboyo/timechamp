@@ -85,6 +85,23 @@ public class TeamService {
     }
 
     @Transactional
+    public TeamDto removeAdminUser(long id, long adminId) {
+        Team team = teamRepository.findById(id);
+        AppUser admin = appUserRepository.findById(adminId);
+
+        if(team == null || admin == null) {
+            throw new IllegalArgumentException();
+        }
+
+        team.getAdminAppUsers().remove(admin);
+
+        admin.setTeam(null);
+        appUserRepository.save(admin);
+
+        return teamMapper.teamToDto(teamRepository.save(team));
+    }
+
+    @Transactional
     public TeamDto addUser(long id, long userId) {
         Team team = teamRepository.findById(id);
         AppUser user = appUserRepository.findById(userId);
@@ -99,5 +116,22 @@ public class TeamService {
         appUserRepository.save(user);
 
         return teamMapper.teamToDto(savedTeam);
+    }
+
+    @Transactional
+    public TeamDto removeUser(long id, long userId) {
+        Team team = teamRepository.findById(id);
+        AppUser user = appUserRepository.findById(userId);
+
+        if(team == null || user == null) {
+            throw new IllegalArgumentException();
+        }
+
+        team.getAppUsers().remove(user);
+
+        user.setTeam(null);
+        appUserRepository.save(user);
+
+        return teamMapper.teamToDto(teamRepository.save(team));
     }
 }
