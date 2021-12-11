@@ -5,6 +5,7 @@ import hu.bme.aut.timechamp.dto.PlaceDto;
 import hu.bme.aut.timechamp.mapper.PlaceMapper;
 import hu.bme.aut.timechamp.model.Place;
 import hu.bme.aut.timechamp.repository.PlaceRepository;
+import hu.bme.aut.timechamp.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,21 +22,9 @@ public class PlaceRestController {
     @Autowired
     PlaceMapper placeMapper;
 
-/*    @GetMapping
-    public List<Place> findAll(){
-        List<Place> places = placeRepository.findAll();
+    @Autowired
+    private PlaceService placeService;
 
-        places.forEach(this::setUnnededPlaceFieldsToNull);
-        return placeRepository.findAll();
-    }
-
-    private void setUnnededPlaceFieldsToNull(Place place){
-        Organization org = place.getOrganization();
-        if(org != null){
-            org.setHeadQuarters(null);
-        }
-    }
-*/
     @GetMapping
     @Transactional
     public List<PlaceDto> findAll() {
@@ -44,7 +33,7 @@ public class PlaceRestController {
     }
 
     @PostMapping
-    public Place createPlace(@RequestBody Place place){
-        return placeRepository.save(place);
+    public Place createPlace(@RequestParam String name, @RequestParam String googleCode, @RequestParam double longitude, @RequestParam double latitude){
+        return placeService.createPlace(name, googleCode, longitude, latitude);
     }
 }
