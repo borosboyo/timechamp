@@ -21,7 +21,7 @@ public class AppUser {
 
     private String email;
 
-    private String userName;
+    private String username;
 
     private String password;
 
@@ -40,9 +40,9 @@ public class AppUser {
     private Team team;
 
 
-    public AppUser(String email, String userName, String password) {
+    public AppUser(String email, String username, String password) {
         this.email = email;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
     }
 }

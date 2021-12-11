@@ -11,7 +11,7 @@ public class AppUserDto {
 
     private long id;
     private String email;
-    private String userName;
+    private String username;
     private String password;
    /* private List<EventDto> events;
     private List<TodoDto> todos;
