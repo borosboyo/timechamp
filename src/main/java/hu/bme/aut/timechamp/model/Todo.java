@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -22,7 +23,7 @@ public class Todo {
     private String name;
 
     @ManyToMany(mappedBy = "todos")
-    private List<AppUser> leaders;
+    private List<AppUser> leaders = new ArrayList<>();
 
     @ManyToOne
     private Event event;

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -31,10 +32,10 @@ public class Event {
     private AppUser creator;
 
     @OneToMany
-    private List<Todo> todos;
+    private List<Todo> todos = new ArrayList<>();
 
     @ManyToMany(mappedBy = "events")
-    private List<AppUser> participants;
+    private List<AppUser> participants = new ArrayList<>();
 
     public Event(String name, LocalDateTime time) { this.name = name; this.time = time; }
 

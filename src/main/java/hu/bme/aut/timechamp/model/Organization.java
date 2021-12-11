@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -22,7 +23,7 @@ public class Organization {
     private String name;
 
     @OneToMany(mappedBy = "organization")
-    private List<Team> teams;
+    private List<Team> teams = new ArrayList<>();
 
     @OneToOne
     private Place headQuarter;

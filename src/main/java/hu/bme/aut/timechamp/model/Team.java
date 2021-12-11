@@ -35,6 +35,6 @@ public class Team {
     private Organization organization;
 
     @OneToMany(mappedBy = "team")
-    private List<Event> events;
+    private List<Event> events = new ArrayList<>();
 
 }
