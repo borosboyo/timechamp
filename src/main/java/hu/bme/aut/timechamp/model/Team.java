@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,8 +22,10 @@ public class Team {
 
     private String name;
 
-    @OneToMany(mappedBy = "team")
-    private List<AppUser> adminAppUsers;
+    @OneToMany()
+    @JoinTable(name = "team_adminappusers",
+            joinColumns = @JoinColumn(name = "team_id"))
+    private List<AppUser> adminAppUsers = new ArrayList<>();
 
     @OneToMany(mappedBy = "team")
     private List<AppUser> appUsers;
