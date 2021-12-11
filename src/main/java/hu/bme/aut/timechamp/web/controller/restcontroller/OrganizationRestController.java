@@ -8,7 +8,10 @@ import hu.bme.aut.timechamp.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -27,7 +30,19 @@ public class OrganizationRestController {
     }
 
     @PostMapping
-    public OrganizationDto createOrganization(@RequestParam String name){
-        return organizationMapper.organizationToDto(organizationService.createOrganization(name));
+    public OrganizationDto createOrganization(@RequestParam String name, RedirectAttributes redirectAttributes){
+        long result = organizationService.createOrganization(name);
+        return organizationService.findById(result);
+    }
+
+    @GetMapping("/{id}")
+    public OrganizationDto findById(@PathVariable long id){
+        return organizationService.findById(id);
+    }
+
+    @PostMapping("/{id}/hq")
+    public OrganizationDto changeHQ(@PathVariable("id") long id, @RequestParam() long place_id, RedirectAttributes redirectAttributes){
+        organizationService.setHQ(id, place_id);
+        return organizationService.findById(id);
     }
 }

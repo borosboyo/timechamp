@@ -24,11 +24,12 @@ public class PlaceRestController {
 
     @GetMapping
     public List<PlaceDto> findAll() {
-        return placeMapper.placesToDto(placeService.findAll());
+        return placeService.findAll();
     }
 
     @PostMapping
-    public Place createPlace(@RequestParam String name, @RequestParam String googleCode, @RequestParam double longitude, @RequestParam double latitude){
-        return placeService.createPlace(name, googleCode, longitude, latitude);
+    public PlaceDto createPlace(@RequestParam String name, @RequestParam String googleCode, @RequestParam double longitude, @RequestParam double latitude){
+        long id = placeService.createPlace(name, googleCode, longitude, latitude);
+        return placeService.findById(id);
     }
 }

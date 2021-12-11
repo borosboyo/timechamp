@@ -14,6 +14,8 @@ import java.util.List;
 public interface OrganizationRepository extends JpaRepository<Organization, Long> {
     List<Organization> findByName(String name);
 
+    Organization findById(long id);
+
     @EntityGraph(attributePaths = "place.organization")
     @Query("SELECT o FROM Organization o")
     List<Organization> findAllWithPlaceOrganization();
