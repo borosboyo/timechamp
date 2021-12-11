@@ -4,6 +4,7 @@ import hu.bme.aut.timechamp.dto.OrganizationDto;
 import hu.bme.aut.timechamp.mapper.OrganizationMapper;
 import hu.bme.aut.timechamp.model.Organization;
 import hu.bme.aut.timechamp.repository.OrganizationRepository;
+import hu.bme.aut.timechamp.service.OrganizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,27 +21,8 @@ public class OrganizationRestController {
     @Autowired
     OrganizationMapper organizationMapper;
 
-/*
-    @GetMapping
-    @Transactional
-    public List<Organization> findAll(){
-        List<Organization> organizations = organizationRepository.findAll();
-        organizations.forEach(this::setUnneededFieldsToNull);
-        return organizations;
-    }
-
-    private void setUnneededFieldsToNull(Organization organization){
-        List<Team> teams = organization.getTeams();
-        if(teams != null){
-            for(Team t : teams)
-                t.setOrganization(null);
-        }
-        Place p = organization.getHeadQuarters();
-        if(p != null){
-            p.setOrganization(null);
-        }
-    }
-*/
+    @Autowired
+    private OrganizationService organizationService;
     /**
      * Azért transactional mert különben nem tudjuk lekérni a Teams listát a lazy initialization miatt (borosboyo)
      */
@@ -52,7 +34,7 @@ public class OrganizationRestController {
     }
 
     @PostMapping
-    public Organization createOrganization(@RequestBody Organization organization){
-        return organizationRepository.save(organization);
+    public OrganizationDto createOrganization(@RequestParam String name){
+        return organizationMapper.organizationToDto(organizationService.createOrganization(name));
     }
 }

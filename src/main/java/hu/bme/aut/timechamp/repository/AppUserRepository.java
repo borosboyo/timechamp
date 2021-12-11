@@ -3,7 +3,9 @@ package hu.bme.aut.timechamp.repository;
 import hu.bme.aut.timechamp.model.AppUser;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +13,7 @@ import java.util.List;
 
 @Repository
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
-    List<AppUser> findByUserName(String name);
+    List<AppUser> findByUsername(String name);
 
     @EntityGraph(attributePaths = "team.app_users")
     @Query(value = "SELECT a FROM AppUser a")
@@ -27,4 +29,9 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 
     @Transactional
     AppUser findById(long id);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE AppUser a SET a.email=:email, a.username=:username, a.password=:password WHERE a.id=:id")
+    void updateById(@Param("id") long id, @Param("email") String email,@Param("username") String username,@Param("password") String password);
 }
