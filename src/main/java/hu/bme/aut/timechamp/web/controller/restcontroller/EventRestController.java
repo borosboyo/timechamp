@@ -2,20 +2,14 @@ package hu.bme.aut.timechamp.web.controller.restcontroller;
 
 
 import hu.bme.aut.timechamp.dto.EventDto;
-import hu.bme.aut.timechamp.mapper.EventMapper;
-import hu.bme.aut.timechamp.model.Event;
-import hu.bme.aut.timechamp.repository.EventRepository;
 import hu.bme.aut.timechamp.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/events")
@@ -45,7 +39,6 @@ public class EventRestController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad parameters");
         }
     }
-
 
     @GetMapping("/{id}")
     public EventDto getEventById(@PathVariable long id) {
