@@ -1,6 +1,7 @@
 package hu.bme.aut.timechamp.service;
 
 import hu.bme.aut.timechamp.dto.PlaceDto;
+import hu.bme.aut.timechamp.mapper.PlaceMapper;
 import hu.bme.aut.timechamp.model.Place;
 import hu.bme.aut.timechamp.repository.PlaceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,21 @@ public class PlaceService {
     @Autowired
     private PlaceRepository placeRepository;
 
+    @Autowired
+    private PlaceMapper placeMapper;
+
     @Transactional
-    public List<Place> findAll() {
-        return placeRepository.findAll();
+    public List<PlaceDto> findAll() {
+        return placeMapper.placesToDto(placeRepository.findAll());
     }
 
     @Transactional
-    public Place createPlace(String name, String googleCode, double longitude, double latitude){
-        return placeRepository.save(new Place(name, googleCode, longitude, latitude));
+    public long createPlace(String name, String googleCode, double longitude, double latitude){
+        return placeRepository.save(new Place(name, googleCode, longitude, latitude)).getId();
+    }
+
+    @Transactional
+    public PlaceDto findById(long id){
+        return placeMapper.placeToDto(placeRepository.findById(id));
     }
 }
