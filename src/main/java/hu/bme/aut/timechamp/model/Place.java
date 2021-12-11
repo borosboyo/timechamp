@@ -29,4 +29,11 @@ public class Place {
 
     @OneToOne
     private Organization organization;
+
+    public Place(String name, String googleCode, double longitude, double latitude) {
+        this.name = name;
+        this.googleCode = googleCode;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 }

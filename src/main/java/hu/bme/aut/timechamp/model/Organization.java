@@ -26,4 +26,8 @@ public class Organization {
 
     @OneToOne
     private Place headQuarter;
+
+    public Organization(String name) {
+        this.name = name;
+    }
 }
