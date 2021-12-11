@@ -38,7 +38,7 @@ public class EventRestController {
 
     @GetMapping("/{id}")
     public EventDto getEventById(@PathVariable long id) {
-        return eventService.getById(id);
+        return eventService.findById(id);
     }
 
 

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,4 +21,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @EntityGraph(attributePaths = "app_user.events")
     @Query("SELECT e FROM Event e")
     List<Todo> findAllWithAppUserEvents();
+
+
+    Event findById(long id);
 }

@@ -38,8 +38,8 @@ public class EventService {
 
     @Transactional
     public EventDto createEvent(String name, long teamId, long creatorId) {
-        Team team = teamRepository.getById(teamId);
-        AppUser creator = appUserRepository.getById(creatorId);
+        Team team = teamRepository.findById(teamId);
+        AppUser creator = appUserRepository.findById(creatorId);
 
         Event event = new Event();
         event.setName(name);
@@ -56,15 +56,15 @@ public class EventService {
 
 
     @Transactional
-    public EventDto getById(long id) {
-        return eventMapper.eventToDto(eventRepository.getById(id));
+    public EventDto findById(long id) {
+        return eventMapper.eventToDto(eventRepository.findById(id));
     }
 
 
     @Transactional
     public EventDto addParticipant(long id, long userId) {
-        Event event = eventRepository.getById(id);
-        AppUser user = appUserRepository.getById(userId);
+        Event event = eventRepository.findById(id);
+        AppUser user = appUserRepository.findById(userId);
         event.getParticipants().add(user);
 
         Event savedEvent = eventRepository.save(event);
@@ -76,8 +76,8 @@ public class EventService {
 
     @Transactional
     public EventDto removeParticipant(long id, long userId) {
-        Event event = eventRepository.getById(id);
-        AppUser user = appUserRepository.getById(userId);
+        Event event = eventRepository.findById(id);
+        AppUser user = appUserRepository.findById(userId);
         event.getParticipants().remove(user);
 
         Event savedEvent = eventRepository.save(event);
@@ -89,7 +89,7 @@ public class EventService {
 
     @Transactional
     public EventDto setTimeById(long id, LocalDateTime time) {
-        Event event = eventRepository.getById(id);
+        Event event = eventRepository.findById(id);
         event.setTime(time);
         return eventMapper.eventToDto(eventRepository.save(event));
     }
