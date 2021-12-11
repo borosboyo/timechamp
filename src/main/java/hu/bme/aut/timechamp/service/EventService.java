@@ -1,6 +1,7 @@
 package hu.bme.aut.timechamp.service;
 
 import hu.bme.aut.timechamp.dto.EventDto;
+import hu.bme.aut.timechamp.mapper.EventMapper;
 import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.model.Team;
@@ -27,40 +28,69 @@ public class EventService {
     @Autowired
     TeamRepository teamRepository;
 
+    @Autowired
+    EventMapper eventMapper;
+
     @Transactional
-    public List<Event> findAll(){
-        return eventRepository.findAll();
+    public List<EventDto> findAll(){
+        return eventMapper.eventsToDto(eventRepository.findAll());
     }
 
     @Transactional
-    public Event createEvent(String name, long teamId, long creatorId) {
+    public EventDto createEvent(String name, long teamId, long creatorId) {
         Team team = teamRepository.getById(teamId);
         AppUser creator = appUserRepository.getById(creatorId);
 
-        Event event = new Event(name, LocalDateTime.now());
+        Event event = new Event();
+        event.setName(name);
         event.setTeam(team);
         event.setCreator(creator);
 
         Event savedEvent = eventRepository.save(event);
         team.getEvents().add(savedEvent);
+        creator.getEvents().add(savedEvent);
         teamRepository.save(team);
 
-        return savedEvent;
+        return eventMapper.eventToDto(savedEvent);
     }
 
 
     @Transactional
-    public Event getById(long id) {
-        return eventRepository.getById(id);
+    public EventDto getById(long id) {
+        return eventMapper.eventToDto(eventRepository.getById(id));
     }
 
 
     @Transactional
-    public Event addParticipant(long id, long userId) {
+    public EventDto addParticipant(long id, long userId) {
         Event event = eventRepository.getById(id);
         AppUser user = appUserRepository.getById(userId);
         event.getParticipants().add(user);
 
-        return eventRepository.save(event);
+        Event savedEvent = eventRepository.save(event);
+        user.getEvents().add(savedEvent);
+
+        return eventMapper.eventToDto(savedEvent);
+    }
+
+
+    @Transactional
+    public EventDto removeParticipant(long id, long userId) {
+        Event event = eventRepository.getById(id);
+        AppUser user = appUserRepository.getById(userId);
+        event.getParticipants().remove(user);
+
+        Event savedEvent = eventRepository.save(event);
+        user.getEvents().remove(savedEvent);
+
+        return eventMapper.eventToDto(savedEvent);
+    }
+
+
+    @Transactional
+    public EventDto setTimeById(long id, LocalDateTime time) {
+        Event event = eventRepository.getById(id);
+        event.setTime(time);
+        return eventMapper.eventToDto(eventRepository.save(event));
     }
 }

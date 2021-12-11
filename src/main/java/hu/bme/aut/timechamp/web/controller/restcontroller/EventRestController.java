@@ -7,11 +7,13 @@ import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.repository.EventRepository;
 import hu.bme.aut.timechamp.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,29 +24,37 @@ public class EventRestController {
     @Autowired
     EventService eventService;
 
-    @Autowired
-    EventMapper eventMapper;
-
     @GetMapping
     public List<EventDto> findAll(){
-        return eventMapper.eventsToDto(eventService.findAll());
+        return eventService.findAll();
     }
 
 
     @PutMapping
     public EventDto createEvent(@RequestParam String name, @RequestParam long teamId, @RequestParam long creatorId) {
-        return eventMapper.eventToDto(eventService.createEvent(name, teamId, creatorId));
+        return eventService.createEvent(name, teamId, creatorId);
     }
 
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public EventDto getEventById(@PathVariable long id) {
-        return eventMapper.eventToDto(eventService.getById(id));
+        return eventService.getById(id);
     }
 
 
-    @PostMapping
-    public EventDto addParticipant(@RequestParam long id, @RequestParam long appUserId) {
-        return eventMapper.eventToDto(eventService.addParticipant(id, appUserId));
+    @PostMapping("/{id}/addparticipant")
+    public EventDto addParticipant(@PathVariable long id, @RequestParam long appUserId) {
+        return eventService.addParticipant(id, appUserId);
+    }
+
+    @PostMapping("/{id}/removeparticipant")
+    public EventDto removeParticipant(@PathVariable long id, @RequestParam long appUserId) {
+        return eventService.removeParticipant(id, appUserId);
+    }
+
+    @PostMapping("{id}/time")
+    public EventDto setTimeById(@PathVariable long id, @RequestParam int year, @RequestParam int month, @RequestParam int day, @RequestParam int hour, @RequestParam int minute) {
+        LocalDateTime time = LocalDateTime.of(year, month, day, hour, minute);
+        return eventService.setTimeById(id, time);
     }
 }
