@@ -33,5 +33,5 @@ public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     @Modifying
     @Transactional
     @Query("UPDATE AppUser a SET a.email=:email, a.username=:username, a.password=:password WHERE a.id=:id")
-    void updateById(@Param("id") long id, @Param("email") String email,@Param("username") String username,@Param("password") String password);
+    int updateById(@Param("id") long id, @Param("email") String email,@Param("username") String username,@Param("password") String password);
 }

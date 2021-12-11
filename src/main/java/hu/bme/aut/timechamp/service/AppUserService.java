@@ -25,9 +25,9 @@ public class AppUserService {
         return appUserMapper.appUsersToDto(appUserRepository.findAll());
     }
 
-    public long createUser(String email, String username, String password){
+    public AppUserDto createUser(String email, String username, String password){
         AppUser appUser = appUserRepository.save(new AppUser(email, username, password));
-        return appUser.getId();
+        return appUserMapper.appUserToDto(appUser);
     }
 
     @Transactional
@@ -36,7 +36,9 @@ public class AppUserService {
     }
 
     @Transactional
-    public void updateById(long id, String email, String username, String password){
-        appUserRepository.updateById(id, email, username, password);
+    public boolean updateById(long id, String email, String username, String password){
+        int result = appUserRepository.updateById(id, email, username, password);
+        System.out.println(result);
+        return result > 0;
     }
 }

@@ -35,8 +35,9 @@ public class OrganizationService {
     }
 
     @Transactional
-    public long createOrganization(String name){
-        return organizationRepository.save(new Organization(name)).getId();
+    public OrganizationDto createOrganization(String name){
+        Organization saved = organizationRepository.save(new Organization(name));
+        return organizationMapper.organizationToDto(saved);
     }
 
     @Transactional
