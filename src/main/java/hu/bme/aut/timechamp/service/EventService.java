@@ -8,7 +8,6 @@ import hu.bme.aut.timechamp.model.Team;
 import hu.bme.aut.timechamp.repository.AppUserRepository;
 import hu.bme.aut.timechamp.repository.EventRepository;
 import hu.bme.aut.timechamp.repository.TeamRepository;
-import hu.bme.aut.timechamp.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

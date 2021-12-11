@@ -38,7 +38,7 @@ public class PostponeEventIT {
         postponeEventService.postponeByMinute("sampleevent",30);
 
         //ASSERT
-        Event eventFromDb = eventRepository.findById(event.getId()).get();
+        Event eventFromDb = eventRepository.findById(event.getId());
         assertEquals(LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 0),eventFromDb.getTime());
 
     }
@@ -54,7 +54,7 @@ public class PostponeEventIT {
         postponeEventService.postponeByHour("sampleevent",1);
 
         //ASSERT
-        Event eventFromDb = eventRepository.findById(event.getId()).get();
+        Event eventFromDb = eventRepository.findById(event.getId());
         assertEquals(LocalDateTime.of(2021, Month.NOVEMBER, 17, 22, 30),eventFromDb.getTime());
 
     }
@@ -70,7 +70,7 @@ public class PostponeEventIT {
         postponeEventService.postponeByDay("sampleevent",1);
 
         //ASSERT
-        Event eventFromDb = eventRepository.findById(event.getId()).get();
+        Event eventFromDb = eventRepository.findById(event.getId());
         assertEquals(LocalDateTime.of(2021, Month.NOVEMBER, 18, 21, 30),eventFromDb.getTime());
 
     }
