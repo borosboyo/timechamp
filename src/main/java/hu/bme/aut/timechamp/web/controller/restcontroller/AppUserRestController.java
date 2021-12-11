@@ -40,4 +40,9 @@ public class AppUserRestController {
     public AppUserDto findById(@PathVariable long id){
         return appUserMapper.appUserToDto(appUserService.findById(id));
     }
+
+    @PostMapping("/{id}")
+    public void updateAppUserDetails(@PathVariable long id, @RequestBody AppUserDto appUserDto){
+        appUserService.updateById(id, appUserDto.getEmail(), appUserDto.getUsername(), appUserDto.getPassword());
+    }
 }
