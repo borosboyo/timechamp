@@ -1,5 +1,22 @@
 # Timechamp - Témalab 2021 beszámoló
 
+## Az alkalmazás lokális futtatása
+Megépíthetjük a `.jar` fájlt command lineból:
+```
+git clone https://github.com/borosboyo/timechamp.git
+cd timechamp
+./mvnw package
+java -jar target/*.jar
+```
+A Timechamp elérhető lesz ezen az URL-en: http://localhost:8080/
+
+Ezen felül akár egyből Maven-en keresztül is futtathatjuk a Spring Boot Maven plugint használva:
+```
+./mvnw spring-boot:run
+```
+
+Természetesen a kedvenc IDE-nkből is.
+
 ## Az alkalmazás programozói dokumentációja
 
 ### A program célja
