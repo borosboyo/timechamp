@@ -22,14 +22,11 @@ import java.util.List;
 public class OrganizationRestController {
 
     @Autowired
-    OrganizationMapper organizationMapper;
-
-    @Autowired
     private OrganizationService organizationService;
 
     @GetMapping
     public List<OrganizationDto> findAll(){
-        return organizationMapper.organizationsToDto(organizationService.findAll());
+        return organizationService.findAll();
     }
 
     @PutMapping

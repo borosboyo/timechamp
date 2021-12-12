@@ -24,8 +24,8 @@ public class OrganizationService {
     private OrganizationMapper organizationMapper;
 
     @Transactional
-    public List<Organization> findAll(){
-        return organizationRepository.findAll();
+    public List<OrganizationDto> findAll(){
+        return organizationMapper.organizationsToDto(organizationRepository.findAll());
     }
 
     @Transactional

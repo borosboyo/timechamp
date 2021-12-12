@@ -21,9 +21,6 @@ import java.util.List;
 public class PlaceRestController {
 
     @Autowired
-    PlaceMapper placeMapper;
-
-    @Autowired
     private PlaceService placeService;
 
     @GetMapping
