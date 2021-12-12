@@ -30,19 +30,11 @@ public class PlaceRestController {
 
     @PostMapping
     public PlaceDto createPlace(@RequestParam String name, @RequestParam String googleCode, @RequestParam double longitude, @RequestParam double latitude){
-        PlaceDto result = placeService.createPlace(name, googleCode, longitude, latitude);
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return result;
+        return RestUtils.executeRestRequest(()->placeService.createPlace(name, googleCode, longitude, latitude));
     }
 
     @GetMapping("/{id}")
     public PlaceDto findById(@PathVariable long id){
-        PlaceDto result = placeService.findById(id);
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return result;
+        return RestUtils.executeRestRequest(()->placeService.findById(id), HttpStatus.NOT_FOUND);
     }
 }

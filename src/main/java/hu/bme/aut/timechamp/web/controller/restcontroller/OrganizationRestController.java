@@ -53,8 +53,11 @@ public class OrganizationRestController {
     }
 
     @PostMapping("/{id}/hq")
-    public OrganizationDto changeHQ(@PathVariable("id") long id, @RequestParam() long place_id, RedirectAttributes redirectAttributes){
-        organizationService.setHQ(id, place_id);
-        return organizationService.findById(id);
+    public OrganizationDto changeHQ(@PathVariable("id") long id, @RequestParam() long place_id){
+        OrganizationDto result = organizationService.setHQ(id, place_id);
+        if(result == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return result;
     }
 }

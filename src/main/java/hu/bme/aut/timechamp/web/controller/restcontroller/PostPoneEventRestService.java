@@ -16,17 +16,17 @@ public class PostPoneEventRestService {
 
     @PostMapping("/api/events/{id}/postponeByMinute")
     public EventDto postponeByMinute(@PathVariable long id, @RequestParam int difference){
-        return postponeEventService.postponeByMinute(id,difference);
+        return RestUtils.executeRestRequest(()->postponeEventService.postponeByMinute(id,difference));
     }
 
     @PostMapping("/api/events/{id}/postponeByHour")
     public EventDto postponeByHour(@PathVariable long id, @RequestParam int difference){
-        return postponeEventService.postponeByHour(id,difference);
+        return RestUtils.executeRestRequest(()->postponeEventService.postponeByHour(id,difference));
     }
 
     @PostMapping("/api/events/{id}/postponeByDay")
     public EventDto postponeByDay(@PathVariable long id, @RequestParam int difference){
-        return postponeEventService.postponeByDay(id,difference);
+        return RestUtils.executeRestRequest(()->postponeEventService.postponeByDay(id,difference));
     }
 
 }

@@ -29,25 +29,12 @@ public class AppUserRestController {
 
     @PutMapping
     public AppUserDto createAppUser(@RequestParam String email, @RequestParam String username, @RequestParam String password){
-        AppUserDto result;
-        try {
-            result = appUserService.createUser(email, username, password);
-        } catch (IllegalArgumentException exception){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return result;
+        return RestUtils.executeRestRequest(()->appUserService.createUser(email, username, password));
     }
 
     @GetMapping("/{id}")
     public AppUserDto findById(@PathVariable long id){
-        AppUserDto result = appUserService.findById(id);
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return result;
+        return RestUtils.executeRestRequest(()->appUserService.findById(id), HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/{id}")
