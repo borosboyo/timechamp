@@ -8,7 +8,7 @@ cd timechamp
 ./mvnw package
 java -jar target/*.jar
 ```
-A Timechamp elérhető lesz ezen az URL-en: http://localhost:8080/
+Ezek után Timechamp elérhető lesz ezen az URL-en: http://localhost:8080/
 
 Ezen felül akár egyből Maven-en keresztül is futtathatjuk a Spring Boot Maven plugint használva:
 ```
