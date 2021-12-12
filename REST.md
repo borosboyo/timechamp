@@ -192,8 +192,120 @@ POST localhost:8080/api/organizations/2/hq?place_id=1
 }
 ```
 
-
 ## AppUser
+
+### GET /api/appusers/
+Visszaadja az összes nyílvántartott felhasználót.
+#### Kivételek:
+- Paraméterhiány esetén Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+
+Példa:
+
+```
+GET localhost:8080/api/appusers
+```
+
+```
+[
+    {
+        "id": 3,
+        "email": "gj@example.com",
+        "username": "gipszjakab",
+        "password": "gj2",
+        "events": [],
+        "todos": [],
+        "team": null
+    }
+]
+```
+
+### GET /api/appusers/{id}
+Visszaadja az adott ID-jú felhasználó adatait.
+#### Path Paraméterek:
+- id : ID
+
+#### Kivételek:
+- Hibás ID esetén Bad Request hibakódoit küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+
+```
+GET localhost:8080/api/appusers/3
+```
+
+```
+{
+        "id": 3,
+        "email": "gj@example.com",
+        "username": "gipszjakab",
+        "password": "gj2",
+        "events": [],
+        "todos": [],
+        "team": null
+}
+```
+
+### PUT /api/appusers/
+Létrehoz egy felhasználót.
+#### Paraméterek:
+- email : Email cím
+- username : Név
+- password : Jelszó
+#### Kivételek:
+- Paraméterhiány esetén Bad Request hibakódot küldünk.
+- Egy már nyílvátartásban felhasználónév vagy email regisztrálása nem lehetséges. Ez esetben Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+
+```
+PUT localhost:8080/api/appusers?username=gipszjakab&password=gj2&email=gjakab@example.com
+```
+
+```
+{
+        "id": 3,
+        "email": "gj@example.com",
+        "username": "gipszjakab",
+        "password": "gj2",
+        "events": [],
+        "todos": [],
+        "team": null
+}
+```
+
+### POST /api/appusers/{id}
+Módosítja az adott felhasználó adatait.
+#### Path Paraméterek:
+- id : Felhasználó ID
+#### Paraméterek:
+- email : Új emailcím
+- username : Új felhasználónév
+- password : Új jelszó
+#### Kivételek:
+- Paraméterhiány esetén Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+
+```
+POST localhost:8080/api/appusers/2?username=gipszjakab&email=gj2@example.com&password=gj3
+```
+
+```
+{
+    "id": 3,
+    "email": "gj2@example.com",
+    "username": "gipszjakab",
+    "password": "gj3",
+    "events": [],
+    "todos": [],
+    "team": null
+}
+```
 
 ## Team
 
