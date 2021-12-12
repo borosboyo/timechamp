@@ -195,7 +195,51 @@ Feltételes kifejezések:
   <p th:case="*">User is some other thing</p>
 </div>
 ```
-### REST
+### REST (Reprersentational State Transfer)
+Egy szoftverarchitektúra típus, loose coupling, nagy, internet alapú rendszerek számára, amelyben különféle erőforrások URI alapon érhetők el. Egy REST típusú architektúra kliensekből és szerverekből áll. A kliensek kéréseket indítanak a szerverek felé; a szerverek kéréseket dolgoznak fel és a megfelelő választ küldik vissza. A kérések és a válaszok erőforrás-reprezentációk szállítása köré épülnek. A kliens és szerver között olyan dokumentumok utaznak, amelyek ezen erőforrások állapotait reprezentálják. Az API nem más, mint címezhető erőforrások (resource) halmaza. Az alapelv nem köti meg a reprezentáció formátumát, gyakran XML, HTML, JSON, de lehet kép, egyszerű szöveg is. Azokat a rendszereket, amelyek eleget tesznek a REST megszorításainak, "RESTful"-nak nevezik, a továbbiakban mi is így hivatkozunk rá.
+
+#### RESTful webszolgáltatás
+A HTTP 1.1 protokollra épít, kihasználja az igék (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) szemantikáját. Példa a használatra és eredményre:
+
+A 12-es azonosítójú „todo” elem lekérdezése:
+```
+GET /api/todos/12
+```
+
+Minden todo elem lekérdezése:
+```
+GET /api/todos
+```
+
+HTTP válasz:
+```
+HTTP/1.1 200
+OK Content-Type: application/json; charset=utf-8
+Server: Microsoft-IIS/10.0
+Date: Thu, 18 Jun 2015 20:51:10 GMT Content-Length: 82
+
+[{"ID":"1","Name":"Házi beadása","IsComplete":false}] 
+```
+
+#### REST API Spring MVC-vel
+Megfelelően konfigurált és megírt szervlettel is megvalósítható egy RESTful webszolgáltatás, de kényelmesebb keretrendszer támogatással. A Spring MVC kezdettől fogva alkalmas REST API fejlesztésére:
+- A controller handler metódusra `@ResponseBody` annotáció
+- Handler metódus bemenő paraméterre `@RequestBody`
+- A törzs (de)szerializálásához, különböző formátumokhoz `HttpMessageConverter`-ek használhatók 
+
+#### JSON szerializálás
+A Jackson libraryre építve, de testre szabható. Léteznek minden webalkalmazás esetében tipikus megoldandó problémák: 
+- Körkörös kapcsolatok eliminálása
+- JPA entitások JSON-ben szereplő kapcsolatainak betöltése még menedzselt állapotban
+- Adott kérésnél fölösleges vagy nem publikus mezők kihagyása a JSON-ből
+
+Erre lehetőséget ad, ha az entitások JSON reprezentációját testreszabjuk Jasckon vagy esetleg más könyvtárak használatával, azonban akkor is orvosolni tudjuk, ha DTO-kat használunk a kontrollerekben a valós entitások helyett.
+
+#### DTO (Data Transfer Object)
+Főbb előnyei, hogy megoldaj a fentebb említett problémát, illetve a REST API kliensei és a prezisztens modell réteg között lazább a csatolás, azonban nem tökéletes a koncepció, hiszen rendelkezik számos hátránnyal is. Sok a plusz osztály, amelyek gyakran az entitások majdnem teljes másolatai, ezért nehéz karbantartani. Ezen felül a DTO és entitás közti konverzió futási időben történik, ami overheaded jelent, továbbá a DTO és entitás közti konverziót le kell fejleszteni, azonban ehhez segítséget nyújthatnak különböző könyvtárak, mint például a MapStruct.
+
+Ha a DTO mentes megoldás mellett döntünk egy RESTful webszolgáltatás esetébeen, akkor a Jackson segítségével kell testreszabni az entitások JSON reprezentációját. Ez a választás is megoldja a korábban említett problémákat, nincsenek plusz osztályok illetve runtime overhead, de annotációkkal telepakolt entitás osztályokkal fogunk kikötni, lletve a kliensnek követnie kell a JPA modell osztályok változtatásait.
+
 ### Maven
 
 #### Mi a Maven?
