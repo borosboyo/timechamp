@@ -241,9 +241,7 @@ Főbb előnyei, hogy megoldaj a fentebb említett problémát, illetve a REST AP
 Ha a DTO mentes megoldás mellett döntünk egy RESTful webszolgáltatás esetébeen, akkor a Jackson segítségével kell testreszabni az entitások JSON reprezentációját. Ez a választás is megoldja a korábban említett problémákat, nincsenek plusz osztályok illetve runtime overhead, de annotációkkal telepakolt entitás osztályokkal fogunk kikötni, lletve a kliensnek követnie kell a JPA modell osztályok változtatásait.
 
 ### Maven
-
-#### Mi a Maven?
-Egy parancssori build automatizáló eszköz, amely igen elterjedt, számos best practice-t integrál, külső pluginokat is be lehet importálni, például Lombok vagy Mapstruct.
+A Maven egy parancssori build automatizáló eszköz, amely igen elterjedt, számos best practice-t integrál, külső pluginokat is be lehet importálni, például Lombok vagy Mapstruct.
 
 #### A Maven főbb előnyei
 - Erősen testreszabható
