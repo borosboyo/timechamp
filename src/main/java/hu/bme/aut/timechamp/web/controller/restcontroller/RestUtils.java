@@ -28,9 +28,9 @@ public class RestUtils {
     }
 
     public static void executeRestRequest(Runnable request, HttpStatus ifException, HttpStatus ifNull){
-        executeRestRequest((Supplier<Void>) () -> {
+        executeRestRequest((Supplier<Object>) () -> {
             request.run();
-            return null;
+            return new Object();
         }, ifException, ifNull);
     }
 
