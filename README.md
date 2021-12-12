@@ -304,4 +304,17 @@ Gyakori igény lehet cégeknél például, hogy a fejlesztői, teszt vagy éles 
 
 ### JPA
 ### Lombok
+A Project Lombok egy Java könytvár, mey pluginként becsatlakozhat az editorunkba és build tooljainkba, felfrissítva a Java kódírás élményét. Segítségével soha többet nem kell getter vagy setter metódusokat írnunk, pár szimpla annoticáióval akár fully featured builderünk is lehet. 
+
+#### Használata
+Az annotációkat a kiszemelt osztályra rakhatjuk. Használatukkal kissé *black-magic* módon implementálásra kerülnek a kiválasztott funkciók. 
+Főbb annoticáók, amiket használtunk a projekt során is:
+- `@Getter`
+- `@Setter`
+- `@ToString`
+- `@NoArgsConstructor`, `@RequiredArgsConstructor` és `@AllArgsConstructor`, ezek mind sorrendben: legenerál egy konstruktort paraméterek nélkül, még egyet annyi argumentel ahány final vagy non-nullfieldünk van, illetve egy olyat is, ahol annyi argument van, ahány field az osztályunkban.
+
+#### *Black-magic*
+Első ránézésre kicsit láthatatlannak tűnhet a lombok működése, azonban a készítők erre is gondoltak. Elkészítették a *delombok*-ot is, amely tmásolja a forrásfájlokat egy másik mappába, kicserélve a lombok annotációkat a *cukormentes formájukkal*. Tehát a `@Getter` lecserélődik egy valódi getterrel, és törli az annotációt. Ennek több use-case-e is lehet, például megláthatjuk, hogy működik a lombok a motorháztető alatt, vagy ha nem szeretnénk tovább használni a lombokot, könnyedén wipeolhatjuk a forráskódunkból, illetve preprocesszáálhatjuk a forrásfájlainkat source level tooloknak, mint például a JavaDoc.
+
 ### Mapstruct
