@@ -74,7 +74,12 @@ public class EventRestController {
 
     @PostMapping("{id}/time")
     public EventDto setTimeById(@PathVariable long id, @RequestParam int year, @RequestParam int month, @RequestParam int day, @RequestParam int hour, @RequestParam int minute) {
-        LocalDateTime time = LocalDateTime.of(year, month, day, hour, minute);
-        return eventService.setTimeById(id, time);
+        try {
+            LocalDateTime time = LocalDateTime.of(year, month, day, hour, minute);
+            return eventService.setTimeById(id, time);
+        }
+        catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 }

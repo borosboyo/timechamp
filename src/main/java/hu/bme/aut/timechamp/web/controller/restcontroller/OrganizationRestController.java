@@ -31,11 +31,16 @@ public class OrganizationRestController {
 
     @PutMapping
     public OrganizationDto createOrganization(@RequestParam String name, RedirectAttributes redirectAttributes){
-        OrganizationDto result = organizationService.createOrganization(name);
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        try {
+            OrganizationDto result = organizationService.createOrganization(name);
+            if(result == null){
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            return result;
         }
-        return result;
+        catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Organization by this name already exists");
+        }
     }
 
     @GetMapping("/{id}")

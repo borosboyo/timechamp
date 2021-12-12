@@ -28,12 +28,17 @@ public class TeamRestController {
     }
 
     @PutMapping
-    public TeamDto createTeam(@RequestParam String name, @RequestParam long creator_id, @RequestParam long organization_id){
-        TeamDto result = teamService.createTeam(name, creator_id, organization_id);
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+    public TeamDto createTeam(@RequestParam String name, @RequestParam long creator_id, @RequestParam long organization_id) {
+        try {
+            TeamDto result = teamService.createTeam(name, creator_id, organization_id);
+            if(result == null){
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            return result;
         }
-        return result;
+        catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/{id}/join")

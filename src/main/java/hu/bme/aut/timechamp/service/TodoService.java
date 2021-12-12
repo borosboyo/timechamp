@@ -39,6 +39,11 @@ public class TodoService {
     @Transactional
     public TodoDto createTodoToEvent(String todoName, long eventId) {
         Event event = eventRepository.findById(eventId);
+
+        if(event == null) {
+            throw new IllegalArgumentException();
+        }
+
         Todo todo = new Todo();
         todo.setName(todoName);
         todo.setEvent(event);

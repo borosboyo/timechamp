@@ -6,8 +6,10 @@ import hu.bme.aut.timechamp.model.Todo;
 import hu.bme.aut.timechamp.repository.TodoRepository;
 import hu.bme.aut.timechamp.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,12 +27,22 @@ public class TodoRestController {
 
     @PostMapping
     public TodoDto createTodoToEvent(@RequestParam String name, @RequestParam long event_id) {
-        return todoService.createTodoToEvent(name, event_id);
+        try {
+            return todoService.createTodoToEvent(name, event_id);
+        }
+        catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("/{id}")
     public TodoDto getTodoById(@PathVariable long id) {
-        return todoService.findById(id);
+        TodoDto todoDto = todoService.findById(id);
+        if(todoDto == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        return todoDto;
     }
 
 
