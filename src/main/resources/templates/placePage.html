@@ -21,7 +21,7 @@
     </tr>
 </table>
 
-<form th:action="@{/createPlace}" th:object="${place}" method="post">
+<form th:action="@{/createPlace}" th:object="${newPlace}" method="post">
     Name: <input th:field="*{name}"/><br/>
     Google Code: <input th:field="*{googleCode}"/><br/>
     Latitude: <input th:field="*{latitude}"/><br/>
