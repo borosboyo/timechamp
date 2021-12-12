@@ -30,7 +30,7 @@ public class OrganizationRestController {
     }
 
     @PutMapping
-    public OrganizationDto createOrganization(@RequestParam String name, RedirectAttributes redirectAttributes){
+    public OrganizationDto createOrganization(@RequestParam String name){
         OrganizationDto result = organizationService.createOrganization(name);
         if(result == null){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,7 +48,7 @@ public class OrganizationRestController {
     }
 
     @PostMapping("/{id}/hq")
-    public OrganizationDto changeHQ(@PathVariable("id") long id, @RequestParam() long place_id, RedirectAttributes redirectAttributes){
+    public OrganizationDto changeHQ(@PathVariable("id") long id, @RequestParam() long place_id){
         organizationService.setHQ(id, place_id);
         return organizationService.findById(id);
     }
