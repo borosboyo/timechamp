@@ -23,7 +23,7 @@ public class AppUserController {
         List<AppUserDto> appUsers = appUserService.findAll();
 
         model.put("appUsers", appUsers);
-        model.put("newAppUser", new AppUserDto());
+        model.put("newAppUser", new AppUserParameters());
         return "appUserPage";
     }
 

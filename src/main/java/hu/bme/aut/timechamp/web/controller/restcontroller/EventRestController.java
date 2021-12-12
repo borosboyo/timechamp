@@ -33,7 +33,6 @@ public class EventRestController {
         return RestUtils.executeRestRequest(() -> eventService.findById(id), HttpStatus.NOT_FOUND);
     }
 
-
     @PostMapping("/{id}/participant/add")
     public EventDto addParticipant(@PathVariable long id, @RequestParam long user_id) {
         return RestUtils.executeRestRequest(() -> eventService.addParticipant(id, user_id));

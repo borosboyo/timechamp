@@ -23,7 +23,7 @@ public class TeamController {
         List<TeamDto> teams = teamService.findAll();
 
         model.put("teams", teams);
-        model.put("newTeam", new TeamDto());
+        model.put("newTeam", new TeamParameters());
         return "teamPage";
     }
 
