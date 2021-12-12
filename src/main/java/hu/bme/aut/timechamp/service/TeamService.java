@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class TeamService {
@@ -46,9 +47,22 @@ public class TeamService {
         AppUser adminUser = appUserRepository.findById(creatorId);
         Organization organization = organizationRepository.findById(organizationId);
 
+
         if(adminUser == null || organization == null) {
             throw new IllegalArgumentException();
         }
+
+        AtomicBoolean exists = new AtomicBoolean(false);
+        organization.getTeams().forEach(e -> {
+            if(e.getName().equals(name)) {
+                exists.set(true);
+            }
+        });
+
+        if(exists.get()) {
+            throw new IllegalArgumentException();
+        }
+
 
         Team team = new Team();
         team.setName(name);

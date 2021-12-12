@@ -35,7 +35,11 @@ public class OrganizationService {
     }
 
     @Transactional
-    public OrganizationDto createOrganization(String name){
+    public OrganizationDto createOrganization(String name) {
+        if(organizationRepository.findByName(name).size() != 0) {
+            throw new IllegalArgumentException();
+        }
+
         Organization saved = organizationRepository.save(new Organization(name));
         return organizationMapper.organizationToDto(saved);
     }
