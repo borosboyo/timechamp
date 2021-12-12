@@ -23,7 +23,6 @@ Természetesen a kedvenc IDE-nkből is.
 Maga a program célja egy csapat és időpont organizációs rendszer megvalósítása **Spring Boot backenddel, teljes REST API-val és szerver oldali rendereléssel, mivel egyikünk se ért az Angularhoz**. Az applikációban csapatokat, csapattagokat és eseményeket lehet kezelni.
 
 ### A program használata
-A webes alkalmazás használata során a felhasználónak lehetősége van regisztrálnia egy fiókot, tetszőleges felhasználónévvel és jelszóval. Regisztráció után természetesen megnyílik a bejelentkezés funkció is.
 
 A program magába foglal organizációkat, melyeket a felhasználók hozhatnak létre, és létrehozásuk után adminisztrációs joggal rendelkeznek felette.
 
