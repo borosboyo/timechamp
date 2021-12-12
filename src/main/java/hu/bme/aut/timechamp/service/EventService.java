@@ -104,6 +104,11 @@ public class EventService {
     @Transactional
     public EventDto setTimeById(long id, LocalDateTime time) {
         Event event = eventRepository.findById(id);
+
+        if(event == null) {
+            throw new IllegalArgumentException();
+        }
+
         event.setTime(time);
         return eventMapper.eventToDto(eventRepository.save(event));
     }

@@ -15,10 +15,14 @@ Az alkalmazás tartalmaz továbbá csapatokat és azok tagjait, melyek egy kül�
 A csapat létrehozója admin joggal rendelkezik a csapaton belül, azonban más csapattagokat is felruházhat vele, továbbá csatlakozhat a csapatával egy szervezethez.
 
 Egy csapat adminja(i) létrehozhatnak, törölhetnek csapatspecifikus eseményeket, melyre minden csapattag jelentkezni tud. Az esemény létrehozója testreszabhatja az eseményt egyedi leírás megadásával. Az eseményeknél megtekinthetőek, hogy kik a jelenlegi résztvevők. Az eseményekhez elvégzendő feladatok is kötődhetnek, amelynek vannak felelősei, illetve egy esemény helyhez kötött, amelyhez hozzá lehet rendelni Google Maps kódot, nevet, hosszúságot, illetve szélességet.
-### További dokumentációk majd ide
+
 ## Mit tanultunk a félév során?
-### Effective Java //MAX 1 OLDAL
-### Clean code
+### Effective Java // TODO MAX 1 OLDAL
+
+### Clean code // TODO
+
+### JPA //TODO
+
 ### Spring MVC
 Egy olyan requrest-driven MVC framework, amely a Servlet API-ra épül és web alkalmazásokat készíthetünk vele. 
 
@@ -49,7 +53,90 @@ Spring Boot nélkül XML és/vagy JavaConfigra lenne szükség a SpringMVC, és 
 Az alkalmazás belépési pontja pedig a `@SpringBootApplication` annotációval ellátot osztály lesz. A Controler osztályainkat a `root` csomagba, vagy valamely alcsomagjába kell helyeznünk. A Thymeleaf-es `.html` fájlokat az `src\main\resources\templates` alá kell helyeznünk.
 
 ### Spring Boot
-A Spring Boot egy keretrendszer, aminek segítségével könnyen és gyorsan írhatunk szerver oldali Java alkalmazásokat. A Spring-re épül, ami egy összetett, sok modulból álló framework. A Spring Boot pedig már a Spring által kínált eszközökből összeállított “váz”, ami egyszerűen bővíthető, és sok technikai részletet elfed a kényelmünk érdekében. 
+A Spring Boot egy keretrendszer, aminek segítségével könnyen és gyorsan írhatunk szerver oldali Java alkalmazásokat. A Spring-re épül, ami egy összetett, sok modulból álló framework. A Spring Boot pedig már a Spring által kínált eszközökből összeállított “váz”, ami egyszerűen bővíthető, és sok technikai részletet elfed a kényelmünk érdekében. Segítségével a webalkalmazások is önálló Java alkalmazásként futtathatók, beágyazott Tomcat/Jetty/Undertow webkonténeren, tehát nem szükséges külön deploy. Megfelelő jar függőségek révén a default konfiguráció automatikus.
+
+#### Kód struktúra
+Az application osztályt, célszerű (nem kötelező) egy `root` package-be tenni, a többi osztály az alatti alpackage-ekben legyen például: 
+- model: entitások
+- service: üzleti logikai osztályok
+- web vagy controller: Spring MVC controller osztályok
+
+#### Konfigurációs osztályok
+JavaConfigot használunk az XML-el szemben, illetve a konfigot szétoszthatjuk több `@Configuration` osztályba, melyek érvényre jutnak, ha:
+- a root package alatt vannak (akár alpackage-ekben),és az application osztály `@ComponentScan` vagy `@SpringBootApplication` annotációt kap
+- vagy explicit behúzzuk őket, például `@Import(MyConfig.class)`
+
+Ha mégis XML-t használnánk, az `@ImportResource` annotációval húzható be egy `@Configuration`–ös osztályon.
+
+#### Autokonfiguráció
+A `@EnableAutoConfiguration` (vagy `@SpringBootApplication`) annotációval engedélyezzük az autokonfigurációkat, by default az összeset. Az autokonfigurációk "intelligensek", például, ha nem webes az alkalmazásunk, nem próbál Spring MVC-t konfigolni, vagy ha mi magunk JavaConfig-ot írunk valamire, nem fogja felülírni. Az autokonfigurációkat nyomon követhetjük, ha `--debug` kapcsolóval indítjuk el az alkalmazásunkat.
+
+#### Property alapú konfiguráció
+Az autokonfig osztályok működése testre szabható saját propertykkel, mert a saját kódban is igény lehet rá, hogy külső konfig fájlból vegyünk adatokat. Illetve, ha sok propertynk van, amelyek akár hierarchikusak, célszerű külön osztályt bevezetni nekik, A propertyk egyik elérési módja kódból a `@Value("${myprop}")` annotáció:
+```
+@Component
+public class MyBean {
+  @Value("${myprop}")
+  private String myField;
+  // ...
+}
+```
+
+A property értéket megadhatjuk a classpath-ra helyezett `application.properties` fájlban.
+```
+myprop=value
+```
+
+Az `application.properties` helyett `application.yml` is használható, mely sokszor tömörebb.
+
+`application.properties`:
+```
+environments.dev.url=http://dev.bar.com
+environments.dev.name=Developer Setup
+environments.prod.url=http://foo.bar.com
+environments.prod.name=My Cool App
+```
+
+`application.yml`:
+```
+environments:
+  dev:
+    url: http://dev.bar.com
+    name: Developer Setup
+  prod:
+    url: http://foo.bar.com
+    name: My Cool App
+```
+
+Összességében a property alapú konfigurációnak számos előnye van:
+- A `@ConfigurationProperties` annotáció `@Bean` metódusokon is alkalmazható, a legyártott bean propertyjeit fogja konfigolni a megfelelő prefixű propertykkel
+- Egyszerre injektálhatunk több, akár hierarchikus property-t
+- Nem tudjuk elgépelni a `@Value`-nak átadott értéket
+- Megengedőbb a property nevekkel, pl. person.firstName, person.first-name, person.first_name, PERSON_FIRST_NAME mind megfelelő
+- A `spring-boot-configuration-processor` metaadatokat tud generálni az osztályokból, így a konfig fájlok szerkesztésekor kódkiegészítés is működhet az IDE-kben
+
+#### Spring Data
+A `spring-boot-starter-data-jpa` függőség hozzáadásával az alábbi könnyebbségekkel szembesülünk:
+- Hozza a Hibernate-et by default, nem kell külön hozzáadni
+- Entitások és repository interfészek minden konfig nélkül használhatók, by default a fő konfig osztály package-ében keresi őket
+- Nem kell `persistence.xml`
+
+#### Spring Security
+By default: 
+- BASIC autentikációval védett majdnem minden URL
+- Security események publikálása bekapcsolva
+- HSTS, XSS, CSRF védelmet bekapcsolja
+
+A Spring Security testre is szabható az `@EnableGlobalMethodSecurity` annotáció explicit használatával. Ha property alapú konfigot szeretnénk akkor az a `SecurityProperties` osztály (pl.: `security.user.password`, `security.basic.path`) alapján történik. Ha a teljes konfigot szeretnénk lecserélni, akkor pedig `@EnableWebSecurity,
+WebSecurityConfigurerAdapter` -et kell használjunk.
+
+#### Spring Tesztelés
+A `spring-boot-starter-test` dependency behúzása több hasznos teszt library-t behúz, például junit, spring-test, mockito, melyek lehetővé teszik a tesztelést. Sima Springes teszteléshez hasonlóan `@RunWith(SpringRunner.class)` annotációva láthatjuk el a teszt osztályunkat. 
+
+Nem szükséges `@ContextConfiguration`-nel megnevezni a teszt kontextusának konfigját, helyette `@SpringBootTest` is elég, mert a package-eken felfelé haladva megtalálja a a fő konfig osztályunkat, azonban Ha csak egyes tesztekhez írunk külön `@Configuration` osztályt, esetleg `@Component` segédosztályokat, a scannelés miatt ez bezavarhat más teszteknél is, ennek elkerülésére `@TestConfiguration`, `@TestComponent` annotációk használható
+
+Az adatokat illetően az `@AutoConfigureTestDatabase` lecseréli a beállított datasource-t egy embedded-re, de a `@DataJpaTest` is használható ilyen célra, de akkor csak a JPA-s
+dolgok töltődnek be, nem a teljes kontextus.
 
 #### Webalkalmazás futtatása
 Ha a `pom.xml`-ünkben megtalálható a `spring-boot-starter-web`, akkor egy beágyazott konténert indíthatunk, default-ból Tomcat-et, így nem szükséges külön webkonténer, fejleszés során kimarad a deploy. Alap esetben a `8080`-as porton, a `http://localhost:8080/`-en keresztül.
@@ -112,11 +199,53 @@ Feltételes kifejezések:
   <p th:case="*">User is some other thing</p>
 </div>
 ```
-### REST
-### Maven
+### REST (Reprersentational State Transfer)
+Egy szoftverarchitektúra típus, loose coupling, nagy, internet alapú rendszerek számára, amelyben különféle erőforrások URI alapon érhetők el. Egy REST típusú architektúra kliensekből és szerverekből áll. A kliensek kéréseket indítanak a szerverek felé; a szerverek kéréseket dolgoznak fel és a megfelelő választ küldik vissza. A kérések és a válaszok erőforrás-reprezentációk szállítása köré épülnek. A kliens és szerver között olyan dokumentumok utaznak, amelyek ezen erőforrások állapotait reprezentálják. Az API nem más, mint címezhető erőforrások (resource) halmaza. Az alapelv nem köti meg a reprezentáció formátumát, gyakran XML, HTML, JSON, de lehet kép, egyszerű szöveg is. Azokat a rendszereket, amelyek eleget tesznek a REST megszorításainak, "RESTful"-nak nevezik, a továbbiakban mi is így hivatkozunk rá.
 
-#### Mi a Maven?
-Egy parancssori build automatizáló eszköz, amely igen elterjedt, számos best practice-t integrál, külső pluginokat is be lehet importálni, például Lombok vagy Mapstruct.
+#### RESTful webszolgáltatás
+A HTTP 1.1 protokollra épít, kihasználja az igék (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) szemantikáját. Példa a használatra és eredményre:
+
+A 12-es azonosítójú „todo” elem lekérdezése:
+```
+GET /api/todos/12
+```
+
+Minden todo elem lekérdezése:
+```
+GET /api/todos
+```
+
+HTTP válasz:
+```
+HTTP/1.1 200
+OK Content-Type: application/json; charset=utf-8
+Server: Microsoft-IIS/10.0
+Date: Thu, 18 Jun 2015 20:51:10 GMT Content-Length: 82
+
+[{"ID":"1","Name":"Házi beadása","IsComplete":false}] 
+```
+
+#### REST API Spring MVC-vel
+Megfelelően konfigurált és megírt szervlettel is megvalósítható egy RESTful webszolgáltatás, de kényelmesebb keretrendszer támogatással. A Spring MVC kezdettől fogva alkalmas REST API fejlesztésére:
+- A controller handler metódusra `@ResponseBody` annotáció
+- Handler metódus bemenő paraméterre `@RequestBody`
+- A törzs (de)szerializálásához, különböző formátumokhoz `HttpMessageConverter`-ek használhatók 
+
+#### JSON szerializálás
+A Jackson libraryre építve, de testre szabható. Léteznek minden webalkalmazás esetében tipikus megoldandó problémák: 
+- Körkörös kapcsolatok eliminálása
+- JPA entitások JSON-ben szereplő kapcsolatainak betöltése még menedzselt állapotban
+- Adott kérésnél fölösleges vagy nem publikus mezők kihagyása a JSON-ből
+
+Erre lehetőséget ad, ha az entitások JSON reprezentációját testreszabjuk Jasckon vagy esetleg más könyvtárak használatával, azonban akkor is orvosolni tudjuk, ha DTO-kat használunk a kontrollerekben a valós entitások helyett.
+
+#### DTO (Data Transfer Object)
+Főbb előnyei, hogy megoldaj a fentebb említett problémát, illetve a REST API kliensei és a prezisztens modell réteg között lazább a csatolás, azonban nem tökéletes a koncepció, hiszen rendelkezik számos hátránnyal is. Sok a plusz osztály, amelyek gyakran az entitások majdnem teljes másolatai, ezért nehéz karbantartani. Ezen felül a DTO és entitás közti konverzió futási időben történik, ami overheaded jelent, továbbá a DTO és entitás közti konverziót le kell fejleszteni, azonban ehhez segítséget nyújthatnak különböző könyvtárak, mint például a MapStruct.
+
+Ha a DTO mentes megoldás mellett döntünk egy RESTful webszolgáltatás esetébeen, akkor a Jackson segítségével kell testreszabni az entitások JSON reprezentációját. Ez a választás is megoldja a korábban említett problémákat, nincsenek plusz osztályok illetve runtime overhead, de annotációkkal telepakolt entitás osztályokkal fogunk kikötni, lletve a kliensnek követnie kell a JPA modell osztályok változtatásait.
+
+### Maven
+A Maven egy parancssori build automatizáló eszköz, amely igen elterjedt, számos best practice-t integrál, külső pluginokat is be lehet importálni, például Lombok vagy Mapstruct.
 
 #### A Maven főbb előnyei
 - Erősen testreszabható
@@ -177,6 +306,61 @@ Miért jó ez? Hát azért, mert a szülő megadhatja a közösen használt depe
 #### Maven profilok
 Gyakori igény lehet cégeknél például, hogy a fejlesztői, teszt vagy éles környezetre másképp szeretnénk buildelni. Erre vannak a profilok.
 
-### JPA
 ### Lombok
+A Project Lombok egy Java könytvár, mey pluginként becsatlakozhat az editorunkba és build tooljainkba, felfrissítva a Java kódírás élményét. Segítségével soha többet nem kell getter vagy setter metódusokat írnunk, pár szimpla annoticáióval akár fully featured builderünk is lehet. 
+
+#### Használata
+Az annotációkat a kiszemelt osztályra rakhatjuk. Használatukkal kissé *black-magic* módon implementálásra kerülnek a kiválasztott funkciók. 
+Főbb annoticáók, amiket használtunk a projekt során is:
+- `@Getter`
+- `@Setter`
+- `@ToString`
+- `@NoArgsConstructor`, `@RequiredArgsConstructor` és `@AllArgsConstructor`, ezek mind sorrendben: legenerál egy konstruktort paraméterek nélkül, még egyet annyi argumentel ahány final vagy non-nullfieldünk van, illetve egy olyat is, ahol annyi argument van, ahány field az osztályunkban.
+
+#### *Black-magic*
+Első ránézésre kicsit láthatatlannak tűnhet a lombok működése, azonban a készítők erre is gondoltak. Elkészítették a *delombok*-ot is, amely tmásolja a forrásfájlokat egy másik mappába, kicserélve a lombok annotációkat a *cukormentes formájukkal*. Tehát a `@Getter` lecserélődik egy valódi getterrel, és törli az annotációt. Ennek több use-case-e is lehet, például megláthatjuk, hogy működik a lombok a motorháztető alatt, vagy ha nem szeretnénk tovább használni a lombokot, könnyedén wipeolhatjuk a forráskódunkból, illetve preprocesszáálhatjuk a forrásfájlainkat source level tooloknak, mint például a JavaDoc.
+
 ### Mapstruct
+Egy kód generátor, ami nagy mértékben leegyszerűsiti a mapping-ek implementációját Java bean típusok között. A generált mapping kód sima metódus invokációkat tartalmaz ezért gyors, type-safe és könnyű megérteni. 
+
+#### Miért használjuk?
+Több layeres appok esetén szükséges lehet a mappolás az entitás modellek között, például RESTful webszolgáltatások esetén az entityk és DTO-k között. A mapping kód megírása hosszú, és error-prone feladat lehet, amit a Mapstruct automatizál helyettünk. Más mapping framework-ökkel ellentétben a Mapstruct compile-time-ban működik, ami biztosítja a nagy teljesítményt, és a gyors fejlesztői feedbacket az error checkinig által. 
+
+#### Hogyan?
+A Mapstruct egy annotation processor, ami a Java compiler-be épül és command-line buildekben is használhatjuk, például Mavenben vagy Gradleben. 
+Az alábbi példakódokban bemutatjuk a használatát.
+
+`Car.java`:
+```
+public class Car {
+
+    private String make;
+    private int numberOfSeats;
+    private CarType type;
+    
+}
+```
+
+`CarDto.java`: 
+```
+public class CarDto {
+
+    private String make;
+    private int seatCount;
+    private String type;
+    
+}
+```
+
+`CarMapper.java`:
+```
+@Mapper
+public interface CarMapper {
+
+    CarMapper INSTANCE = Mappers.getMapper( CarMapper.class ); 
+    
+    @Mapping(source = "numberOfSeats", target = "seatCount")
+    CarDto carToCarDto(Car car);
+    
+}
+```

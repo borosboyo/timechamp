@@ -7,14 +7,12 @@ import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.model.Todo;
 import hu.bme.aut.timechamp.repository.AppUserRepository;
 import hu.bme.aut.timechamp.repository.EventRepository;
-import hu.bme.aut.timechamp.repository.TeamRepository;
 import hu.bme.aut.timechamp.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -39,6 +37,11 @@ public class TodoService {
     @Transactional
     public TodoDto createTodoToEvent(String todoName, long eventId) {
         Event event = eventRepository.findById(eventId);
+
+        if(event == null) {
+            throw new IllegalArgumentException();
+        }
+
         Todo todo = new Todo();
         todo.setName(todoName);
         todo.setEvent(event);
@@ -65,6 +68,11 @@ public class TodoService {
     public TodoDto assignLeader(long todoId, long userId) {
         Todo todo = todoRepository.findById(todoId);
         AppUser user = appUserRepository.findById(userId);
+
+        if(todo == null || user == null) {
+            throw new IllegalArgumentException();
+        }
+
         todo.getLeaders().add(user);
 
         Todo savedTodo = todoRepository.save(todo);
@@ -76,6 +84,11 @@ public class TodoService {
     @Transactional
     public TodoDto setDescription(long todoId, String description) {
         Todo todo = todoRepository.findById(todoId);
+
+        if(todo == null) {
+            throw new IllegalArgumentException();
+        }
+
         todo.setDescription(description);
 
         return todoMapper.todoToDto(todoRepository.save(todo));
