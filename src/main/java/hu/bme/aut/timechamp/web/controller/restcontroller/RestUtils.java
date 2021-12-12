@@ -26,4 +26,19 @@ public class RestUtils {
     public static <T> T executeRestRequest(Supplier<T> request, HttpStatus ifNull){
         return executeRestRequest(request, HttpStatus.BAD_REQUEST, ifNull);
     }
+
+    public static void executeRestRequest(Runnable request, HttpStatus ifException, HttpStatus ifNull){
+        executeRestRequest((Supplier<Void>) () -> {
+            request.run();
+            return null;
+        }, ifException, ifNull);
+    }
+
+    public static void executeRestRequest(Runnable request){
+        executeRestRequest(request, HttpStatus.BAD_REQUEST, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public static void executeRestRequest(Runnable request, HttpStatus ifNull){
+        executeRestRequest(request, HttpStatus.BAD_REQUEST, ifNull);
+    }
 }
