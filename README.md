@@ -17,7 +17,22 @@ A csapat létrehozója admin joggal rendelkezik a csapaton belül, azonban más 
 Egy csapat adminja(i) létrehozhatnak, törölhetnek csapatspecifikus eseményeket, melyre minden csapattag jelentkezni tud. Az esemény létrehozója testreszabhatja az eseményt egyedi leírás megadásával. Az eseményeknél megtekinthetőek, hogy kik a jelenlegi résztvevők. Az eseményekhez elvégzendő feladatok is kötődhetnek, amelynek vannak felelősei, illetve egy esemény helyhez kötött, amelyhez hozzá lehet rendelni Google Maps kódot, nevet, hosszúságot, illetve szélességet.
 
 ## Mit tanultunk a félév során?
-### Effective Java // TODO MAX 1 OLDAL
+### Effective Java - summary, favourites
+#### 2. 
+##### 2.1. Use STATIC FACTORY METHODS instead of constructors
+Van nevük, nem hoznak mindig létre új objektumot, bármilyen subtype-ot tudnak return-ölni.
+##### 2.2. Use BUILDERS when faced with many constructors
+Jó választás osztályok esetén, melyek konstruktorai vagy static factory-ai sok paramétert tartalmaznak. 
+##### 2.3. Enforce the singleton property with a private constructor or an enum type
+Public final field, Singleton with static factory, Serialize a singleton módszerekkel, vagy Enum Singleton, ami ez esetben a preferált megoldás.
+##### 2.4. Enforce noninstantiability with a private constructor
+Cím. Osztályoknak, melyek static fieldeket vagy static methodokat csoportosítanak.
+##### 2.5. Avoid creating objects
+Használj static factory methodokat. Az object poolok általában rossz ötletek. Használj újra mutable objektumokat, melyekről tudod, hogy nem fognak változni.
+##### 2.6. Eliminate obsolete object references
+Nehéz debug, memory leak megtalálása. Null-ozd ki a nem használt referenciákat. Használj Heap Profilert néha, hogy megtalált a rejtett memory leakeke.t
+##### 2.7 Avoid finalizers
+A finalizerek kiszámíthatatlanok, gyakran veszélyesek. Erősen befolyásolják a teljesítményt
 
 ### Clean code // TODO
 
