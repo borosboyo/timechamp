@@ -40,4 +40,9 @@ public class TodoRestController {
     public TodoDto setDescription(@PathVariable long id, @RequestParam String description) {
         return RestUtils.executeRestRequest(() -> todoService.setDescription(id, description));
     }
+
+    @DeleteMapping("/{id}")
+    public void DeleteTodoById(@PathVariable long id) {
+        RestUtils.executeRestRequest(()->todoService.removeTodo(id));
+    }
 }

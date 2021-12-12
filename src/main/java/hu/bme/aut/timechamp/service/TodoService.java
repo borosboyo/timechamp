@@ -93,4 +93,18 @@ public class TodoService {
 
         return todoMapper.todoToDto(todoRepository.save(todo));
     }
+
+    @Transactional
+    public void removeTodo(long id){
+        Todo todo = todoRepository.findById(id);
+        if(todo == null){
+            throw new IllegalArgumentException();
+        }
+        for(AppUser leader : todo.getLeaders()){
+            leader.getTodos().remove(todo);
+        }
+        todo.getEvent().getTodos().remove(todo);
+        todoRepository.flush();
+        todoRepository.removeById(id);
+    }
 }
