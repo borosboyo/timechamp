@@ -34,5 +34,8 @@ public interface EventMapper {
 
     @Mapping(target = "teams", ignore = true)
     OrganizationDto organizationToDto(Organization organization);
+
+    @Mapping(target = "organization", ignore =  true)
+    PlaceDto placeToDto(Place place);
 }
 
