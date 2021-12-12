@@ -30,34 +30,17 @@ public class OrganizationRestController {
     }
 
     @PutMapping
-    public OrganizationDto createOrganization(@RequestParam String name){
-        try {
-            OrganizationDto result = organizationService.createOrganization(name);
-            if(result == null){
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-            return result;
-        }
-        catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Organization by this name already exists");
-        }
+    public OrganizationDto createOrganization(@RequestParam String name) {
+        return RestUtils.executeRestRequest(() -> organizationService.createOrganization(name));
     }
 
     @GetMapping("/{id}")
-    public OrganizationDto findById(@PathVariable long id){
-        OrganizationDto result = organizationService.findById(id);
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return result;
+    public OrganizationDto findById(@PathVariable long id) {
+        return RestUtils.executeRestRequest(() -> organizationService.findById(id), HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/{id}/hq")
-    public OrganizationDto changeHQ(@PathVariable("id") long id, @RequestParam() long place_id){
-        OrganizationDto result = organizationService.setHQ(id, place_id);
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        return result;
+    public OrganizationDto changeHQ(@PathVariable("id") long id, @RequestParam() long place_id) {
+        return RestUtils.executeRestRequest(() -> organizationService.setHQ(id, place_id), HttpStatus.NOT_FOUND);
     }
 }

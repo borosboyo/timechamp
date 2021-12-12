@@ -26,60 +26,28 @@ public class EventRestController {
 
     @PostMapping
     public EventDto createEvent(@RequestParam String name, @RequestParam long team_id, @RequestParam long creator_id) {
-        try {
-            EventDto eventDto = eventService.createEvent(name, team_id, creator_id);
-
-            if(eventDto == null) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-
-            return eventDto;
-        }
-        catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad parameters");
-        }
+        return RestUtils.executeRestRequest(() -> eventService.createEvent(name, team_id, creator_id));
     }
 
     @GetMapping("/{id}")
     public EventDto getEventById(@PathVariable long id) {
-        EventDto eventDto = eventService.findById(id);
-        if(eventDto == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-
-        return eventDto;
+        return RestUtils.executeRestRequest(() -> eventService.findById(id), HttpStatus.NOT_FOUND);
     }
 
 
     @PostMapping("/{id}/participant/add")
     public EventDto addParticipant(@PathVariable long id, @RequestParam long user_id) {
-        try {
-            EventDto eventDto = eventService.addParticipant(id, user_id);
-
-            if(eventDto == null) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-
-            return eventDto;
-        }
-        catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad parameters");
-        }
+        return RestUtils.executeRestRequest(() -> eventService.addParticipant(id, user_id));
     }
 
     @PostMapping("/{id}/participant/remove")
     public EventDto removeParticipant(@PathVariable long id, @RequestParam long user_id) {
-        return eventService.removeParticipant(id, user_id);
+        return RestUtils.executeRestRequest(() -> eventService.removeParticipant(id, user_id));
     }
 
     @PostMapping("{id}/time")
     public EventDto setTimeById(@PathVariable long id, @RequestParam int year, @RequestParam int month, @RequestParam int day, @RequestParam int hour, @RequestParam int minute) {
-        try {
-            LocalDateTime time = LocalDateTime.of(year, month, day, hour, minute);
-            return eventService.setTimeById(id, time);
-        }
-        catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
+        LocalDateTime time = LocalDateTime.of(year, month, day, hour, minute);
+        return RestUtils.executeRestRequest(() -> eventService.setTimeById(id, time));
     }
 }

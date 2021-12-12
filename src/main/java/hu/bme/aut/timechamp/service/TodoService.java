@@ -70,6 +70,11 @@ public class TodoService {
     public TodoDto assignLeader(long todoId, long userId) {
         Todo todo = todoRepository.findById(todoId);
         AppUser user = appUserRepository.findById(userId);
+
+        if(todo == null || user == null) {
+            throw new IllegalArgumentException();
+        }
+
         todo.getLeaders().add(user);
 
         Todo savedTodo = todoRepository.save(todo);
@@ -81,6 +86,11 @@ public class TodoService {
     @Transactional
     public TodoDto setDescription(long todoId, String description) {
         Todo todo = todoRepository.findById(todoId);
+
+        if(todo == null) {
+            throw new IllegalArgumentException();
+        }
+
         todo.setDescription(description);
 
         return todoMapper.todoToDto(todoRepository.save(todo));
