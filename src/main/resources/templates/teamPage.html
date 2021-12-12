@@ -36,7 +36,7 @@
                     <tr th:each ="team : ${teams}">
                         <th th:text="${team.id}">ID</th>
                         <th th:text="${team.name}">Name</th>
-                        <th th:text="${team.creator}">Creator</th>
+                        <th th:text="${team.adminAppUsers}">Admin Users</th>
                         <th th:text="${team.appUsers}">AppUsers</th>
                         <th th:text="${team.organization}">Organization</th>
                         <th>
@@ -58,7 +58,7 @@
 
             <div class="form-group" style = "padding: 10px;">
                 <label for="creator">CreatorId:</label>
-                <input th:field="*{creator}" id="creator"/><br/>
+                <input th:field="*{adminAppUsers}" id="creator"/><br/>
             </div>
 
             <div class="form-group" style = "padding: 10px;">
