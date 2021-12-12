@@ -3,22 +3,61 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>Organizations</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/grid/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d7b26806ab.js" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="grid.css" rel="stylesheet">
 </head>
 <body>
+<main>
+    <div class="px-4 py-5 my-5 text-center">
+        <h1><b>Organizations</b></h1>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style = "padding: 50px;" >
+            <a href="/">
+                <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Back</button>
+            </a>
+        </div>
+        <div class ="container">
+            <div class = "row">
+                <table class ="table table-striped table-borderd">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Teams</th>
+                        <th>HeadQuarter</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr th:each ="organization : ${organizations}">
+                        <th th:text="${organization.id}">ID</th>
+                        <th th:text="${organization.name}">Name</th>
+                        <th th:text="${organization.teams}">Google Code</th>
+                        <th th:text="${organization.headQuarter}">latitude</th>
+                        <th>
+                            <a href="" class="btn btn-sm btn-primary"><i
+                                    class="far fa-edit"></i></a>
+                            <a href="" class="btn btn-sm btn-danger"><i
+                                    class="far fa-trash-alt"></i></a>
+                            </a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <form th:action="@{/createOrganization}" th:object="${newOrganization}" method="post">
+            <div class="form-group" style = "padding: 10px;">
+                <label for="name">Name:</label>
+                <input th:field="*{name}" id="name"/><br/>
+            </div>
+            <input type="submit" value="Add"/>
+        </form>
+    </div>
+</main>
 
-    <table>
-        <tr>
-            <th>Name</th>
-        </tr>
-        <tr th:each ="organization : ${organizations}">
-            <td th:text="${organization.name}">Name</td>
-        </tr>
-    </table>
-
-    <form th:action="@{/createOrganization}" th:object="${organization}" method="post">
-        Name: <input th:field="*{name}"/><br/>
-        <input type="submit" value="Add"/>
-    </form>
 
 </body>
 </html>

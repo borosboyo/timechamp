@@ -22,7 +22,7 @@ public interface TodoMapper {
     @Mapping(target = "participants", ignore = true)
     EventDto eventToDto(Event event);
 
-    @Mapping(target = "adminAppUsers", ignore = true)
+    @Mapping(target = "creator", ignore = true)
     @Mapping(target = "appUsers", ignore = true)
     TeamDto teamToDto(Team team);
 
