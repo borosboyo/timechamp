@@ -49,4 +49,9 @@ public class EventRestController {
         LocalDateTime time = LocalDateTime.of(year, month, day, hour, minute);
         return RestUtils.executeRestRequest(() -> eventService.setTimeById(id, time));
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteEventById(@PathVariable long id) {
+        RestUtils.executeRestRequest(() -> eventService.removeEvent(id));
+    }
 }
