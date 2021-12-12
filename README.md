@@ -19,32 +19,37 @@ Egy csapat adminja(i) létrehozhatnak, törölhetnek csapatspecifikus események
 ## Mit tanultunk a félév során?
 ### Effective Java - summary, favourites
 #### 2. CREATING AND DESTROYING OBJECTS
+
 ##### 1. Use STATIC FACTORY METHODS instead of constructors
 Van nevük, nem hoznak mindig létre új objektumot, bármilyen subtype-ot tudnak return-ölni.
+
 ##### 2. Use BUILDERS when faced with many constructors
 Jó választás osztályok esetén, melyek konstruktorai vagy static factory-ai sok paramétert tartalmaznak. 
-##### 3. Enforce the singleton property with a private constructor or an enum type
-Public final field, Singleton with static factory, Serialize a singleton módszerekkel, vagy Enum Singleton, ami ez esetben a preferált megoldás.
-##### 4. Enforce noninstantiability with a private constructor
-Cím. Osztályoknak, melyek static fieldeket vagy static methodokat csoportosítanak.
-##### 5. Avoid creating objects
-Használj static factory methodokat. Az object poolok általában rossz ötletek. Használj újra mutable objektumokat, melyekről tudod, hogy nem fognak változni.
+
 ##### 6. Eliminate obsolete object references
 Nehéz debug, memory leak megtalálása. Null-ozd ki a nem használt referenciákat. Használj Heap Profilert néha, hogy megtalált a rejtett memory leakeket.
+
 ##### 7 Avoid finalizers
 A finalizerek kiszámíthatatlanok, gyakran veszélyesek. Erősen befolyásolják a teljesítményt.
+
 #### 3. METHODS COMMON TO ALL OBJECTS
 ##### 10. Always override toString
 Egy jó toString implementáció szép, olvashatóvá teszi az osztályt. Praktikus, mert minden információt megkaphatunk belőle.
+
 ##### 12. Consider implementing Comparable
 Comparable egy interface. Nincs deklarálva az Object-ben. Hasznosan jön a gyakorlatban.
+
 #### 4. CLASSES AND INTERFACES
 ##### 13. Consider implementing Comparable
 Jól dizájnolt module elrejti minden implementációs részletét. Elkülöníti az API-t az implementációtól.
+
 ##### 15. Minimize Mutability
 Minden információ az objektumról akkor kerül megadásra, amikor létrehozzuk. Könnyebb a desing, implementáció, kevesebb az error, nagyobb a biztonság.
+
 ##### 18. Prefer interfaces to abstract classes
 Java csak single-inheritencet enged meg, korlátozva az absztrakt osztályok használatát. Meglévő osztályokat könnyű retrofitelni interface-el.
+
+
 ### Clean code // TODO
 
 
