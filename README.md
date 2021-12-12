@@ -3,7 +3,7 @@
 ## Az alkalmazás programozói dokumentációja
 
 ### A program célja
-Maga a program célja egy csapat és időpont organizációs rendszer megvalósítása Spring Boot backenddel, melyben csapatokat, csapattagokat és eseményeket lehet kezelni.
+Maga a program célja egy csapat és időpont organizációs rendszer megvalósítása Spring Boot backenddel, teljes REST API-val és szerver oldali rendereléssel, mivel egyikünk se ért az Angularhoz. Az applikációban csapatokat, csapattagokat és eseményeket lehet kezelni.
 
 ### A program használata
 A webes alkalmazás használata során a felhasználónak lehetősége van regisztrálnia egy fiókot, tetszőleges felhasználónévvel és jelszóval. Regisztráció után természetesen megnyílik a bejelentkezés funkció is.
