@@ -22,7 +22,7 @@ public class Team {
 
     private String name;
 
-    @OneToMany()
+    @ManyToMany()
     @JoinTable(name = "team_adminappusers",
             joinColumns = @JoinColumn(name = "team_id"))
     private List<AppUser> adminAppUsers = new ArrayList<>();
