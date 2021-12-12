@@ -43,8 +43,26 @@ Minden információ az objektumról akkor kerül megadásra, amikor létrehozzuk
 ##### 18. Prefer interfaces to abstract classes
 Java csak single-inheritencet enged meg, korlátozva az absztrakt osztályok használatát. Meglévő osztályokat könnyű retrofitelni interface-el.
 
+### Clean code by Uncle Bob
+#### Code smells (Episode 1)
+#### Naming (Episode 2)
+#### Functions (Episode 3)
+#### Function structure (Episode 4)
+#### Form (Episode 5)
+#### TDD (Episode 6)
+#### Architecture, Use Cases, and High Level Design (Episode 7)
+#### Foundations of the SOLID principles (Episode 8)
+#### The Single Responsibility Principle (Episode 9)
+#### The Open-Closed Principle (Episode 10)
+#### The Liskov Substitution Principle (Episode 11)
+#### The Interface Segregation Principle (Episode 12)
+#### The Dependency Inversion Principle (Episode 13)
+#### Solid Case Study (Episode 14)
+#### SOLID Components (Episode 15)
+#### Component Cohesion (Episode 16)
+#### Component Coupling (Episode 17)
+#### Component Case Study (Episode 18)
 
-### Clean code // TODO
 
 
 ### JPA //TODO
