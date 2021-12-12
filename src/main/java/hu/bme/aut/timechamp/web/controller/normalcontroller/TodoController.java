@@ -3,12 +3,14 @@ package hu.bme.aut.timechamp.web.controller.normalcontroller;
 import hu.bme.aut.timechamp.dto.TodoDto;
 import hu.bme.aut.timechamp.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 import java.util.Map;
 
+@Controller
 public class TodoController {
 
     @Autowired
@@ -25,7 +27,7 @@ public class TodoController {
 
     @PostMapping("/createTodo")
     public String createTodo(TodoDto newTodo){
-        todoService.createTodoToEvent();
+        todoService.createTodoToEvent(newTodo.getName(),newTodo.getEvent().getId());
         return "redirect:/todos";
     }
 }

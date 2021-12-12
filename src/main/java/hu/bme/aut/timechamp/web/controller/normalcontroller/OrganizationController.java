@@ -27,7 +27,7 @@ public class OrganizationController {
 
     @PostMapping("/createOrganization")
     public String createOrganization(OrganizationDto newOrganization){
-        organizationService.createOrganization();
+        organizationService.createOrganization(newOrganization.getName());
         return "redirect:/organizations";
     }
 }

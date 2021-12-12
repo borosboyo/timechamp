@@ -11,7 +11,7 @@ public class TeamDto {
 
     private long id;
     private String name;
-    private List<AppUserDto> adminAppUsers;
+    private AppUserDto creator;
     private List<AppUserDto> appUsers;
     private OrganizationDto organization;
 

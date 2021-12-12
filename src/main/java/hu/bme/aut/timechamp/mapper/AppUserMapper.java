@@ -13,7 +13,7 @@ public interface AppUserMapper {
    List<AppUserDto> appUsersToDto(List<AppUser> appUsers);
 
    @Mapping(target = "appUsers", ignore =  true)
-   @Mapping(target = "adminAppUsers", ignore =  true)
+   @Mapping(target = "creator", ignore =  true)
    TeamDto teamUserToDto(Team team);
 
    /*@Mapping(target = "adminAppUsers", ignore =  true)

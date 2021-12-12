@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class EventDto{
+public class EventDto {
 
     private long id;
     private String name;
@@ -17,4 +17,5 @@ public class EventDto{
     private AppUserDto creator;
     private List<TodoDto> todos;
     private List<AppUserDto> participants;
+}
 

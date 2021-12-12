@@ -21,6 +21,6 @@ public interface OrganizationMapper {
 
     @Mapping(target = "organization", ignore =  true)
     @Mapping(target = "appUsers", ignore =  true)
-    @Mapping(target = "adminAppUsers", ignore =  true)
+    @Mapping(target = "creator", ignore =  true)
     TeamDto teamToDto(Team team);
 }
