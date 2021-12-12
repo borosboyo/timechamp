@@ -4,9 +4,7 @@ import hu.bme.aut.timechamp.dto.AppUserDto;
 import hu.bme.aut.timechamp.mapper.AppUserMapper;
 import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.repository.AppUserRepository;
-import hu.bme.aut.timechamp.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

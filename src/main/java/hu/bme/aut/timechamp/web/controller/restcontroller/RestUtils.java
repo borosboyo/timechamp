@@ -1,8 +1,6 @@
 package hu.bme.aut.timechamp.web.controller.restcontroller;
 
-import hu.bme.aut.timechamp.dto.AppUserDto;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.function.Supplier;
