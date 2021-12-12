@@ -1,15 +1,10 @@
 package hu.bme.aut.timechamp.web.controller.restcontroller;
 
 import hu.bme.aut.timechamp.dto.TodoDto;
-import hu.bme.aut.timechamp.mapper.TodoMapper;
-import hu.bme.aut.timechamp.model.Todo;
-import hu.bme.aut.timechamp.repository.TodoRepository;
 import hu.bme.aut.timechamp.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 

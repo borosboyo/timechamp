@@ -1,17 +1,10 @@
 package hu.bme.aut.timechamp.web.controller.restcontroller;
 
 
-import hu.bme.aut.timechamp.dto.AppUserDto;
 import hu.bme.aut.timechamp.dto.TeamDto;
-import hu.bme.aut.timechamp.mapper.TeamMapper;
-import hu.bme.aut.timechamp.model.Team;
-import hu.bme.aut.timechamp.repository.TeamRepository;
 import hu.bme.aut.timechamp.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
