@@ -5,6 +5,7 @@ import hu.bme.aut.timechamp.mapper.EventMapper;
 import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.model.Team;
+import hu.bme.aut.timechamp.model.Todo;
 import hu.bme.aut.timechamp.repository.AppUserRepository;
 import hu.bme.aut.timechamp.repository.EventRepository;
 import hu.bme.aut.timechamp.repository.TeamRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,6 +31,9 @@ public class EventService {
 
     @Autowired
     EventMapper eventMapper;
+
+    @Autowired
+    TodoService todoService;
 
     @Transactional
     public List<EventDto> findAll(){
@@ -112,5 +117,29 @@ public class EventService {
 
         event.setTime(time);
         return eventMapper.eventToDto(eventRepository.save(event));
+    }
+
+
+    @Transactional
+    public void removeEvent(long id) {
+        Event event = eventRepository.findById(id);
+
+        if(event == null) {
+            throw new IllegalArgumentException();
+        }
+
+        event.getTeam().getEvents().remove(event);
+
+        for(AppUser user : event.getParticipants()) {
+            user.getEvents().remove(event);
+        }
+
+
+        for(int i = 0; i < event.getTodos().size(); i++) {
+            todoService.removeTodo(event.getTodos().get(i).getId());
+        }
+
+        eventRepository.flush();
+        eventRepository.removeById(id);
     }
 }
