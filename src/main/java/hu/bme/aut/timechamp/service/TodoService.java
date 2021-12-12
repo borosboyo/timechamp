@@ -82,6 +82,27 @@ public class TodoService {
     }
 
     @Transactional
+    public TodoDto removeLeader(long todoId, long userId) {
+        Todo todo = todoRepository.findById(todoId);
+        AppUser user = appUserRepository.findById(userId);
+
+        if(todo == null || user == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if(!todo.getEvent().getParticipants().contains(user) || !todo.getLeaders().contains(user)) {
+            throw new IllegalArgumentException();
+        }
+
+        todo.getLeaders().remove(user);
+
+        Todo savedTodo = todoRepository.save(todo);
+        user.getTodos().remove(savedTodo);
+
+        return todoMapper.todoToDto(savedTodo);
+    }
+
+    @Transactional
     public TodoDto setDescription(long todoId, String description) {
         Todo todo = todoRepository.findById(todoId);
 

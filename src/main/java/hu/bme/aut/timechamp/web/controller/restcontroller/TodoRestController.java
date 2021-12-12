@@ -36,6 +36,11 @@ public class TodoRestController {
         return RestUtils.executeRestRequest(() -> todoService.assignLeader(id, user_id));
     }
 
+    @PostMapping("/{id}/removeleader")
+    public TodoDto removeLeader(@PathVariable long id, @RequestParam long user_id) {
+        return RestUtils.executeRestRequest(() -> todoService.removeLeader(id, user_id));
+    }
+
     @PostMapping("/{id}/description")
     public TodoDto setDescription(@PathVariable long id, @RequestParam String description) {
         return RestUtils.executeRestRequest(() -> todoService.setDescription(id, description));
