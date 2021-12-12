@@ -2,6 +2,8 @@ package hu.bme.aut.timechamp.web.controller.normalcontroller;
 
 import hu.bme.aut.timechamp.dto.OrganizationDto;
 import hu.bme.aut.timechamp.service.OrganizationService;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +28,15 @@ public class OrganizationController {
     }
 
     @PostMapping("/createOrganization")
-    public String createOrganization(OrganizationDto newOrganization){
-        organizationService.createOrganization(newOrganization.getName());
+    public String createOrganization(OrganizationParameters organizationParameters){
+        organizationService.createOrganization(organizationParameters .getName());
         return "redirect:/organizations";
+    }
+
+    @Setter
+    @Getter
+    static
+    class OrganizationParameters {
+        private String name;
     }
 }
