@@ -32,7 +32,7 @@ public class OrganizationRestController {
         return organizationMapper.organizationsToDto(organizationService.findAll());
     }
 
-    @PostMapping
+    @PutMapping
     public OrganizationDto createOrganization(@RequestParam String name, RedirectAttributes redirectAttributes){
         OrganizationDto result = organizationService.createOrganization(name);
         if(result == null){

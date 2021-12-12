@@ -24,10 +24,10 @@ public class EventRestController {
     }
 
 
-    @PutMapping
-    public EventDto createEvent(@RequestParam String name, @RequestParam long teamId, @RequestParam long creatorId) {
+    @PostMapping
+    public EventDto createEvent(@RequestParam String name, @RequestParam long team_id, @RequestParam long creator_id) {
         try {
-            EventDto eventDto = eventService.createEvent(name, teamId, creatorId);
+            EventDto eventDto = eventService.createEvent(name, team_id, creator_id);
 
             if(eventDto == null) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -52,9 +52,9 @@ public class EventRestController {
 
 
     @PostMapping("/{id}/participant/add")
-    public EventDto addParticipant(@PathVariable long id, @RequestParam long appUserId) {
+    public EventDto addParticipant(@PathVariable long id, @RequestParam long user_id) {
         try {
-            EventDto eventDto = eventService.addParticipant(id, appUserId);
+            EventDto eventDto = eventService.addParticipant(id, user_id);
 
             if(eventDto == null) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -68,8 +68,8 @@ public class EventRestController {
     }
 
     @PostMapping("/{id}/participant/remove")
-    public EventDto removeParticipant(@PathVariable long id, @RequestParam long appUserId) {
-        return eventService.removeParticipant(id, appUserId);
+    public EventDto removeParticipant(@PathVariable long id, @RequestParam long user_id) {
+        return eventService.removeParticipant(id, user_id);
     }
 
     @PostMapping("{id}/time")

@@ -26,7 +26,8 @@ public class AppUserRestController {
     public List<AppUserDto> findAll(){
         return appUserService.findAll();
     }
-    @PostMapping
+
+    @PutMapping
     public AppUserDto createAppUser(@RequestParam String email, @RequestParam String username, @RequestParam String password){
         AppUserDto result = appUserService.createUser(email, username, password);
         if(result == null){
