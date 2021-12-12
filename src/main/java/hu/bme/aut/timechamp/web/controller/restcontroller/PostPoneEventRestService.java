@@ -21,12 +21,12 @@ public class PostPoneEventRestService {
 
     @PostMapping("/api/events/{id}/postponeByHour")
     public EventDto postponeByHour(@PathVariable long id, @RequestParam int difference){
-        return postponeEventService.postponeByMinute(id,difference);
+        return postponeEventService.postponeByHour(id,difference);
     }
 
     @PostMapping("/api/events/{id}/postponeByDay")
     public EventDto postponeByDay(@PathVariable long id, @RequestParam int difference){
-        return postponeEventService.postponeByMinute(id,difference);
+        return postponeEventService.postponeByDay(id,difference);
     }
 
 }

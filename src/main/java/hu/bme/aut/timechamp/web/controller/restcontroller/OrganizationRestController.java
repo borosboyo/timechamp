@@ -30,7 +30,7 @@ public class OrganizationRestController {
     }
 
     @PutMapping
-    public OrganizationDto createOrganization(@RequestParam String name, RedirectAttributes redirectAttributes){
+    public OrganizationDto createOrganization(@RequestParam String name){
         try {
             OrganizationDto result = organizationService.createOrganization(name);
             if(result == null){
