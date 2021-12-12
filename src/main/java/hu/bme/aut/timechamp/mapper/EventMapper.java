@@ -25,10 +25,10 @@ public interface EventMapper {
     AppUserDto appUserToDto(AppUser appUser);
 
     @Mapping(target = "appUsers", ignore =  true)
-    @Mapping(target = "creator", ignore =  true)
+    @Mapping(target = "adminAppUsers", ignore =  true)
     TeamDto teamUserToDto(Team team);
 
-    @Mapping(target = "creator", ignore =  true)
+    @Mapping(target = "adminAppUsers", ignore =  true)
     @Mapping(target = "appUsers", ignore =  true)
     List<TeamDto> teamListToTeamDtoList(List<Team> list);
 

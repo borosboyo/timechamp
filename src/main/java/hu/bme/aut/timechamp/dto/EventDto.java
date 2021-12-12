@@ -18,4 +18,3 @@ public class EventDto {
     private List<TodoDto> todos;
     private List<AppUserDto> participants;
 }
-
