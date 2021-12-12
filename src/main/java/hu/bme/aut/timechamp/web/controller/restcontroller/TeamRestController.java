@@ -27,7 +27,7 @@ public class TeamRestController {
         return teamService.findAll();
     }
 
-    @PostMapping
+    @PutMapping
     public TeamDto createTeam(@RequestParam String name, @RequestParam long creator_id, @RequestParam long organization_id){
         TeamDto result = teamService.createTeam(name, creator_id, organization_id);
         if(result == null){

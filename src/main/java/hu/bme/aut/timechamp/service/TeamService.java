@@ -60,9 +60,6 @@ public class TeamService {
         organization.getTeams().add(team);
         organizationRepository.save(organization);
 
-        adminUser.setTeam(savedTeam);
-        appUserRepository.save(adminUser);
-
         return teamMapper.teamToDto(savedTeam);
     }
 

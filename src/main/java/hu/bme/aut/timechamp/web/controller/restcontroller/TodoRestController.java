@@ -23,9 +23,9 @@ public class TodoRestController {
     }
 
 
-    @PutMapping
-    public TodoDto createTodoToEvent(@RequestParam String todoName, @RequestParam long eventId) {
-        return todoService.createTodoToEvent(todoName, eventId);
+    @PostMapping
+    public TodoDto createTodoToEvent(@RequestParam String name, @RequestParam long event_id) {
+        return todoService.createTodoToEvent(name, event_id);
     }
 
     @GetMapping("/{id}")
@@ -35,8 +35,8 @@ public class TodoRestController {
 
 
     @PostMapping("/{id}/addleader")
-    public TodoDto assignLeader(@PathVariable long id, @RequestParam long userId) {
-        return todoService.assignLeader(id, userId);
+    public TodoDto assignLeader(@PathVariable long id, @RequestParam long user_id) {
+        return todoService.assignLeader(id, user_id);
     }
 
     @PostMapping("/{id}/description")
