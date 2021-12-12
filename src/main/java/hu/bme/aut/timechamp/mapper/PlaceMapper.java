@@ -14,6 +14,7 @@ public interface PlaceMapper {
     PlaceDto placeToDto(Place place);
     List<PlaceDto> placesToDto(List<Place> places);
 
+    @Mapping(target = "teams", ignore = true)
     @Mapping(target = "headQuarter", ignore =  true)
     OrganizationDto organizationToDto(Organization organization);
 }
