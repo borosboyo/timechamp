@@ -30,6 +30,11 @@ public class TeamRestController {
         return RestUtils.executeRestRequest(()->teamService.addUser(team_id, user_id));
     }
 
+    @PostMapping("/{id}/rename")
+    public TeamDto renameTeam(@PathVariable("id") long team_id, @RequestParam String name){
+        return RestUtils.executeRestRequest(()->teamService.renameTeam(team_id, name));
+    }
+
     @PostMapping("/{id}/leave")
     public TeamDto leaveTeam(@PathVariable("id") long team_id, @RequestParam long user_id){
         return RestUtils.executeRestRequest(()->teamService.removeUser(team_id, user_id));

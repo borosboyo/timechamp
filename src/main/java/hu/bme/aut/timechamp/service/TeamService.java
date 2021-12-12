@@ -160,4 +160,14 @@ public class TeamService {
         }
         appUser.getEvents().removeAll(toRemove);
     }
+
+    @Transactional
+    public TeamDto renameTeam(long id, String newName){
+        Team team = teamRepository.findById(id);
+        if(team == null || newName == null){
+            throw new IllegalArgumentException();
+        }
+        team.setName(newName);
+        return teamMapper.teamToDto(teamRepository.save(team));
+    }
 }
