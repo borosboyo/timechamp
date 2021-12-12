@@ -37,7 +37,7 @@ public class TeamService {
 
 
     @Transactional
-    public TeamDto getById(long id) {
+    public TeamDto findById(long id) {
         return teamMapper.teamToDto(teamRepository.findById(id));
     }
 

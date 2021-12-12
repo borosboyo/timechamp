@@ -1,9 +1,11 @@
 package hu.bme.aut.timechamp.web.controller.restcontroller;
 
 
+import hu.bme.aut.timechamp.dto.EventDto;
 import hu.bme.aut.timechamp.dto.TeamDto;
 import hu.bme.aut.timechamp.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +20,11 @@ public class TeamRestController {
     @GetMapping
     public List<TeamDto> findAll(){
         return teamService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public TeamDto getTeamById(@PathVariable long id) {
+        return RestUtils.executeRestRequest(() -> teamService.findById(id), HttpStatus.NOT_FOUND);
     }
 
     @PutMapping
