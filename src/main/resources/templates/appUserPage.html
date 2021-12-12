@@ -26,17 +26,23 @@
             <div class = "row">
                 <table class ="table table-striped table-borderd">
                     <tr>
-                        <th>Name</th>
-                        <th>Google Code</th>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Events</th>
+                        <th>Todos</th>
+                        <th>Team</th>
                         <th>Actions</th>
                     </tr>
-                    <tr th:each ="appuser : ${appusers}">
-                        <th th:text="${appuser.name}">Name</th>
-                        <th th:text="${appuser.googleCode}">Google Code</th>
-                        <th th:text="${appuser.latitude}">latitude</th>
-                        <th th:text="${appuser.longitude}">longitude</th>
+                    <tr th:each ="appuser : ${appUsers}">
+                        <th th:text="${appuser.id}">ID</th>
+                        <th th:text="${appuser.email}">Name</th>
+                        <th th:text="${appuser.username}">Username</th>
+                        <th th:text="${appuser.password}">Password</th>
+                        <th th:text="${appuser.events}">Events</th>
+                        <th th:text="${appuser.todos}">Todos</th>
+                        <th th:text="${appuser.team}">Team</th>
                         <th>
                             <a href="" class="btn btn-sm btn-primary"><i
                                     class="far fa-edit"></i></a>
@@ -50,24 +56,20 @@
         </div>
         <form th:action="@{/createAppUser}" th:object="${newAppUser}" method="post">
             <div class="form-group" style = "padding: 10px;">
-                <label for="name">Name:</label>
-                <input th:field="*{name}" id="name"/><br/>
+                <label for="email">Email:</label>
+                <input th:field="*{email}" id="email"/><br/>
             </div>
 
             <div class="form-group" style = "padding: 10px;">
-                <label for="googleCode">Google Code:</label>
-                <input th:field="*{googleCode}" id="googleCode"/><br/>
+                <label for="username">Google Code:</label>
+                <input th:field="*{username}" id="username"/><br/>
             </div>
 
             <div class="form-group" style = "padding: 10px;">
-                <label for="latitude">Latitude:</label>
-                <input th:field="*{latitude}" id="latitude"/><br/>
+                <label for="password">Latitude:</label>
+                <input th:field="*{password}" id="password"/><br/>
             </div>
 
-            <div class="form-group" style = "padding: 10px;">
-                <label for="longitude">Longitude:</label>
-                <input th:field="*{longitude}" id="longitude"/><br/>
-            </div>
             <input type="submit" value="Add"/>
         </form>
     </div>

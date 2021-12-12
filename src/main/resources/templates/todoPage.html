@@ -26,17 +26,19 @@
             <div class = "row">
                 <table class ="table table-striped table-borderd">
                     <tr>
+                        <th>ID</th>
                         <th>Name</th>
-                        <th>Google Code</th>
-                        <th>Latitude</th>
-                        <th>Longitude</th>
+                        <th>Description</th>
+                        <th>Leaders</th>
+                        <th>Event</th>
                         <th>Actions</th>
                     </tr>
                     <tr th:each ="todo : ${todos}">
+                        <th th:text="${todo.id}">ID</th>
                         <th th:text="${todo.name}">Name</th>
-                        <th th:text="${todo.googleCode}">Google Code</th>
-                        <th th:text="${todo.latitude}">latitude</th>
-                        <th th:text="${todo.longitude}">longitude</th>
+                        <th th:text="${todo.description}">Description</th>
+                        <th th:text="${todo.leaders}">Leaders</th>
+                        <th th:text="${todo.event}">Longitude</th>
                         <th>
                             <a href="" class="btn btn-sm btn-primary"><i
                                     class="far fa-edit"></i></a>
@@ -55,19 +57,10 @@
             </div>
 
             <div class="form-group" style = "padding: 10px;">
-                <label for="googleCode">Google Code:</label>
-                <input th:field="*{googleCode}" id="googleCode"/><br/>
+                <label for="event">EventId</label>
+                <input th:field="*{event}" id="event"/><br/>
             </div>
 
-            <div class="form-group" style = "padding: 10px;">
-                <label for="latitude">Latitude:</label>
-                <input th:field="*{latitude}" id="latitude"/><br/>
-            </div>
-
-            <div class="form-group" style = "padding: 10px;">
-                <label for="longitude">Longitude:</label>
-                <input th:field="*{longitude}" id="longitude"/><br/>
-            </div>
             <input type="submit" value="Add"/>
         </form>
     </div>
