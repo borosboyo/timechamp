@@ -52,8 +52,8 @@ public class EventService {
         Event savedEvent = eventRepository.save(event);
         team.getEvents().add(savedEvent);
         teamRepository.save(team);
-        creator.getEvents().add(savedEvent);
-        appUserRepository.save(creator);
+        savedEvent.getParticipants().add(creator);
+        eventRepository.save(savedEvent);
 
         return eventMapper.eventToDto(savedEvent);
     }
@@ -77,7 +77,8 @@ public class EventService {
         event.getParticipants().add(user);
 
         Event savedEvent = eventRepository.save(event);
-        user.getEvents().add(savedEvent);
+        event.getParticipants().add(user);
+        eventRepository.save(event);
 
         return eventMapper.eventToDto(savedEvent);
     }
@@ -95,8 +96,8 @@ public class EventService {
         event.getParticipants().remove(user);
 
         Event savedEvent = eventRepository.save(event);
-        user.getEvents().remove(savedEvent);
-
+        event.getParticipants().remove(user);
+        eventRepository.save(savedEvent);
         return eventMapper.eventToDto(savedEvent);
     }
 
