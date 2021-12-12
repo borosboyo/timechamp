@@ -16,12 +16,13 @@ public interface AppUserMapper {
    @Mapping(target = "adminAppUsers", ignore =  true)
    TeamDto teamUserToDto(Team team);
 
-   @Mapping(target = "adminAppUsers", ignore =  true)
+   /*@Mapping(target = "adminAppUsers", ignore =  true)
    @Mapping(target = "appUsers", ignore =  true)
-   List<TeamDto> teamListToTeamDtoList(List<Team> list);
+   List<TeamDto> teamListToTeamDtoList(List<Team> list);*/
 
    @Mapping(target = "participants", ignore = true)
    @Mapping(target = "creator", ignore = true)
+   @Mapping(target = "todos", ignore = true)
    EventDto eventToEventDto(Event event);
 
    @Mapping(target = "leaders", ignore =  true)

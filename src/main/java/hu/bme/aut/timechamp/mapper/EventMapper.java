@@ -15,10 +15,13 @@ public interface EventMapper {
     List<EventDto> eventsToDto(List<Event> events);
 
     @Mapping(target = "event", ignore =  true)
+    @Mapping(target = "leaders", ignore =  true)
     TodoDto todoToDto(Todo todo);
 
     @Mapping(target = "events", ignore =  true)
+    @Mapping(target = "todos", ignore =  true)
     @Mapping(target = "team", ignore = true)
+    @Mapping(target = "password", ignore = true)
     AppUserDto appUserToDto(AppUser appUser);
 
     @Mapping(target = "appUsers", ignore =  true)

@@ -20,5 +20,7 @@ public interface OrganizationMapper {
     PlaceDto placeToDto(Place place);
 
     @Mapping(target = "organization", ignore =  true)
+    @Mapping(target = "appUsers", ignore =  true)
+    @Mapping(target = "adminAppUsers", ignore =  true)
     TeamDto teamToDto(Team team);
 }
