@@ -40,7 +40,7 @@ public class EventService {
         Team team = teamRepository.findById(teamId);
         AppUser creator = appUserRepository.findById(creatorId);
 
-        if(team == null || creator == null) {
+        if(team == null || creator == null || !team.getAppUsers().contains(creator)) {
             throw new IllegalArgumentException();
         }
 
