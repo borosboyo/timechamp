@@ -29,66 +29,26 @@ public class TeamRestController {
 
     @PutMapping
     public TeamDto createTeam(@RequestParam String name, @RequestParam long creator_id, @RequestParam long organization_id){
-        TeamDto result = teamService.createTeam(name, creator_id, organization_id);
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return result;
+        return RestUtils.executeRestRequest(()->teamService.createTeam(name, creator_id, organization_id));
     }
 
     @PostMapping("/{id}/join")
     public TeamDto joinTeam(@PathVariable("id") long team_id, @RequestParam long user_id){
-        TeamDto result;
-        try{
-            result = teamService.addUser(team_id, user_id);
-        } catch (IllegalArgumentException exception){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return result;
+        return RestUtils.executeRestRequest(()->teamService.addUser(team_id, user_id));
     }
 
     @PostMapping("/{id}/leave")
     public TeamDto leaveTeam(@PathVariable("id") long team_id, @RequestParam long user_id){
-        TeamDto result;
-        try{
-            result = teamService.removeUser(team_id, user_id);
-        } catch (IllegalArgumentException exception){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return result;
+        return RestUtils.executeRestRequest(()->teamService.removeUser(team_id, user_id));
     }
 
     @PostMapping("/{id}/admin/add")
     public TeamDto addAdmin(@PathVariable("id") long team_id, @RequestParam long user_id){
-        TeamDto result;
-        try{
-            result = teamService.addAdminUser(team_id, user_id);
-        } catch (IllegalArgumentException exception){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return result;
+        return RestUtils.executeRestRequest(()->teamService.addAdminUser(team_id, user_id));
     }
 
     @PostMapping("/{id}/admin/remove")
     public TeamDto removeAdmin(@PathVariable("id") long team_id, @RequestParam long user_id){
-        TeamDto result;
-        try{
-            result = teamService.removeAdminUser(team_id, user_id);
-        } catch (IllegalArgumentException exception){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-        if(result == null){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        return result;
+        return RestUtils.executeRestRequest(()->teamService.removeUser(team_id, user_id));
     }
 }

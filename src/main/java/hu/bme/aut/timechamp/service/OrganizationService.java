@@ -41,12 +41,12 @@ public class OrganizationService {
     }
 
     @Transactional
-    public void setHQ(long orgId, long placeId){
+    public OrganizationDto setHQ(long orgId, long placeId){
         Organization org =  organizationRepository.findById(orgId);
         Place place = placeRepository.findById(placeId);
         org.setHeadQuarter(place);
         place.setOrganization(org);
-        organizationRepository.flush();
-        placeRepository.flush();
+        Organization newOrg = organizationRepository.save(org);
+        return organizationMapper.organizationToDto(newOrg);
     }
 }
