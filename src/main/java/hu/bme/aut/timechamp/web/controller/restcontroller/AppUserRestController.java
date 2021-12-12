@@ -28,7 +28,12 @@ public class AppUserRestController {
     }
     @PostMapping
     public AppUserDto createAppUser(@RequestParam String email, @RequestParam String username, @RequestParam String password){
-        AppUserDto result = appUserService.createUser(email, username, password);
+        AppUserDto result;
+        try {
+            result = appUserService.createUser(email, username, password);
+        } catch (IllegalArgumentException exception){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
         if(result == null){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }

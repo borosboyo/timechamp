@@ -26,6 +26,11 @@ public class AppUserService {
     }
 
     public AppUserDto createUser(String email, String username, String password){
+        int numOfUsernames = appUserRepository.findByUsername(username).size();
+        int numOfEmails = appUserRepository.findByEmail(email).size();
+        if(numOfUsernames > 0 || numOfEmails > 0){
+            throw new IllegalArgumentException();
+        }
         AppUser appUser = appUserRepository.save(new AppUser(email, username, password));
         return appUserMapper.appUserToDto(appUser);
     }

@@ -15,6 +15,8 @@ import java.util.List;
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
     List<AppUser> findByUsername(String name);
 
+    List<AppUser> findByEmail(String email);
+
     @EntityGraph(attributePaths = "team.app_users")
     @Query(value = "SELECT a FROM AppUser a")
     List<AppUser> findAllWithTeamAppUsers();
