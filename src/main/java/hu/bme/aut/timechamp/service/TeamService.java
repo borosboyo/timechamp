@@ -2,9 +2,7 @@ package hu.bme.aut.timechamp.service;
 
 import hu.bme.aut.timechamp.dto.TeamDto;
 import hu.bme.aut.timechamp.mapper.TeamMapper;
-import hu.bme.aut.timechamp.model.AppUser;
-import hu.bme.aut.timechamp.model.Organization;
-import hu.bme.aut.timechamp.model.Team;
+import hu.bme.aut.timechamp.model.*;
 import hu.bme.aut.timechamp.repository.AppUserRepository;
 import hu.bme.aut.timechamp.repository.OrganizationRepository;
 import hu.bme.aut.timechamp.repository.TeamRepository;
@@ -12,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -128,10 +127,31 @@ public class TeamService {
         }
 
         team.getAppUsers().remove(user);
-
         user.setTeam(null);
+        removeTeamTodos(user, team);
+        removeTeamEvents(user, team);
         appUserRepository.save(user);
 
         return teamMapper.teamToDto(teamRepository.save(team));
+    }
+
+    private void removeTeamTodos(AppUser appUser, Team team) {
+        List<Todo> toRemove = new ArrayList<>();
+        for(Todo todo : appUser.getTodos()) {
+            if(todo.getEvent().getTeam().getId() == team.getId()) {
+                toRemove.add(todo);
+            }
+        }
+        appUser.getTodos().removeAll(toRemove);
+    }
+
+    private void removeTeamEvents(AppUser appUser, Team team) {
+        List<Event> toRemove = new ArrayList<>();
+        for(Event event : appUser.getEvents()) {
+            if(event.getTeam().getId() == team.getId()) {
+                toRemove.add(event);
+            }
+        }
+        appUser.getEvents().removeAll(toRemove);
     }
 }
