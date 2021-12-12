@@ -57,8 +57,10 @@ public class EventService {
         Event savedEvent = eventRepository.save(event);
         team.getEvents().add(savedEvent);
         teamRepository.save(team);
+        creator.getEvents().add(savedEvent);
         savedEvent.getParticipants().add(creator);
         eventRepository.save(savedEvent);
+        appUserRepository.save(creator);
 
         return eventMapper.eventToDto(savedEvent);
     }
@@ -82,8 +84,10 @@ public class EventService {
         event.getParticipants().add(user);
 
         Event savedEvent = eventRepository.save(event);
+        user.getEvents().add(event);
         event.getParticipants().add(user);
         eventRepository.save(event);
+        appUserRepository.save(user);
 
         return eventMapper.eventToDto(savedEvent);
     }
@@ -94,15 +98,17 @@ public class EventService {
         Event event = eventRepository.findById(id);
         AppUser user = appUserRepository.findById(userId);
 
-        if(event == null || user == null) {
+        if(event == null || user == null || event.getCreator().getId() == user.getId()) {
             throw new IllegalArgumentException();
         }
 
         event.getParticipants().remove(user);
 
         Event savedEvent = eventRepository.save(event);
+        user.getEvents().remove(event);
         event.getParticipants().remove(user);
         eventRepository.save(savedEvent);
+        appUserRepository.save(user);
         return eventMapper.eventToDto(savedEvent);
     }
 
