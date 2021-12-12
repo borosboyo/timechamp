@@ -49,7 +49,90 @@ Spring Boot nélkül XML és/vagy JavaConfigra lenne szükség a SpringMVC, és 
 Az alkalmazás belépési pontja pedig a `@SpringBootApplication` annotációval ellátot osztály lesz. A Controler osztályainkat a `root` csomagba, vagy valamely alcsomagjába kell helyeznünk. A Thymeleaf-es `.html` fájlokat az `src\main\resources\templates` alá kell helyeznünk.
 
 ### Spring Boot
-A Spring Boot egy keretrendszer, aminek segítségével könnyen és gyorsan írhatunk szerver oldali Java alkalmazásokat. A Spring-re épül, ami egy összetett, sok modulból álló framework. A Spring Boot pedig már a Spring által kínált eszközökből összeállított “váz”, ami egyszerűen bővíthető, és sok technikai részletet elfed a kényelmünk érdekében. 
+A Spring Boot egy keretrendszer, aminek segítségével könnyen és gyorsan írhatunk szerver oldali Java alkalmazásokat. A Spring-re épül, ami egy összetett, sok modulból álló framework. A Spring Boot pedig már a Spring által kínált eszközökből összeállított “váz”, ami egyszerűen bővíthető, és sok technikai részletet elfed a kényelmünk érdekében. Segítségével a webalkalmazások is önálló Java alkalmazásként futtathatók, beágyazott Tomcat/Jetty/Undertow webkonténeren, tehát nem szükséges külön deploy. Megfelelő jar függőségek révén a default konfiguráció automatikus.
+
+#### Kód struktúra
+Az application osztályt, célszerű (nem kötelező) egy `root` package-be tenni, a többi osztály az alatti alpackage-ekben legyen például: 
+- model: entitások
+- service: üzleti logikai osztályok
+- web vagy controller: Spring MVC controller osztályok
+
+#### Konfigurációs osztályok
+JavaConfigot használunk az XML-el szemben, illetve a konfigot szétoszthatjuk több `@Configuration` osztályba, melyek érvényre jutnak, ha:
+- a root package alatt vannak (akár alpackage-ekben),és az application osztály `@ComponentScan` vagy `@SpringBootApplication` annotációt kap
+- vagy explicit behúzzuk őket, például `@Import(MyConfig.class)`
+
+Ha mégis XML-t használnánk, az `@ImportResource` annotációval húzható be egy `@Configuration`–ös osztályon.
+
+#### Autokonfiguráció
+A `@EnableAutoConfiguration` (vagy `@SpringBootApplication`) annotációval engedélyezzük az autokonfigurációkat, by default az összeset. Az autokonfigurációk "intelligensek", például, ha nem webes az alkalmazásunk, nem próbál Spring MVC-t konfigolni, vagy ha mi magunk JavaConfig-ot írunk valamire, nem fogja felülírni. Az autokonfigurációkat nyomon követhetjük, ha `--debug` kapcsolóval indítjuk el az alkalmazásunkat.
+
+#### Property alapú konfiguráció
+Az autokonfig osztályok működése testre szabható saját propertykkel, mert a saját kódban is igény lehet rá, hogy külső konfig fájlból vegyünk adatokat. Illetve, ha sok propertynk van, amelyek akár hierarchikusak, célszerű külön osztályt bevezetni nekik, A propertyk egyik elérési módja kódból a `@Value("${myprop}")` annotáció:
+```
+@Component
+public class MyBean {
+  @Value("${myprop}")
+  private String myField;
+  // ...
+}
+```
+
+A property értéket megadhatjuk a classpath-ra helyezett `application.properties` fájlban.
+```
+myprop=value
+```
+
+Az `application.properties` helyett `application.yml` is használható, mely sokszor tömörebb.
+
+`application.properties`:
+```
+environments.dev.url=http://dev.bar.com
+environments.dev.name=Developer Setup
+environments.prod.url=http://foo.bar.com
+environments.prod.name=My Cool App
+```
+
+`application.yml`:
+```
+environments:
+  dev:
+    url: http://dev.bar.com
+    name: Developer Setup
+  prod:
+    url: http://foo.bar.com
+    name: My Cool App
+```
+
+Összességében a property alapú konfigurációnak számos előnye van:
+- A `@ConfigurationProperties` annotáció `@Bean` metódusokon is alkalmazható, a legyártott bean propertyjeit fogja konfigolni a megfelelő prefixű propertykkel
+- Egyszerre injektálhatunk több, akár hierarchikus property-t
+- Nem tudjuk elgépelni a `@Value`-nak átadott értéket
+- Megengedőbb a property nevekkel, pl. person.firstName, person.first-name, person.first_name, PERSON_FIRST_NAME mind megfelelő
+- A `spring-boot-configuration-processor` metaadatokat tud generálni az osztályokból, így a konfig fájlok szerkesztésekor kódkiegészítés is működhet az IDE-kben
+
+#### Spring Data
+A `spring-boot-starter-data-jpa` függőség hozzáadásával az alábbi könnyebbségekkel szembesülünk:
+- Hozza a Hibernate-et by default, nem kell külön hozzáadni
+- Entitások és repository interfészek minden konfig nélkül használhatók, by default a fő konfig osztály package-ében keresi őket
+- Nem kell `persistence.xml`
+
+#### Spring Security
+By default: 
+- BASIC autentikációval védett majdnem minden URL
+- Security események publikálása bekapcsolva
+- HSTS, XSS, CSRF védelmet bekapcsolja
+
+A Spring Security testre is szabható az `@EnableGlobalMethodSecurity` annotáció explicit használatával. Ha property alapú konfigot szeretnénk akkor az a `SecurityProperties` osztály (pl.: `security.user.password`, `security.basic.path`) alapján történik. Ha a teljes konfigot szeretnénk lecserélni, akkor pedig `@EnableWebSecurity,
+WebSecurityConfigurerAdapter` -et kell használjunk.
+
+#### Spring Tesztelés
+A `spring-boot-starter-test` dependency behúzása több hasznos teszt library-t behúz, például junit, spring-test, mockito, melyek lehetővé teszik a tesztelést. Sima Springes teszteléshez hasonlóan `@RunWith(SpringRunner.class)` annotációva láthatjuk el a teszt osztályunkat. 
+
+Nem szükséges `@ContextConfiguration`-nel megnevezni a teszt kontextusának konfigját, helyette `@SpringBootTest` is elég, mert a package-eken felfelé haladva megtalálja a a fő konfig osztályunkat, azonban Ha csak egyes tesztekhez írunk külön `@Configuration` osztályt, esetleg `@Component` segédosztályokat, a scannelés miatt ez bezavarhat más teszteknél is, ennek elkerülésére `@TestConfiguration`, `@TestComponent` annotációk használható
+
+Az adatokat illetően az `@AutoConfigureTestDatabase` lecseréli a beállított datasource-t egy embedded-re, de a `@DataJpaTest` is használható ilyen célra, de akkor csak a JPA-s
+dolgok töltődnek be, nem a teljes kontextus.
 
 #### Webalkalmazás futtatása
 Ha a `pom.xml`-ünkben megtalálható a `spring-boot-starter-web`, akkor egy beágyazott konténert indíthatunk, default-ból Tomcat-et, így nem szükséges külön webkonténer, fejleszés során kimarad a deploy. Alap esetben a `8080`-as porton, a `http://localhost:8080/`-en keresztül.
