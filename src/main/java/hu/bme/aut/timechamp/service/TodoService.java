@@ -48,11 +48,7 @@ public class TodoService {
 
         Todo savedTodo = todoRepository.save(todo);
         event.getTodos().add(savedTodo);
-
-        for(AppUser user : event.getParticipants()) {
-            user.getTodos().add(savedTodo);
-            appUserRepository.save(user);
-        }
+        
 
         eventRepository.save(event);
 
@@ -70,6 +66,10 @@ public class TodoService {
         AppUser user = appUserRepository.findById(userId);
 
         if(todo == null || user == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if(!todo.getEvent().getParticipants().contains(user)) {
             throw new IllegalArgumentException();
         }
 
