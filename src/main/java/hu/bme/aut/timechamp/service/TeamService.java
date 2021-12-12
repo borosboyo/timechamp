@@ -74,8 +74,6 @@ public class TeamService {
 
         team.getAdminAppUsers().add(admin);
         Team savedTeam = teamRepository.save(team);
-        admin.setTeam(savedTeam);
-        appUserRepository.save(admin);
 
         return teamMapper.teamToDto(savedTeam);
     }
@@ -90,9 +88,6 @@ public class TeamService {
         }
 
         team.getAdminAppUsers().remove(admin);
-
-        admin.setTeam(null);
-        appUserRepository.save(admin);
 
         return teamMapper.teamToDto(teamRepository.save(team));
     }
