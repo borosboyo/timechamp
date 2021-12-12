@@ -40,11 +40,8 @@
                         <th th:text="${todo.leaders}">Leaders</th>
                         <th th:text="${todo.event}">Longitude</th>
                         <th>
-                            <a href="" class="btn btn-sm btn-primary"><i
-                                    class="far fa-edit"></i></a>
-                            <a href="" class="btn btn-sm btn-danger"><i
+                            <a href="/removeTodo" class="btn btn-sm btn-danger" th:action="@{/removeTodo}" th:object="${todo.id}" data-th-method="delete"><i
                                     class="far fa-trash-alt"></i></a>
-                            </a>
                         </th>
                     </tr>
                 </table>

@@ -31,7 +31,6 @@
                         <th>Google Code</th>
                         <th>Latitude</th>
                         <th>Longitude</th>
-                        <th>Actions</th>
                     </tr>
                     <tr th:each ="place : ${places}">
                         <th th:text="${place.id}">ID</th>
@@ -39,13 +38,6 @@
                         <th th:text="${place.googleCode}">Google Code</th>
                         <th th:text="${place.latitude}">latitude</th>
                         <th th:text="${place.longitude}">longitude</th>
-                        <th>
-                            <a href="" class="btn btn-sm btn-primary"><i
-                                    class="far fa-edit"></i></a>
-                            <a href="" class="btn btn-sm btn-danger"><i
-                                    class="far fa-trash-alt"></i></a>
-                            </a>
-                        </th>
                     </tr>
                 </table>
             </div>

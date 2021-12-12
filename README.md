@@ -23,7 +23,6 @@ Természetesen a kedvenc IDE-nkből is.
 Maga a program célja egy csapat és időpont organizációs rendszer megvalósítása **Spring Boot backenddel, teljes REST API-val és szerver oldali rendereléssel, mivel egyikünk se ért az Angularhoz**. Az applikációban csapatokat, csapattagokat és eseményeket lehet kezelni.
 
 ### A program használata
-A webes alkalmazás használata során a felhasználónak lehetősége van regisztrálnia egy fiókot, tetszőleges felhasználónévvel és jelszóval. Regisztráció után természetesen megnyílik a bejelentkezés funkció is.
 
 A program magába foglal organizációkat, melyeket a felhasználók hozhatnak létre, és létrehozásuk után adminisztrációs joggal rendelkeznek felette.
 
@@ -85,7 +84,7 @@ Java csak single-inheritencet enged meg, korlátozva az absztrakt osztályok has
 ### JPA //TODO
 
 ### Spring MVC
-Egy olyan requrest-driven MVC framework, amely a Servlet API-ra épül és web alkalmazásokat készíthetünk vele. 
+Egy olyan request-driven MVC framework, amely a Servlet API-ra épül és web alkalmazásokat készíthetünk vele. 
 
 #### Általános jellemzői:
 - Az objektumok felelősségeinek jó szétválasztása (MVC,validátorok, stb.)
@@ -379,7 +378,7 @@ Főbb annoticáók, amiket használtunk a projekt során is:
 - `@NoArgsConstructor`, `@RequiredArgsConstructor` és `@AllArgsConstructor`, ezek mind sorrendben: legenerál egy konstruktort paraméterek nélkül, még egyet annyi argumentel ahány final vagy non-nullfieldünk van, illetve egy olyat is, ahol annyi argument van, ahány field az osztályunkban.
 
 #### *Black-magic*
-Első ránézésre kicsit láthatatlannak tűnhet a lombok működése, azonban a készítők erre is gondoltak. Elkészítették a *delombok*-ot is, amely átmásolja a forrásfájlokat egy másik mappába, kicserélve a lombok annotációkat a *cukormentes formájukkal*. Tehát a `@Getter` lecserélődik egy valódi getterrel, és törli az annotációt. Ennek több use-case-e is lehet, például megláthatjuk, hogy működik a lombok a motorháztető alatt, vagy ha nem szeretnénk tovább használni a lombokot, könnyedén wipeolhatjuk a forráskódunkból, illetve preprocesszáálhatjuk a forrásfájlainkat source level tooloknak, mint például a JavaDoc.
+Első ránézésre kicsit láthatatlannak tűnhet a lombok működése, azonban a készítők erre is gondoltak. Elkészítették a *delombok*-ot is, amely átmásolja a forrásfájlokat egy másik mappába, kicserélve a lombok annotációkat a *cukormentes formájukkal*. Tehát a `@Getter` lecserélődik egy valódi getterrel, és törli az annotációt. Ennek több use-case-e is lehet, például megláthatjuk, hogy működik a lombok a motorháztető alatt, vagy ha nem szeretnénk tovább használni a lombokot, könnyedén wipeolhatjuk a forráskódunkból, illetve preprocesszálhatjuk a forrásfájlainkat source level tooloknak, mint például a JavaDoc.
 
 ### Mapstruct
 Egy kód generátor, ami nagy mértékben leegyszerűsiti a mapping-ek implementációját Java bean típusok között. A generált mapping kód sima metódus invokációkat tartalmaz ezért gyors, type-safe és könnyű megérteni. 
