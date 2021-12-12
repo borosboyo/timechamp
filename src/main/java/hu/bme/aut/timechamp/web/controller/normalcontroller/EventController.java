@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -32,6 +33,13 @@ public class EventController {
         eventService.createEvent(eventParameters.getName(),eventParameters.getTeamId(),eventParameters.getCreatorId());
         return "redirect:/events";
     }
+
+    @DeleteMapping("/removeEvent")
+    public String removeEvent(long id){
+        eventService.removeEvent(id);
+        return "redirect:/events";
+    }
+
 
     @Setter
     @Getter

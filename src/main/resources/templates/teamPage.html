@@ -31,7 +31,6 @@
                         <th>Creator</th>
                         <th>AppUsers</th>
                         <th>Organization</th>
-                        <th>Actions</th>
                     </tr>
                     <tr th:each ="team : ${teams}">
                         <th th:text="${team.id}">ID</th>
@@ -39,13 +38,6 @@
                         <th th:text="${team.adminAppUsers}">Admin Users</th>
                         <th th:text="${team.appUsers}">AppUsers</th>
                         <th th:text="${team.organization}">Organization</th>
-                        <th>
-                            <a href="" class="btn btn-sm btn-primary"><i
-                                    class="far fa-edit"></i></a>
-                            <a href="" class="btn btn-sm btn-danger"><i
-                                    class="far fa-trash-alt"></i></a>
-                            </a>
-                        </th>
                     </tr>
                 </table>
             </div>

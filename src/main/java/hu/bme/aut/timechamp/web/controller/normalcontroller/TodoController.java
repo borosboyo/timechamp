@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -32,6 +33,13 @@ public class TodoController {
         todoService.createTodoToEvent(todoParameters.getName(),todoParameters.getEventId());
         return "redirect:/todos";
     }
+
+    @DeleteMapping("/removeTodo")
+    public String removeTodo(long id){
+        todoService.removeTodo(id);
+        return "redirect:/todos";
+    }
+
     @Setter
     @Getter
     static

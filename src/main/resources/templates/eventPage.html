@@ -44,11 +44,8 @@
                         <th th:text="${event.todos}">Todos</th>
                         <th th:text="${event.participants}">Participants</th>
                         <th>
-                            <a href="" class="btn btn-sm btn-primary"><i
-                                    class="far fa-edit"></i></a>
-                            <a href="" class="btn btn-sm btn-danger"><i
+                            <a href="/removeEvent" class="btn btn-sm btn-danger" th:action="@{/removeEvent}" th:object="${event.id}" data-th-method="delete"><i
                                     class="far fa-trash-alt"></i></a>
-                            </a>
                         </th>
                     </tr>
                 </table>

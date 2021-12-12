@@ -33,7 +33,6 @@
                         <th>Events</th>
                         <th>Todos</th>
                         <th>Team</th>
-                        <th>Actions</th>
                     </tr>
                     <tr th:each ="appuser : ${appUsers}">
                         <th th:text="${appuser.id}">ID</th>
@@ -43,13 +42,6 @@
                         <th th:text="${appuser.events}">Events</th>
                         <th th:text="${appuser.todos}">Todos</th>
                         <th th:text="${appuser.team}">Team</th>
-                        <th>
-                            <a href="" class="btn btn-sm btn-primary"><i
-                                    class="far fa-edit"></i></a>
-                            <a href="" class="btn btn-sm btn-danger"><i
-                                    class="far fa-trash-alt"></i></a>
-                            </a>
-                        </th>
                     </tr>
                 </table>
             </div>

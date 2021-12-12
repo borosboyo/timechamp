@@ -30,20 +30,12 @@
                         <th>Name</th>
                         <th>Teams</th>
                         <th>HeadQuarter</th>
-                        <th>Actions</th>
                     </tr>
                     <tr th:each ="organization : ${organizations}">
                         <th th:text="${organization.id}">ID</th>
                         <th th:text="${organization.name}">Name</th>
                         <th th:text="${organization.teams}">Google Code</th>
                         <th th:text="${organization.headQuarter}">latitude</th>
-                        <th>
-                            <a href="" class="btn btn-sm btn-primary"><i
-                                    class="far fa-edit"></i></a>
-                            <a href="" class="btn btn-sm btn-danger"><i
-                                    class="far fa-trash-alt"></i></a>
-                            </a>
-                        </th>
                     </tr>
                 </table>
             </div>
