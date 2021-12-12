@@ -2,6 +2,8 @@ package hu.bme.aut.timechamp.web.controller.normalcontroller;
 
 import hu.bme.aut.timechamp.dto.TodoDto;
 import hu.bme.aut.timechamp.service.TodoService;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +28,15 @@ public class TodoController {
     }
 
     @PostMapping("/createTodo")
-    public String createTodo(TodoDto newTodo){
-        todoService.createTodoToEvent(newTodo.getName(),newTodo.getEvent().getId());
+    public String createTodo(TodoParameters todoParameters){
+        todoService.createTodoToEvent(todoParameters.getName(),todoParameters.getEventId());
         return "redirect:/todos";
+    }
+    @Setter
+    @Getter
+    static
+    class TodoParameters {
+        private String name;
+        private long eventId;
     }
 }
