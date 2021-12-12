@@ -15,10 +15,14 @@ Az alkalmazás tartalmaz továbbá csapatokat és azok tagjait, melyek egy kül�
 A csapat létrehozója admin joggal rendelkezik a csapaton belül, azonban más csapattagokat is felruházhat vele, továbbá csatlakozhat a csapatával egy szervezethez.
 
 Egy csapat adminja(i) létrehozhatnak, törölhetnek csapatspecifikus eseményeket, melyre minden csapattag jelentkezni tud. Az esemény létrehozója testreszabhatja az eseményt egyedi leírás megadásával. Az eseményeknél megtekinthetőek, hogy kik a jelenlegi résztvevők. Az eseményekhez elvégzendő feladatok is kötődhetnek, amelynek vannak felelősei, illetve egy esemény helyhez kötött, amelyhez hozzá lehet rendelni Google Maps kódot, nevet, hosszúságot, illetve szélességet.
-### További dokumentációk majd ide
+
 ## Mit tanultunk a félév során?
-### Effective Java //MAX 1 OLDAL
-### Clean code
+### Effective Java // TODO MAX 1 OLDAL
+
+### Clean code // TODO
+
+### JPA //TODO
+
 ### Spring MVC
 Egy olyan requrest-driven MVC framework, amely a Servlet API-ra épül és web alkalmazásokat készíthetünk vele. 
 
@@ -302,7 +306,6 @@ Miért jó ez? Hát azért, mert a szülő megadhatja a közösen használt depe
 #### Maven profilok
 Gyakori igény lehet cégeknél például, hogy a fejlesztői, teszt vagy éles környezetre másképp szeretnénk buildelni. Erre vannak a profilok.
 
-### JPA
 ### Lombok
 A Project Lombok egy Java könytvár, mey pluginként becsatlakozhat az editorunkba és build tooljainkba, felfrissítva a Java kódírás élményét. Segítségével soha többet nem kell getter vagy setter metódusokat írnunk, pár szimpla annoticáióval akár fully featured builderünk is lehet. 
 
