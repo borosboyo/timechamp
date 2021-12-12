@@ -26,12 +26,6 @@ Van nevük, nem hoznak mindig létre új objektumot, bármilyen subtype-ot tudna
 ##### 2. Use BUILDERS when faced with many constructors
 Jó választás osztályok esetén, melyek konstruktorai vagy static factory-ai sok paramétert tartalmaznak. 
 
-##### 6. Eliminate obsolete object references
-Nehéz debug, memory leak megtalálása. Null-ozd ki a nem használt referenciákat. Használj Heap Profilert néha, hogy megtalált a rejtett memory leakeket.
-
-##### 7 Avoid finalizers
-A finalizerek kiszámíthatatlanok, gyakran veszélyesek. Erősen befolyásolják a teljesítményt.
-
 #### 3. METHODS COMMON TO ALL OBJECTS
 ##### 10. Always override toString
 Egy jó toString implementáció szép, olvashatóvá teszi az osztályt. Praktikus, mert minden információt megkaphatunk belőle.
