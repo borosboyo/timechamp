@@ -318,3 +318,46 @@ Főbb annoticáók, amiket használtunk a projekt során is:
 Első ránézésre kicsit láthatatlannak tűnhet a lombok működése, azonban a készítők erre is gondoltak. Elkészítették a *delombok*-ot is, amely tmásolja a forrásfájlokat egy másik mappába, kicserélve a lombok annotációkat a *cukormentes formájukkal*. Tehát a `@Getter` lecserélődik egy valódi getterrel, és törli az annotációt. Ennek több use-case-e is lehet, például megláthatjuk, hogy működik a lombok a motorháztető alatt, vagy ha nem szeretnénk tovább használni a lombokot, könnyedén wipeolhatjuk a forráskódunkból, illetve preprocesszáálhatjuk a forrásfájlainkat source level tooloknak, mint például a JavaDoc.
 
 ### Mapstruct
+Egy kód generátor, ami nagy mértékben leegyszerűsiti a mapping-ek implementációját Java bean típusok között. A generált mapping kód sima metódus invokációkat tartalmaz ezért gyors, type-safe és könnyű megérteni. 
+
+#### Miért használjuk?
+Több layeres appok esetén szükséges lehet a mappolás az entitás modellek között, például RESTful webszolgáltatások esetén az entityk és DTO-k között. A mapping kód megírása hosszú, és error-prone feladat lehet, amit a Mapstruct automatizál helyettünk. Más mapping framework-ökkel ellentétben a Mapstruct compile-time-ban működik, ami biztosítja a nagy teljesítményt, és a gyors fejlesztői feedbacket az error checkinig által. 
+
+#### Hogyan?
+A Mapstruct egy annotation processor, ami a Java compiler-be épül és command-line buildekben is használhatjuk, például Mavenben vagy Gradleben. 
+Az alábbi példakódokban bemutatjuk a használatát.
+
+`Car.java`:
+```
+public class Car {
+
+    private String make;
+    private int numberOfSeats;
+    private CarType type;
+    
+}
+```
+
+`CarDto.java`: 
+```
+public class CarDto {
+
+    private String make;
+    private int seatCount;
+    private String type;
+    
+}
+```
+
+`CarMapper.java`:
+```
+@Mapper
+public interface CarMapper {
+
+    CarMapper INSTANCE = Mappers.getMapper( CarMapper.class ); 
+    
+    @Mapping(source = "numberOfSeats", target = "seatCount")
+    CarDto carToCarDto(Car car);
+    
+}
+```
