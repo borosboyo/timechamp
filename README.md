@@ -1,9 +1,26 @@
 # Timechamp - Témalab 2021 beszámoló
 
+## Az alkalmazás lokális futtatása
+Megépíthetjük a `.jar` fájlt command lineból:
+```
+git clone https://github.com/borosboyo/timechamp.git
+cd timechamp
+./mvnw package
+java -jar target/*.jar
+```
+Ezek után Timechamp elérhető lesz ezen az URL-en: http://localhost:8080/
+
+Ezen felül akár egyből Maven-en keresztül is futtathatjuk a Spring Boot Maven plugint használva:
+```
+./mvnw spring-boot:run
+```
+
+Természetesen a kedvenc IDE-nkből is.
+
 ## Az alkalmazás programozói dokumentációja
 
 ### A program célja
-Maga a program célja egy csapat és időpont organizációs rendszer megvalósítása Spring Boot backenddel, melyben csapatokat, csapattagokat és eseményeket lehet kezelni.
+Maga a program célja egy csapat és időpont organizációs rendszer megvalósítása **Spring Boot backenddel, teljes REST API-val és szerver oldali rendereléssel, mivel egyikünk se ért az Angularhoz**. Az applikációban csapatokat, csapattagokat és eseményeket lehet kezelni.
 
 ### A program használata
 A webes alkalmazás használata során a felhasználónak lehetősége van regisztrálnia egy fiókot, tetszőleges felhasználónévvel és jelszóval. Regisztráció után természetesen megnyílik a bejelentkezés funkció is.
@@ -17,9 +34,53 @@ A csapat létrehozója admin joggal rendelkezik a csapaton belül, azonban más 
 Egy csapat adminja(i) létrehozhatnak, törölhetnek csapatspecifikus eseményeket, melyre minden csapattag jelentkezni tud. Az esemény létrehozója testreszabhatja az eseményt egyedi leírás megadásával. Az eseményeknél megtekinthetőek, hogy kik a jelenlegi résztvevők. Az eseményekhez elvégzendő feladatok is kötődhetnek, amelynek vannak felelősei, illetve egy esemény helyhez kötött, amelyhez hozzá lehet rendelni Google Maps kódot, nevet, hosszúságot, illetve szélességet.
 
 ## Mit tanultunk a félév során?
-### Effective Java // TODO MAX 1 OLDAL
+### Effective Java - summary, favourites
+#### 2. CREATING AND DESTROYING OBJECTS
 
-### Clean code // TODO
+##### 1. Use STATIC FACTORY METHODS instead of constructors
+Van nevük, nem hoznak mindig létre új objektumot, bármilyen subtype-ot tudnak return-ölni.
+
+##### 2. Use BUILDERS when faced with many constructors
+Jó választás osztályok esetén, melyek konstruktorai vagy static factory-ai sok paramétert tartalmaznak. 
+
+#### 3. METHODS COMMON TO ALL OBJECTS
+##### 10. Always override toString
+Egy jó toString implementáció szép, olvashatóvá teszi az osztályt. Praktikus, mert minden információt megkaphatunk belőle.
+
+##### 12. Consider implementing Comparable
+Comparable egy interface. Nincs deklarálva az Object-ben. Hasznosan jön a gyakorlatban.
+
+#### 4. CLASSES AND INTERFACES
+##### 13. Consider implementing Comparable
+Jól dizájnolt module elrejti minden implementációs részletét. Elkülöníti az API-t az implementációtól.
+
+##### 15. Minimize Mutability
+Minden információ az objektumról akkor kerül megadásra, amikor létrehozzuk. Könnyebb a desing, implementáció, kevesebb az error, nagyobb a biztonság.
+
+##### 18. Prefer interfaces to abstract classes
+Java csak single-inheritencet enged meg, korlátozva az absztrakt osztályok használatát. Meglévő osztályokat könnyű retrofitelni interface-el.
+
+### Clean code by Uncle Bob
+#### Code smells (Episode 1)
+#### Naming (Episode 2)
+#### Functions (Episode 3)
+#### Function structure (Episode 4)
+#### Form (Episode 5)
+#### TDD (Episode 6)
+#### Architecture, Use Cases, and High Level Design (Episode 7)
+#### Foundations of the SOLID principles (Episode 8)
+#### The Single Responsibility Principle (Episode 9)
+#### The Open-Closed Principle (Episode 10)
+#### The Liskov Substitution Principle (Episode 11)
+#### The Interface Segregation Principle (Episode 12)
+#### The Dependency Inversion Principle (Episode 13)
+#### Solid Case Study (Episode 14)
+#### SOLID Components (Episode 15)
+#### Component Cohesion (Episode 16)
+#### Component Coupling (Episode 17)
+#### Component Case Study (Episode 18)
+
+
 
 ### JPA //TODO
 
@@ -199,7 +260,7 @@ Feltételes kifejezések:
   <p th:case="*">User is some other thing</p>
 </div>
 ```
-### REST (Reprersentational State Transfer)
+### REST (Representational State Transfer)
 Egy szoftverarchitektúra típus, loose coupling, nagy, internet alapú rendszerek számára, amelyben különféle erőforrások URI alapon érhetők el. Egy REST típusú architektúra kliensekből és szerverekből áll. A kliensek kéréseket indítanak a szerverek felé; a szerverek kéréseket dolgoznak fel és a megfelelő választ küldik vissza. A kérések és a válaszok erőforrás-reprezentációk szállítása köré épülnek. A kliens és szerver között olyan dokumentumok utaznak, amelyek ezen erőforrások állapotait reprezentálják. Az API nem más, mint címezhető erőforrások (resource) halmaza. Az alapelv nem köti meg a reprezentáció formátumát, gyakran XML, HTML, JSON, de lehet kép, egyszerű szöveg is. Azokat a rendszereket, amelyek eleget tesznek a REST megszorításainak, "RESTful"-nak nevezik, a továbbiakban mi is így hivatkozunk rá.
 
 #### RESTful webszolgáltatás
