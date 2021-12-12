@@ -2,6 +2,8 @@ package hu.bme.aut.timechamp.web.controller.normalcontroller;
 
 import hu.bme.aut.timechamp.dto.EventDto;
 import hu.bme.aut.timechamp.service.EventService;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +28,17 @@ public class EventController {
     }
 
     @PostMapping("/createEvent")
-    public String createEvent(EventDto newEvent){
-        eventService.createEvent(newEvent.getName(),newEvent.getTeam().getId(),newEvent.getCreator().getId());
+    public String createEvent(EventParameters eventParameters){
+        eventService.createEvent(eventParameters.getName(),eventParameters.getTeamId(),eventParameters.getCreatorId());
         return "redirect:/events";
+    }
+
+    @Setter
+    @Getter
+    static
+    class EventParameters {
+        private String name;
+        private long teamId;
+        private long creatorId;
     }
 }

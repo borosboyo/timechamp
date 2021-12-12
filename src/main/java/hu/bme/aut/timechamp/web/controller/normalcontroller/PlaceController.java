@@ -42,6 +42,7 @@ public class PlaceController {
         private String googleCode;
         private double longitude;
         private double latitude;
+
     }
 
 }
