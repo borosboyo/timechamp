@@ -20,8 +20,11 @@ Természetesen a kedvenc IDE-nkből is futtathatjuk.
 Az indítás után szembesülhetünk a Thymeleafes UI-al:
 
 `index.html`:
+
 ![](./index.png)
+
 `appUsers.html`:
+
 ![](./appUsers.png)
 
 ## Az alkalmazás programozói dokumentációja
