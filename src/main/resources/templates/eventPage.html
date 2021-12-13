@@ -103,13 +103,13 @@
                         <h5 class="card-title">Remove participant</h5>
                         <form class="p-2" th:action="@{/removeParticipant}" th:object="${removeParticipant}" method="post">
                             <div class="form-group row text-start">
-                                <label for="id" class="col-form-label">EventId:</label>
-                                <input th:field="*{eventId}" id="id"/><br/>
+                                <label for="id2" class="col-form-label">EventId:</label>
+                                <input th:field="*{eventId}" id="id2"/><br/>
                             </div>
 
                             <div class="form-group row text-start">
-                                <label for="userId" class="col-form-label">UserId:</label>
-                                <input th:field="*{participantId}" id="userId"/><br/>
+                                <label for="userId2" class="col-form-label">UserId:</label>
+                                <input th:field="*{participantId}" id="userId2"/><br/>
                             </div>
                 
                             <input type="submit" class="btn btn-primary mt-2" value="Remove"/>
