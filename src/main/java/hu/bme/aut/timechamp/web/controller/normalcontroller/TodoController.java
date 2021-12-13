@@ -23,9 +23,6 @@ public class TodoController {
 
         model.put("todos", todos);
         model.put("newTodo", new TodoParameters());
-        model.put("newDesc", new TodoParameters());
-        model.put("newLeader", new TodoUserParameters());
-        model.put("removeLeader", new TodoUserParameters());
         model.put("thUtils", ThUtils.getInstance());
         return "todoPage";
     }
@@ -36,27 +33,9 @@ public class TodoController {
         return "redirect:/todos";
     }
 
-    @PostMapping("/setTodoDescription")
-    public String setTodoDescription(TodoParameters todoParameters){
-        todoService.setDescription(todoParameters.getId(), todoParameters.getDescription());
-        return "redirect:/todos";
-    }
-
     @RequestMapping(value = "/removeTodo", method = RequestMethod.GET)
     public String removeEvent(@RequestParam(name="todoId") int id){
         todoService.removeTodo(id);
-        return "redirect:/todos";
-    }
-
-    @PostMapping("/assignTodoLeader")
-    public String assignTodoLeader(TodoUserParameters todoUserParameters){
-        todoService.assignLeader(todoUserParameters.getTodoId(), todoUserParameters.getUserId());
-        return "redirect:/todos";
-    }
-
-    @PostMapping("/removeTodoLeader")
-    public String removeTodoLeader(TodoUserParameters todoUserParameters){
-        todoService.removeLeader(todoUserParameters.getTodoId(), todoUserParameters.getUserId());
         return "redirect:/todos";
     }
 
@@ -64,17 +43,7 @@ public class TodoController {
     @Getter
     static
     class TodoParameters {
-        private long id;
         private String name;
         private long eventId;
-        private String description;
-    }
-
-    @Setter
-    @Getter
-    static
-    class TodoUserParameters {
-        private long todoId;
-        private long userId;
     }
 }

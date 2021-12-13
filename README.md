@@ -69,6 +69,101 @@ Minden információ az objektumról akkor kerül megadásra, amikor létrehozzuk
 ##### 18. Prefer interfaces to abstract classes
 Java csak single-inheritencet enged meg, korlátozva az absztrakt osztályok használatát. Meglévő osztályokat könnyű retrofitelni interface-el.
 
+
+#### 5. Chapter 5 - Generics
+
+##### Item 26: Don't use raw types
+Raw type-al a hibák csak runtime-ban derülnek ki. 
+Generics-el a deklaráció tartalmazza a típust, és fordítási időben derülnek ki a problémák.
+
+##### Item 27: Eliminate unchecked warnings
+Generics-ekkel való dolgozás során a sok warning-ot kaphatunk.
+Ha tudjuk bizonyítani, hogy a kódunk typesafe, akkor annotációval eliminálhatjuk a warning-ot.
+A túl sok felesleges warning elnyomhatja a fontos warning-okat.
+
+##### Item 28: Prefer lists to arrays
+Listák használata esetén a hibák túlnyomó többsége compile időben már megjelenik, míg tömbök esetén csak futás időben.
+Listákhoz sok hasznos interface van, otpimalizált implementációkkal.
+
+##### Item 29: Favor generic types
+Kliensként a használatuk ehyszerű, bár generikus osztályokat írni egy kicsit bonyolultabb.
+Primitíveket csak csomagolt formában lehet használni.
+
+##### Item 30: Favor generic methods
+Generikus metódusok használata sokkal biztonságosabb, mint azoké, melyeknél explicit típuskonverziókat kell végezni.
+
+##### Item 31: Use bounded wildcards to increase API flexibility
+A legnagyobb rugalmasság érdekében használjunk wildcard típusokat a bemeneti paramétereken, 
+amelyek pruducer-ek vagy consumer-ek.
+PECS: producer-extends, consumer-super.
+
+##### Item 33: Consider typesafe heterogeneous containers
+Mappoknál a kulcs legyen a típusparaméteres, ne a tároló.
+Típusbiztos heterogén tároló minta.
+
+
+#### Chapter 6 - Enums and Annotations
+
+##### Item 34: Use enums instead of `int` constants
+Az enum típus egy olyan típus, melynek értékei fix konstansok lehetnek.
+Enumokat nem lehet példányosítani, se nem lszármaztatni.
+Használjunk enumokat, ha olyan kostans listára van szükégünk, melynek értékét már fordítási időben is ismerjük.
+
+##### Item 35: Use instance fields instead of ordinals
+Soha ne használjuk ki az enumok ordinalitását, sorrendjét.
+
+##### Item 36: Use `EnumSet` instead of bit fields
+A konstansok bitenkéni vagyolását váltja ki, egy biztonságosabb alternatívát nyújtva.
+
+##### Item 37: use `EnumMap` instead of ordinal indexing
+Szinte soha nem megengedhető, hogy enum ordinalitást használjunk, inább `EnumMap`-ot használjunk.
+
+##### Item 38: Emulate extensible enums with interfaces
+Bár nem lehet leszármaztatni enumokból, de lehet úgy helyettesíteni, hogy írunk egy interface-t az enumhoz, 
+amely implementálja az interface-t.
+
+##### Item 39: Prefer annotations to naming patterns
+Az annotációk sokkal hasznosabbak, mint az elnevezési típusok.
+Illik a java által biztosított annotációkat kihasználni.
+
+##### Item 40: Consistently use the `Override` annotation
+Minding rakjuk ki az `@Override` annotációt, ha felülírunk egy ősosztály függvényét.
+
+##### Item 41: Use marker interfaces to define types
+A marker inerface-k egy olyan típust határoznak meg, melyeket a megjelölt osztály 
+pédányai valósítanak meg.
+A marker interface-ket lehet örökölni, míg annotációt nem.
+
+
+#### Chapter 7 - Lambdas and Streams
+
+##### Item 42: Prefer lambdas to anonymous classes
+Labdák használata olvashatóbb kódot eredményez.
+Törekednünk kell a tömörségre, de ha a kód túl tömör, 
+akkor már kevésbé érthető.
+
+##### Item 43: Prefer method references to lambdas
+Ha a metódusreferenciák tömörebbek akkor használjuk azokat, különben használjunk lambdákat.
+
+##### Item 44: Favor the use of standard functional interfaces
+Használjuk a standard funkcionális interface-eket, amikor csak lehet.
+Ha sajátot hozunk létre, akkor használjuk a `@FunctionalInterface` annotációt.
+
+##### Item 45: Use streams judiciously
+A streamek hasznosak, de túlhasználni őket értelmetlenné teheti a kódot.
+
+##### Item 46: Prefer side-effect-free functions in streams
+Törekedjünk a "pure function"-ok írására és használatára
+
+##### Item 47: Prefer Collection to Stream as a return type
+Ha egy olyan függvényünk van amely elemek sorozatával tér vissza, 
+készüljünk fel rá, hogy egyes felhasználók steram-ként dolgozzák fel,
+míg mások iterálható elemekként.
+
+##### Item 48: Use caution when making streams parallel
+Csak akkor páhuzamosítsunk pipeline-t, biztosan meg vagyunk győződve arról, 
+biztonságos lesz és gyorasbb.
+
 #### 8. Methods
 ##### 49. Check parameters for validity
 Ellenőrizzük az átvett értékeket, hogy ne késöbb okozzanak valamilyen exceptiont vagy hibás eredményt.
@@ -131,25 +226,68 @@ Használjuk ki az Executor Framework adta lehetőséget.
 
 ### Clean code by Uncle Bob
 #### Code smells (Episode 1)
+Rigid code: nehéz változtatásokat eszközölni benne
+Fragility: egy változtatás több helyen elront valamit
+Inseparability: nem újrafelhasználható kód
+Opairy: a ködot nehéz megérteni
 #### Naming (Episode 2)
+Az elnevezés legyen beszédes.
+Dezinformáció terjesztésének elkerülése.
+Kiejthető nevek használata.
+Scope szabály:
+- függvények és osztályok esetében:
+    - "long scope, short names"
+    - "short scope, long names"
+- Változók:
+    - "long scope, long name"
+    - "short scope, short name"
 #### Functions (Episode 3)
+Egy függvény legyen rövid: kb 4 sor, de ne legyen több mint 10.
+Egy föggvénynek csak egy feladata legyen.
+A függvény ne lépjen át abbsztrakciós szinteken.
 #### Function structure (Episode 4)
-#### Form (Episode 5)
+Max 3 paramétere legyen egy függvénynek.
+Soha ne legyen bool paramétere egy függvénynek
+Tell don't ask principle betartása.
+Law of Demeter betartása.
+Tell, don't ask betratása.
+"stepdown rule".
+switch-ek elkerülése.
+Kivételek dobásánál a lehető legkisebb scope-t használjuk.
 #### TDD (Episode 6)
+A TDD 3 szabályának követése.
+A teszteket a kódolás előtt írjuk meg.
+Jól átfogó tesztekkel nem félünk refaktorálni a kódot.
 #### Architecture, Use Cases, and High Level Design (Episode 7)
+Egy jó architektúra reugalmas és nem függ más komponensektől.
 #### Foundations of the SOLID principles (Episode 8)
+Törekedjünk a SOLID elvek betartására.
+Űgyeljünk hogy a pojektünkben "high cohesion, low coupling" legyen.
 #### The Single Responsibility Principle (Episode 9)
+A felelősség a változás forrása.
+Figyeljünk rá, hogy a lehető legjobban elválasszuk a felelősségeket.
 #### The Open-Closed Principle (Episode 10)
+"Open for extension, closed for modification".
+Ne módotsunk meglévő kódot, csak adjunk kozzá újat.
+YAGNI.
+"Don't over engineer".
 #### The Liskov Substitution Principle (Episode 11)
+Duck typing.
+"Representative rule", négyzet-téglalap példa.
+Ha csak lehet, ne typecheck-eljünk.
 #### The Interface Segregation Principle (Episode 12)
+"Fat classes" probléma.
+Az interface-ek jelentősebbek, mint maguk az implementációk.
+Ne kelljen a hívónak olyan dogokról tudnia, ami nem a feladata, hogy tudjon.
 #### The Dependency Inversion Principle (Episode 13)
+Plugin architaktúra, függőségek megfordítása.
+A leftöbb framework ezt az elvet használja.
+Magas szintű modulok ne függjenek alacsony szintű moduloktól.
+DB és UI kezelés plugin-két legyen az alpalmazásban.
 #### Solid Case Study (Episode 14)
-#### SOLID Components (Episode 15)
-#### Component Cohesion (Episode 16)
-#### Component Coupling (Episode 17)
-#### Component Case Study (Episode 18)
-
-
+Az architektúra elnevezése a use-case-k alapján.
+Builder-ek és factory-k elősegítik a modulok közti szeparációt.
+Osztály diagramok használata segíti a csapatban a megértést.
 
 ### JPA
 A Java Persistence API (JPA) egy keretrendszer, melynek fő feladata a relációs adatok kezelése.
