@@ -54,6 +54,6 @@ public class TeamRestController {
 
     @PostMapping("/{id}/admin/remove")
     public TeamDto removeAdmin(@PathVariable("id") long team_id, @RequestParam long user_id){
-        return RestUtils.executeRestRequest(()->teamService.removeUser(team_id, user_id));
+        return RestUtils.executeRestRequest(()->teamService.removeAdminUser(team_id, user_id));
     }
 }

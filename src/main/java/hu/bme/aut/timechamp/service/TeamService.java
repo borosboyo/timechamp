@@ -97,7 +97,7 @@ public class TeamService {
         Team team = teamRepository.findById(id);
         AppUser admin = appUserRepository.findById(adminId);
 
-        if(team == null || admin == null) {
+        if(team == null || admin == null || !team.getAdminAppUsers().contains(admin)) {
             throw new IllegalArgumentException();
         }
 
@@ -128,7 +128,7 @@ public class TeamService {
         Team team = teamRepository.findById(id);
         AppUser user = appUserRepository.findById(userId);
 
-        if(team == null || user == null) {
+        if(team == null || user == null || !team.getAppUsers().contains(user)) {
             throw new IllegalArgumentException();
         }
 
