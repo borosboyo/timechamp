@@ -24,6 +24,8 @@ public class EventController {
         model.put("events", events);
         model.put("newEvent", new EventParameters());
         model.put("thUtils", ThUtils.getInstance());
+        model.put("addParticipant", new ParticipantParameters());
+        model.put("removeParticipant", new ParticipantParameters());
         return "eventPage";
     }
 
@@ -39,6 +41,19 @@ public class EventController {
         return "redirect:/events";
     }
 
+    @PostMapping("/addParticipant")
+    public String addParticipant(ParticipantParameters participant) {
+        eventService.addParticipant(participant.getEventId(), participant.getParticipantId());
+        return "redirect:/events";
+    }
+
+    @PostMapping("/removeParticipant")
+    public String removeParticipant(ParticipantParameters participant) {
+        eventService.removeParticipant(participant.getEventId(), participant.getParticipantId());
+        return "redirect:/events";
+    }
+
+
     @Setter
     @Getter
     static
@@ -46,5 +61,12 @@ public class EventController {
         private String name;
         private long teamId;
         private long creatorId;
+    }
+
+    @Setter
+    @Getter
+    class ParticipantParameters {
+        private long eventId;
+        private long participantId;
     }
 }
