@@ -24,6 +24,7 @@ public class TeamController {
 
         model.put("teams", teams);
         model.put("newTeam", new TeamParameters());
+        model.put("thUtils", ThUtils.getInstance());
         return "teamPage";
     }
 
