@@ -111,7 +111,7 @@ public class TeamService {
         Team team = teamRepository.findById(id);
         AppUser user = appUserRepository.findById(userId);
 
-        if(team == null || user == null) {
+        if(team == null || user == null || user.getTeam() != null) {
             throw new IllegalArgumentException();
         }
 

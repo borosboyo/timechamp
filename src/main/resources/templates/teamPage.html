@@ -22,43 +22,149 @@
                 <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Back</button>
             </a>
         </div>
-        <div class ="container">
+        <div class ="card container my-4">
             <div class = "row">
-                <table class ="table table-striped table-borderd">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>AdminAppUsers</th>
-                        <th>AppUsers</th>
-                        <th>Organization</th>
-                    </tr>
+                <table class ="table table-striped table-borderd my-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">AdminAppUsers</th>
+                            <th scope="col">AppUsers</th>
+                            <th scope="col">Organization</th>
+                        </tr>
+                    </thead>
                     <tr th:each ="team : ${teams}">
-                        <th th:text="${team.id}">ID</th>
-                        <th th:text="${team.name}">Name</th>
-                        <th th:text="${thUtils.getAppUserName(team.adminAppUsers)}">Admin Users</th>
-                        <th th:text="${thUtils.getAppUserName(team.appUsers)}">AppUsers</th>
-                        <th th:text="${thUtils.getOrganizationName(team.organization)}">Organization</th>
+                        <th scope="row" th:text="${team.id}">ID</th>
+                        <td th:text="${team.name}">Name</td>
+                        <td th:text="${thUtils.getAppUserName(team.adminAppUsers)}">Admin Users</td>
+                        <td th:text="${thUtils.getAppUserName(team.appUsers)}">AppUsers</td>
+                        <td th:text="${thUtils.getOrganizationName(team.organization)}">Organization</td>
                     </tr>
                 </table>
             </div>
         </div>
-        <form th:action="@{/createTeam}" th:object="${newTeam}" method="post">
-            <div class="form-group" style = "padding: 10px;">
-                <label for="name">Name:</label>
-                <input th:field="*{name}" id="name"/><br/>
+            <div class="row">
+                <div class="row">
+                    <div class="card col-md-5 container">
+                        <div class="card-body">
+                            <h5 class="card-title">Create Event</h5>
+                            <form class="p-2" th:action="@{/createTeam}" th:object="${newTeam}" method="post">
+                                <div class="form-group row text-start">
+                                    <label for="name" class="col-form-label">Name:</label>
+                                    <input th:field="*{name}" id="name"/><br/>
+                                </div>
+                    
+                                <div class="form-group row text-start">
+                                    <label for="creator" class="col-form-label">Creator ID:</label>
+                                    <input th:field="*{creatorId}" id="creatorId"/><br/>
+                                </div>
+                    
+                                <div class="form-group row text-start">
+                                    <label for="organization" class="col-form-label">Organization ID:</label>
+                                    <input th:field="*{organizationId}" id="organization"/><br/>
+                                </div>
+                    
+                                <input type="submit" class="btn btn-primary mt-2" value="Add"/>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card col-md-5 container">
+                        <div class="card-body">
+                            <h5 class="card-title">Rename Team</h5>
+                            <form class="p-2" th:action="@{/renameTeam}" th:object="${renameTeam}" method="post">
+                                <div class="form-group row text-start">
+                                    <label for="id" class="col-form-label">Team ID:</label>
+                                    <input th:field="*{id}" id="id"/><br/>
+                                </div>
+                                <div class="form-group row text-start">
+                                    <label for="name" class="col-form-label">Name:</label>
+                                    <input th:field="*{name}" id="name"/><br/>
+                                </div>
+                                <input type="submit" class="btn btn-primary mt-2" value="Add"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card col-md-5 container">
+                        <div class="card-body">
+                            <h5 class="card-title">Join team</h5>
+                            <form class="p-2" th:action="@{/joinTeam}" th:object="${joinTeam}" method="post">
+                                <div class="form-group row text-start">
+                                    <label for="id" class="col-form-label">Team ID:</label>
+                                    <input th:field="*{teamId}" id="id"/><br/>
+                                </div>
+    
+                                <div class="form-group row text-start">
+                                    <label for="userId" class="col-form-label">User ID:</label>
+                                    <input th:field="*{userId}" id="userId"/><br/>
+                                </div>
+                    
+                                <input type="submit" class="btn btn-primary mt-2" value="Add"/>
+                            </form>
+                        </div>
+                    </div>
+    
+                    <div class="card col-md-5 container">
+                        <div class="card-body">
+                            <h5 class="card-title">Leave Team</h5>
+                            <form class="p-2" th:action="@{/leaveTeam}" th:object="${leaveTeam}" method="post">
+                                <div class="form-group row text-start">
+                                    <label for="id" class="col-form-label">Team ID:</label>
+                                    <input th:field="*{teamId}" id="id"/><br/>
+                                </div>
+    
+                                <div class="form-group row text-start">
+                                    <label for="userId" class="col-form-label">User ID:</label>
+                                    <input th:field="*{userId}" id="userId"/><br/>
+                                </div>
+                    
+                                <input type="submit" class="btn btn-primary mt-2" value="Remove"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="card col-md-5 container">
+                        <div class="card-body">
+                            <h5 class="card-title">Add Team Admin</h5>
+                            <form class="p-2" th:action="@{/addTeamAdmin}" th:object="${addAdmin}" method="post">
+                                <div class="form-group row text-start">
+                                    <label for="id" class="col-form-label">Team ID:</label>
+                                    <input th:field="*{teamId}" id="id"/><br/>
+                                </div>
+    
+                                <div class="form-group row text-start">
+                                    <label for="userId" class="col-form-label">User ID:</label>
+                                    <input th:field="*{userId}" id="userId"/><br/>
+                                </div>
+                    
+                                <input type="submit" class="btn btn-primary mt-2" value="Add"/>
+                            </form>
+                        </div>
+                    </div>
+    
+                    <div class="card col-md-5 container">
+                        <div class="card-body">
+                            <h5 class="card-title">Remove Team Admin</h5>
+                            <form class="p-2" th:action="@{/removeTeamAdmin}" th:object="${removeAdmin}" method="post">
+                                <div class="form-group row text-start">
+                                    <label for="id" class="col-form-label">Team ID:</label>
+                                    <input th:field="*{teamId}" id="id"/><br/>
+                                </div>
+    
+                                <div class="form-group row text-start">
+                                    <label for="userId" class="col-form-label">User ID:</label>
+                                    <input th:field="*{userId}" id="userId"/><br/>
+                                </div>
+                    
+                                <input type="submit" class="btn btn-primary mt-2" value="Remove"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group" style = "padding: 10px;">
-                <label for="creator">CreatorId:</label>
-                <input th:field="*{creatorId}" id="creator"/><br/>
-            </div>
-
-            <div class="form-group" style = "padding: 10px;">
-                <label for="organization">OrganizationId:</label>
-                <input th:field="*{organizationId}" id="organization"/><br/>
-            </div>
-
-            <input type="submit" value="Add"/>
         </form>
     </div>
 </main>
