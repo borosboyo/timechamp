@@ -119,7 +119,7 @@ Visszaadja az adott ID-jú szervezet adatait.
 - id : ID
 
 #### Kivételek:
-- Hibás ID esetén Bad Request hibakódoit küldünk.
+- Hibás ID esetén Bad Request hibakódot küldünk.
 - Szerver hiba esetén Internal Server Error hibakódot küldünk.
 
 Példa:
@@ -226,7 +226,7 @@ Visszaadja az adott ID-jú felhasználó adatait.
 - id : ID
 
 #### Kivételek:
-- Hibás ID esetén Bad Request hibakódoit küldünk.
+- Hibás ID esetén Bad Request hibakódot küldünk.
 - Szerver hiba esetén Internal Server Error hibakódot küldünk.
 
 Példa:
@@ -375,7 +375,7 @@ Visszaadja az adott ID-jú teendő adatait.
 - id : ID
 
 #### Kivételek:
-- Hibás ID esetén Bad Request hibakódoit küldünk.
+- Hibás ID esetén Bad Request hibakódot küldünk.
 - Szerver hiba esetén Internal Server Error hibakódot küldünk.
 
 Példa:
