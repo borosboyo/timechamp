@@ -151,7 +151,17 @@ Használjuk ki az Executor Framework adta lehetőséget.
 
 
 
-### JPA //TODO
+### JPA
+A Java Persistence API (JPA) egy keretrendszer, melynek fő feladata a relációs adatok kezelése.
+
+#### Általános jellemzők
+- Tartalmazza a javax.persistence csomagot, a JPQL nyelvet.
+- A JPA az entitásokat valamilyen relációs adatbázisban tárolja, míg helyileg azok egy persistence entitás segítségével érhetőek el.
+- A JPA annotációkkal definiált metaadatok segítségével működik, azok segítségével szabhatjuk testre működését. Ezeket akár xml-ben is definiálhatjuk.
+- A memóriában levő adatok eléréséhez a perzisztenciakontextust használjuk. Ez az EntityManager osztályon keresztül érhető el.
+- Az Entitások életciklussal rendelkeznek.
+- Futtathatunk vele JPQL (akár Critiria API) illetve natív SQL lekérdezéseket.
+
 
 ### Spring MVC
 Egy olyan request-driven MVC framework, amely a Servlet API-ra épül és web alkalmazásokat készíthetünk vele. 
