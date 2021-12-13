@@ -1,9 +1,7 @@
 package hu.bme.aut.timechamp.web.controller.normalcontroller;
 
-import hu.bme.aut.timechamp.dto.EventDto;
-import hu.bme.aut.timechamp.dto.PlaceDto;
-import hu.bme.aut.timechamp.dto.TeamDto;
-import hu.bme.aut.timechamp.dto.TodoDto;
+import hu.bme.aut.timechamp.dto.*;
+import hu.bme.aut.timechamp.model.Todo;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,10 +29,25 @@ public class ThUtils {
     }
 
     public static String getTeamName(TeamDto teamDto){
-        return teamDto != null ? teamDto.getName() : "";
+        return teamDto != null ? teamDto.getName() + " (" + teamDto.getId() + ")" : "";
     }
 
     public static String getPlaceName(PlaceDto placeDto){
-        return placeDto != null ? placeDto.getName() : "";
+        return placeDto != null ? placeDto.getName() + " (" + placeDto.getId() + ")" : "";
+    }
+
+    public static String getAppUserName(AppUserDto appUserDto){
+        return appUserDto != null ? appUserDto.getUsername() + " (" + appUserDto.getId() + ")" : "";
+    }
+
+    public static String getOrganizationName(OrganizationDto organizationDto){
+        return organizationDto != null ? organizationDto.getName() + " (" + organizationDto.getId() + ")" : "";
+    }
+
+    public static String getEventName(EventDto eventDto){
+        return eventDto != null ? eventDto.getName() + " (" + eventDto.getId() + ")" : "";
+    }
+    public static String getTodoName(TodoDto todoDto){
+        return todoDto != null ? todoDto.getName() + " (" + todoDto.getId() + ")" : "";
     }
 }
