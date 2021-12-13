@@ -1,59 +1,86 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="ISO-8859-1">
     <title>Organizations</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/grid/">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/d7b26806ab.js" crossorigin="anonymous"></script>
 
     <!-- Bootstrap core CSS -->
-    <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="grid.css" rel="stylesheet">
 </head>
+
 <body>
-<main>
-    <div class="px-4 py-5 my-5 text-center">
-        <h1><b>Organizations</b></h1>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style = "padding: 50px;" >
-            <a href="/">
-                <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Back</button>
-            </a>
-        </div>
-        <div class ="container">
-            <div class = "row">
-                <table class ="table table-striped table-borderd">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Teams</th>
-                        <th>HeadQuarter</th>
-                    </tr>
-                    <tr th:each ="organization : ${organizations}">
-                        <th th:text="${organization.id}">ID</th>
-                        <th th:text="${organization.name}">Name</th>
-                        <th th:text="${ThUtils.listTeamNames(organization.teams)}">Teams</th>
-                        <th th:text="${ThUtils.getPlaceName(organization.headQuarter)}">Headquarter</th>
-                    </tr>
-                </table>
+    <main>
+        <div class="px-4 py-5 my-5 text-center">
+            <h1><b>Organizations</b></h1>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="padding: 50px;">
+                <a href="/">
+                    <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Back</button>
+                </a>
+            </div>
+            <div class="card container my-4">
+                <div class="row">
+                    <table class="table table-striped table-borderd my-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Teams</th>
+                                <th scope="col">Headquarters</th>
+                            </tr>
+                        </thead>
+                        <tr th:each="organization : ${organizations}">
+                            <th scope="row" th:text="${organization.id}">ID</th>
+                            <td th:text="${organization.name}">Name</td>
+                            <td th:text="${ThUtils.listTeamNames(organization.teams)}">Teams</td>
+                            <td th:text="${ThUtils.getPlaceName(organization.headQuarter)}">Headquarters</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card col-md-5 container">
+                    <div class="card-body">
+                        <h5 class="card-title">Create Organization</h5>
+                        <form class="p-2" th:action="@{/createOrganization}" th:object="${newOrganization}"
+                            method="post">
+                            <div class="form-group row text-start">
+                                <label for="name" class="col-form-label">Name:</label>
+                                <input class="form-control" th:field="*{name}" id="name" /><br />
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Add" />
+                        </form>
+                    </div>
+                </div>
+                <div class="card col-md-5 container">
+                    <div class="card-body">
+                        <h5 class="card-title">Change Headquarters</h5>
+                        <form class="p-2" th:action="@{/setHq}" th:object="${changeHq}" method="post">
+                            <div class="form-group row text-start">
+                                <label for="id" class="col-form-label">ID:</label>
+                                <input class="form-control" th:field="*{id}" id="id" /><br />
+                            </div>
+                            <div class="form-group row text-start">
+                                <label for="hq" class="col-form-label">HQ ID:</label>
+                                <input class="form-control" th:field="*{hqId}" id="hq" /><br />
+                            </div>
+                            <input type="submit" class="btn btn-primary mt-2" value="Update" />
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        <form th:action="@{/createOrganization}" th:object="${newOrganization}" method="post">
-            <div class="form-group" style = "padding: 10px;">
-                <label for="name">Name:</label>
-                <input th:field="*{name}" id="name"/><br/>
-            </div>
-            <div class="form-group" style = "padding: 10px;">
-                <label for="hq">HqId:</label>
-                <input th:field="*{hqId}" id="hq"/><br/>
-            </div>
-            <input type="submit" value="Add"/>
-        </form>
-    </div>
-</main>
+    </main>
 
 
 </body>
+
 </html>

@@ -24,6 +24,7 @@ public class OrganizationController {
 
         model.put("organizations", organizations);
         model.put("newOrganization", new OrganizationParameters());
+        model.put("changeHq", new OrganizationParameters());
         model.put("ThUtils", ThUtils.getInstance());
         return "organizationPage";
     }
@@ -34,10 +35,17 @@ public class OrganizationController {
         return "redirect:/organizations";
     }
 
+    @PostMapping("/setHq")
+    public String setHQ(OrganizationParameters organizationParameters){
+        organizationService.setHQ(organizationParameters.getId(), organizationParameters.getHqId());
+        return "redirect:/organizations";
+    }
+
     @Setter
     @Getter
     static
     class OrganizationParameters {
+        private long id;
         private String name;
         private long hqId;
     }
