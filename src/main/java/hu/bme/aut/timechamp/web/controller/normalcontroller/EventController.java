@@ -65,6 +65,7 @@ public class EventController {
 
     @Setter
     @Getter
+    static
     class ParticipantParameters {
         private long eventId;
         private long participantId;

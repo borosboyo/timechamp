@@ -37,8 +37,8 @@
                     <tr th:each ="team : ${teams}">
                         <th scope="row" th:text="${team.id}">ID</th>
                         <td th:text="${team.name}">Name</td>
-                        <td th:text="${thUtils.getAppUserName(team.adminAppUsers)}">Admin Users</td>
-                        <td th:text="${thUtils.getAppUserName(team.appUsers)}">AppUsers</td>
+                        <td th:text="${thUtils.listAppUserNames(team.adminAppUsers)}">Admin Users</td>
+                        <td th:text="${thUtils.listAppUserIds(team.appUsers)}">AppUsers</td>
                         <td th:text="${thUtils.getOrganizationName(team.organization)}">Organization</td>
                     </tr>
                 </table>
@@ -56,7 +56,7 @@
                                 </div>
                     
                                 <div class="form-group row text-start">
-                                    <label for="creator" class="col-form-label">Creator ID:</label>
+                                    <label for="creatorId" class="col-form-label">Creator ID:</label>
                                     <input th:field="*{creatorId}" id="creatorId"/><br/>
                                 </div>
                     

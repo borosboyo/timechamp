@@ -50,6 +50,10 @@ public class ThUtils {
         return appUserDtos.stream().mapToLong(AppUserDto::getId).boxed().collect(Collectors.toList());
     }
 
+    public static List<String> listAppUserNames(List<AppUserDto> appUserDtos) {
+        return appUserDtos.stream().map(ThUtils::getAppUserName).collect(Collectors.toList());
+    }
+
     public static String getOrganizationName(OrganizationDto organizationDto){
         return organizationDto != null ? organizationDto.getName() + " (" + organizationDto.getId() + ")" : "";
     }
