@@ -5,6 +5,7 @@ import hu.bme.aut.timechamp.mapper.EventMapper;
 import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.model.Team;
+import hu.bme.aut.timechamp.model.Todo;
 import hu.bme.aut.timechamp.repository.AppUserRepository;
 import hu.bme.aut.timechamp.repository.EventRepository;
 import hu.bme.aut.timechamp.repository.TeamRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,7 +45,7 @@ public class EventService {
         Team team = teamRepository.findById(teamId);
         AppUser creator = appUserRepository.findById(creatorId);
 
-        if(team == null || creator == null) {
+        if(team == null || creator == null || (!team.getAppUsers().contains(creator) && !team.getAdminAppUsers().contains(creator))) {
             throw new IllegalArgumentException();
         }
 
@@ -56,11 +58,12 @@ public class EventService {
         team.getEvents().add(savedEvent);
         teamRepository.save(team);
         creator.getEvents().add(savedEvent);
-        savedEvent.getParticipants().add(creator);
-        eventRepository.save(savedEvent);
-        appUserRepository.save(creator);
+        AppUser savedUser = appUserRepository.save(creator);
+        if(!savedEvent.getParticipants().contains(savedUser)){
+            savedEvent.getParticipants().add(savedUser);
+        }
 
-        return eventMapper.eventToDto(savedEvent);
+        return eventMapper.eventToDto(eventRepository.save(savedEvent));
     }
 
 
@@ -78,16 +81,13 @@ public class EventService {
         if(event == null || user == null) {
             throw new IllegalArgumentException();
         }
-
-        event.getParticipants().add(user);
-
-        Event savedEvent = eventRepository.save(event);
         user.getEvents().add(event);
-        event.getParticipants().add(user);
-        eventRepository.save(event);
-        appUserRepository.save(user);
+        AppUser savedUser = appUserRepository.save(user);
+        if(!event.getParticipants().contains(savedUser)){
+            event.getParticipants().add(savedUser);
+        }
 
-        return eventMapper.eventToDto(savedEvent);
+        return eventMapper.eventToDto(eventRepository.save(event));
     }
 
 
@@ -100,14 +100,10 @@ public class EventService {
             throw new IllegalArgumentException();
         }
 
-        event.getParticipants().remove(user);
-
-        Event savedEvent = eventRepository.save(event);
         user.getEvents().remove(event);
-        event.getParticipants().remove(user);
-        eventRepository.save(savedEvent);
-        appUserRepository.save(user);
-        return eventMapper.eventToDto(savedEvent);
+        AppUser savedUser = appUserRepository.save(user);
+        event.getParticipants().remove(savedUser);
+        return eventMapper.eventToDto(eventRepository.save(event));
     }
 
 
