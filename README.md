@@ -164,6 +164,66 @@ míg mások iterálható elemekként.
 Csak akkor páhuzamosítsunk pipeline-t, biztosan meg vagyunk győződve arról, 
 biztonságos lesz és gyorasbb.
 
+#### 8. Methods
+##### 49. Check parameters for validity
+Ellenőrizzük az átvett értékeket, hogy ne késöbb okozzanak valamilyen exceptiont vagy hibás eredményt.
+
+##### 50. Make defensive copies when needed
+Amikor mutábilis objektumokat kapunk vagy adunk vissza, másoljuk le azokat, hogy külső támadók ne férjenek hozzá az objektumunk belső változóihoz.
+
+##### 52. User overloading judiciously
+Az overloading inkább vezet hibákhoz, mint előnyökhöz, ha használni kell, alaposan tervezzük meg, hogyan történnek az overloadolások.
+
+##### 54. Return empty collections or arrays, not nulls
+A null hibához vezethet, ha váratlanul kajuk, az üres kollekciók nem.
+
+#### 55. Return optionals judiciously
+Az Optionals használata megvédhet minket sok váratlan hibától. Az 54.-es szabály 1 elemre szóló változata.
+
+#### 9. General Programming
+##### 59. Know and use the libraries
+Mielőtt újraimplementálnánk valamit, keressük egy library-t ami megoldja a problémánkat, mert ezzel időt, pénzt, energiát spórolunk és a megoldás is jobb lesz.
+
+##### 60. Avoid float and double if exact answers are required
+Ha pontos lebegőpontos számok kellenek, használjunk BigDecimalt.
+
+##### 61. Prefer primitive types to boxed primitives
+Használjunk primitív típusokat ha lehet, mert optimálisabbak és kevesebb hibához vezetnek.
+
+##### 62. Avoid strings where other types are more appropriate
+Stringek helyett használjunk alkalmas típusokat, ha nincsenek ilyenek, keressünk/írjunk egyet.
+
+##### 66. Use native methods judiciously
+A Java-ból lehet C/C++ metódusokat hívni, ezekkel óvatosan bánjunk mert memory-leakek, stb.
+
+##### 67. Optimize judiciously
+Ne optimalizáljuk idő előtt, a jó terv + implementáció után esetleg.
+
+##### 68. Adhere to generally accepted naming conventions
+Kövessük a Java elnevezési szabványait.
+
+#### 10. Exception
+##### 69. Use exceptions only for exceptional conditions
+Próbáljuk elkerülni az exceptionök dobását más patern-ek, pl. Optionals használatával.
+
+##### 72. Favor the use of standard exceptions
+Használjunk a Java által szolgáltatott exceptionöket, ne írjuk sajátot, csak ha muszáj.
+
+##### 73. Throw exceptions appropriate to the abstraction
+Fordítsuk át a kivételeket, ahogy haladnak felfelé az absztrakciós rétegeken.
+
+##### 76. Strive for failure atomicity
+Ha egy methódus elfailel, ne maradjon a rendszer inkonzistens állapotban, legyen olyan mintha meg sem történt volna.
+
+#### 11. Concurrency
+##### 79. Avoid excessive synchronization
+Használjuk ki a Concurrent Collections Framework adta lehetőségeket.
+
+##### 80. Prefer executors, tasks, and streams to threads
+Használjuk ki az Executor Framework adta lehetőséget.
+
+
+
 ### Clean code by Uncle Bob
 #### Code smells (Episode 1)
 Rigid code: nehéz változtatásokat eszközölni benne
