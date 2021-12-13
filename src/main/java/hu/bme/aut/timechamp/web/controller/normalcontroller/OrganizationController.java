@@ -23,13 +23,13 @@ public class OrganizationController {
         List<OrganizationDto> organizations = organizationService.findAll();
 
         model.put("organizations", organizations);
-        model.put("newOrganization", new OrganizationDto());
+        model.put("newOrganization", new OrganizationParameters());
         return "organizationPage";
     }
 
     @PostMapping("/createOrganization")
     public String createOrganization(OrganizationParameters organizationParameters){
-        organizationService.createOrganization(organizationParameters .getName());
+        organizationService.createOrganization(organizationParameters.getName());
         return "redirect:/organizations";
     }
 
@@ -38,5 +38,6 @@ public class OrganizationController {
     static
     class OrganizationParameters {
         private String name;
+        private long hqId;
     }
 }

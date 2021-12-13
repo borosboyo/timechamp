@@ -44,7 +44,7 @@
                         <th th:text="${event.todos}">Todos</th>
                         <th th:text="${event.participants}">Participants</th>
                         <th>
-                            <a href="/removeEvent" class="btn btn-sm btn-danger" th:action="@{/removeEvent}" th:object="${event.id}" data-th-method="delete"><i
+                            <a th:href="@{/removeEvent(eventId=${event.id})}" class="btn btn-sm btn-danger"><i
                                     class="far fa-trash-alt"></i></a>
                         </th>
                     </tr>
@@ -59,12 +59,12 @@
 
             <div class="form-group" style = "padding: 10px;">
                 <label for="team">TeamId:</label>
-                <input th:field="*{team}" id="team"/><br/>
+                <input th:field="*{teamId}" id="team"/><br/>
             </div>
 
             <div class="form-group" style = "padding: 10px;">
                 <label for="creator">CreatorId:</label>
-                <input th:field="*{creator}" id="creator"/><br/>
+                <input th:field="*{creatorId}" id="creator"/><br/>
             </div>
 
             <input type="submit" value="Add"/>

@@ -28,7 +28,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Creator</th>
+                        <th>AdminAppUsers</th>
                         <th>AppUsers</th>
                         <th>Organization</th>
                     </tr>
@@ -50,12 +50,12 @@
 
             <div class="form-group" style = "padding: 10px;">
                 <label for="creator">CreatorId:</label>
-                <input th:field="*{adminAppUsers}" id="creator"/><br/>
+                <input th:field="*{creatorId}" id="creator"/><br/>
             </div>
 
             <div class="form-group" style = "padding: 10px;">
                 <label for="organization">OrganizationId:</label>
-                <input th:field="*{organization}" id="organization"/><br/>
+                <input th:field="*{organizationId}" id="organization"/><br/>
             </div>
 
             <input type="submit" value="Add"/>

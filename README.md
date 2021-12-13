@@ -15,7 +15,17 @@ Ezen felül akár egyből Maven-en keresztül is futtathatjuk a Spring Boot Mave
 ./mvnw spring-boot:run
 ```
 
-Természetesen a kedvenc IDE-nkből is.
+Természetesen a kedvenc IDE-nkből is futtathatjuk.
+
+Az indítás után szembesülhetünk a Thymeleafes UI-al:
+
+`index.html`:
+
+![](./index.png)
+
+`appUsers.html`:
+
+![](./appUsers.png)
 
 ## Az alkalmazás programozói dokumentációja
 

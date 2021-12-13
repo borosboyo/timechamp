@@ -39,7 +39,7 @@ Visszaadja az adott ID-jú hely adatait.
 - id : ID
 
 #### Kivételek:
-- Hibás ID esetén Bad Request hibakódoit küldünk.
+- Hibás ID esetén Bad Request hibakódot küldünk.
 - Szerver hiba esetén Internal Server Error hibakódot küldünk.
 
 Példa:

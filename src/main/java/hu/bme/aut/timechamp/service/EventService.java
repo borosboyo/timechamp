@@ -5,7 +5,6 @@ import hu.bme.aut.timechamp.mapper.EventMapper;
 import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.model.Event;
 import hu.bme.aut.timechamp.model.Team;
-import hu.bme.aut.timechamp.model.Todo;
 import hu.bme.aut.timechamp.repository.AppUserRepository;
 import hu.bme.aut.timechamp.repository.EventRepository;
 import hu.bme.aut.timechamp.repository.TeamRepository;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,7 +43,7 @@ public class EventService {
         Team team = teamRepository.findById(teamId);
         AppUser creator = appUserRepository.findById(creatorId);
 
-        if(team == null || creator == null || !team.getAppUsers().contains(creator)) {
+        if(team == null || creator == null) {
             throw new IllegalArgumentException();
         }
 

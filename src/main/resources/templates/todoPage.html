@@ -40,7 +40,7 @@
                         <th th:text="${todo.leaders}">Leaders</th>
                         <th th:text="${todo.event}">Longitude</th>
                         <th>
-                            <a href="/removeTodo" class="btn btn-sm btn-danger" th:action="@{/removeTodo}" th:object="${todo.id}" data-th-method="delete"><i
+                            <a th:href="@{/removeTodo(todoId=${todo.id})}" class="btn btn-sm btn-danger"><i
                                     class="far fa-trash-alt"></i></a>
                         </th>
                     </tr>
@@ -55,7 +55,7 @@
 
             <div class="form-group" style = "padding: 10px;">
                 <label for="event">EventId</label>
-                <input th:field="*{event}" id="event"/><br/>
+                <input th:field="*{eventId}" id="event"/><br/>
             </div>
 
             <input type="submit" value="Add"/>
