@@ -27,7 +27,7 @@ Az indítás után szembesülhetünk a Thymeleafes UI-al:
 
 ![](./appUsers.png)
 
-## Az alkalmazás programozói dokumentációja
+## Az alkalmazás specifikációja
 
 ### A program célja
 Maga a program célja egy csapat és időpont organizációs rendszer megvalósítása **Spring Boot backenddel, teljes REST API-val és szerver oldali rendereléssel, mivel egyikünk se ért az Angularhoz**. Az applikációban csapatokat, csapattagokat és eseményeket lehet kezelni.
