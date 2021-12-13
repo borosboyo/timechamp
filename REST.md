@@ -197,7 +197,6 @@ POST localhost:8080/api/organizations/2/hq?place_id=1
 ### GET /api/appusers/
 Visszaadja az összes nyílvántartott felhasználót.
 #### Kivételek:
-- Paraméterhiány esetén Bad Request hibakódot küldünk.
 - Szerver hiba esetén Internal Server Error hibakódot küldünk.
 
 
@@ -312,3 +311,388 @@ POST localhost:8080/api/appusers/2?username=gipszjakab&email=gj2@example.com&pas
 ## Event
 
 ## Todo
+
+### GET /api/todos/
+Visszaadja az összes nyílvántartott teendőt.
+#### Kivételek:
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+
+```
+GET localhost:8080/api/todos
+```
+
+```
+[
+    {
+        "id": 5,
+        "name": "Get more milk",
+        "description": null,
+        "leaders": [],
+        "event": {
+            "id": 4,
+            "name": "House Party",
+            "team": {
+                "id": 3,
+                "name": "Test Team A",
+                "adminAppUsers": null,
+                "appUsers": null,
+                "organization": {
+                    "id": 2,
+                    "name": "Example Organization",
+                    "teams": null,
+                    "headQuarter": {
+                        "id": 1,
+                        "name": "ExamplePlace",
+                        "googleCode": "ABC123",
+                        "longitude": 1.0,
+                        "latitude": -1.0,
+                        "organization": null
+                    }
+                }
+            },
+            "time": null,
+            "creator": {
+                "id": 3,
+                "email": "gj@example.com",
+                "username": "gipszjakab",
+                "password": null,
+                "events": null,
+                "todos": null,
+                "team": null
+            },
+            "todos": null,
+            "participants": null
+        }
+    }
+]
+```
+
+### GET /api/todos/{id}
+Visszaadja az adott ID-jú teendő adatait.
+#### Path Paraméterek:
+- id : ID
+
+#### Kivételek:
+- Hibás ID esetén Bad Request hibakódoit küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+
+```
+GET localhost:8080/api/todos/5
+```
+
+```
+{
+    "id": 5,
+    "name": "Get more milk",
+    "description": null,
+    "leaders": [],
+    "event": {
+        "id": 4,
+        "name": "House Party",
+        "team": {
+            "id": 3,
+            "name": "Test Team A",
+            "adminAppUsers": null,
+            "appUsers": null,
+            "organization": {
+                "id": 2,
+                "name": "Example Organization",
+                "teams": null,
+                "headQuarter": {
+                    "id": 1,
+                    "name": "ExamplePlace",
+                    "googleCode": "ABC123",
+                    "longitude": 1.0,
+                    "latitude": -1.0,
+                    "organization": null
+                }
+            }
+        },
+        "time": null,
+        "creator": {
+            "id": 3,
+            "email": "gj@example.com",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        },
+        "todos": null,
+        "participants": null
+    }
+}
+```
+
+### POST /api/todos/
+Létrehoz egy új teendőt.
+#### Paraméterek:
+- name : Teendő neve
+- event_id : Esemény ID-je
+#### Kivételek:
+- Paraméterhiány esetén Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+
+```
+POST localhost:8080/api/todos?name=Get more milk&event_id=16
+```
+
+```
+{
+    "id": 5,
+    "name": "Get more milk",
+    "description": null,
+    "leaders": [],
+    "event": {
+        "id": 4,
+        "name": "House Party",
+        "team": {
+            "id": 3,
+            "name": "Test Team A",
+            "adminAppUsers": null,
+            "appUsers": null,
+            "organization": {
+                "id": 2,
+                "name": "Example Organization",
+                "teams": null,
+                "headQuarter": {
+                    "id": 1,
+                    "name": "ExamplePlace",
+                    "googleCode": "ABC123",
+                    "longitude": 1.0,
+                    "latitude": -1.0,
+                    "organization": null
+                }
+            }
+        },
+        "time": null,
+        "creator": {
+            "id": 3,
+            "email": "gj@example.com",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        },
+        "todos": null,
+        "participants": null
+    }
+}
+```
+
+### POST /api/todos/{id}/addleader
+Hozzáad egy felhasználót a teendőhöz
+#### Path Paraméterek:
+- id : Teendő ID
+#### Paraméterek:
+- user_id : Felhasználó ID-je
+#### Kivételek:
+- Paraméterhiány esetén Bad Request hibakódot küldünk.
+- Ha az adott felhasználó nem tartozik a teendő eseményéhez, akkor Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+
+```
+POST localhost:8080/api/todos/5/addleader?user_id=3
+```
+
+```
+{
+    "id": 5,
+    "name": "Get more milk",
+    "description": null,
+    "leaders": [
+        {
+            "id": 3,
+            "email": "gj2@example.com",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ],
+    "event": {
+        "id": 4,
+        "name": "House Party",
+        "team": {
+            "id": 3,
+            "name": "Test Team A",
+            "adminAppUsers": null,
+            "appUsers": null,
+            "organization": {
+                "id": 2,
+                "name": "Example Organization",
+                "teams": null,
+                "headQuarter": {
+                    "id": 1,
+                    "name": "ExamplePlace",
+                    "googleCode": "ABC123",
+                    "longitude": 1.0,
+                    "latitude": -1.0,
+                    "organization": null
+                }
+            }
+        },
+        "time": null,
+        "creator": {
+            "id": 3,
+            "email": "gj@example.com",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        },
+        "todos": null,
+        "participants": null
+    }
+}
+```
+
+### POST /api/todos/{id}/removeleader
+Eltávolít egy felhasználót a teendőhöz
+#### Path Paraméterek:
+- id : Teendő ID
+#### Paraméterek:
+- user_id : Felhasználó ID-je
+#### Kivételek:
+- Paraméterhiány esetén Bad Request hibakódot küldünk.
+- Ha az adott felhasználó nem tartozik a teendőhöz, akkor Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+
+```
+POST localhost:8080/api/todos/5/removeleader?user_id=3
+```
+
+```
+{
+    "id": 5,
+    "name": "Get more milk",
+    "description": null,
+    "leaders": [],
+    "event": {
+        "id": 4,
+        "name": "House Party",
+        "team": {
+            "id": 3,
+            "name": "Test Team A",
+            "adminAppUsers": null,
+            "appUsers": null,
+            "organization": {
+                "id": 2,
+                "name": "Example Organization",
+                "teams": null,
+                "headQuarter": {
+                    "id": 1,
+                    "name": "ExamplePlace",
+                    "googleCode": "ABC123",
+                    "longitude": 1.0,
+                    "latitude": -1.0,
+                    "organization": null
+                }
+            }
+        },
+        "time": null,
+        "creator": {
+            "id": 3,
+            "email": "gj@example.com",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        },
+        "todos": null,
+        "participants": null
+    }
+}
+```
+
+### POST /api/todos/{id}/description
+Módosítja a teendő leírását.
+#### Path Paraméterek:
+- id : Teendő ID
+#### Paraméterek:
+- text : A leírás szövege.
+#### Kivételek:
+- Paraméterhiány esetén Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+
+```
+POST localhost:8080/api/todos/5/description?text=Go to the supermaket and get some milk.
+```
+
+```
+{
+    "id": 5,
+    "name": "Get more milk",
+    "description": "Go to the supermaket and get some milk.",
+    "leaders": [],
+    "event": {
+        "id": 4,
+        "name": "House Party",
+        "team": {
+            "id": 3,
+            "name": "Test Team A",
+            "adminAppUsers": null,
+            "appUsers": null,
+            "organization": {
+                "id": 2,
+                "name": "Example Organization",
+                "teams": null,
+                "headQuarter": {
+                    "id": 1,
+                    "name": "ExamplePlace",
+                    "googleCode": "ABC123",
+                    "longitude": 1.0,
+                    "latitude": -1.0,
+                    "organization": null
+                }
+            }
+        },
+        "time": null,
+        "creator": {
+            "id": 3,
+            "email": "gj@example.com",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        },
+        "todos": null,
+        "participants": null
+    }
+}
+```
+
+### DELETE /api/todos/{id}
+Törli az adott teendőt.
+#### Path Paraméterek:
+- id : Teendő ID
+#### Kivételek:
+- Paraméterhiány esetén Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+
+```
+DELETE localhost:8080/api/todos/5
+```
+
+```
+200 OK
+```
