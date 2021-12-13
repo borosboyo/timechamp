@@ -1,9 +1,15 @@
 package hu.bme.aut.timechamp.web.controller.normalcontroller;
 
 import hu.bme.aut.timechamp.dto.*;
+import hu.bme.aut.timechamp.model.AppUser;
 import hu.bme.aut.timechamp.model.Todo;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.text.DateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ThUtils {
@@ -40,6 +46,10 @@ public class ThUtils {
         return appUserDto != null ? appUserDto.getUsername() + " (" + appUserDto.getId() + ")" : "";
     }
 
+    public static List<Long> listAppUserIds(List<AppUserDto> appUserDtos) {
+        return appUserDtos.stream().mapToLong(AppUserDto::getId).boxed().collect(Collectors.toList());
+    }
+
     public static String getOrganizationName(OrganizationDto organizationDto){
         return organizationDto != null ? organizationDto.getName() + " (" + organizationDto.getId() + ")" : "";
     }
@@ -49,5 +59,11 @@ public class ThUtils {
     }
     public static String getTodoName(TodoDto todoDto){
         return todoDto != null ? todoDto.getName() + " (" + todoDto.getId() + ")" : "";
+    }
+
+    public static String getLocalDateTime(LocalDateTime time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd. HH:mm");
+
+        return time.format(formatter);
     }
 }
