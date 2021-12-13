@@ -164,29 +164,70 @@ míg mások iterálható elemekként.
 Csak akkor páhuzamosítsunk pipeline-t, biztosan meg vagyunk győződve arról, 
 biztonságos lesz és gyorasbb.
 
-
-
 ### Clean code by Uncle Bob
 #### Code smells (Episode 1)
+Rigid code: nehéz változtatásokat eszközölni benne
+Fragility: egy változtatás több helyen elront valamit
+Inseparability: nem újrafelhasználható kód
+Opairy: a ködot nehéz megérteni
 #### Naming (Episode 2)
+Az elnevezés legyen beszédes.
+Dezinformáció terjesztésének elkerülése.
+Kiejthető nevek használata.
+Scope szabály:
+- függvények és osztályok esetében:
+    - "long scope, short names"
+    - "short scope, long names"
+- Változók:
+    - "long scope, long name"
+    - "short scope, short name"
 #### Functions (Episode 3)
+Egy függvény legyen rövid: kb 4 sor, de ne legyen több mint 10.
+Egy föggvénynek csak egy feladata legyen.
+A függvény ne lépjen át abbsztrakciós szinteken.
 #### Function structure (Episode 4)
-#### Form (Episode 5)
+Max 3 paramétere legyen egy függvénynek.
+Soha ne legyen bool paramétere egy függvénynek
+Tell don't ask principle betartása.
+Law of Demeter betartása.
+Tell, don't ask betratása.
+"stepdown rule".
+switch-ek elkerülése.
+Kivételek dobásánál a lehető legkisebb scope-t használjuk.
 #### TDD (Episode 6)
+A TDD 3 szabályának követése.
+A teszteket a kódolás előtt írjuk meg.
+Jól átfogó tesztekkel nem félünk refaktorálni a kódot.
 #### Architecture, Use Cases, and High Level Design (Episode 7)
+Egy jó architektúra reugalmas és nem függ más komponensektől.
 #### Foundations of the SOLID principles (Episode 8)
+Törekedjünk a SOLID elvek betartására.
+Űgyeljünk hogy a pojektünkben "high cohesion, low coupling" legyen.
 #### The Single Responsibility Principle (Episode 9)
+A felelősség a változás forrása.
+Figyeljünk rá, hogy a lehető legjobban elválasszuk a felelősségeket.
 #### The Open-Closed Principle (Episode 10)
+"Open for extension, closed for modification".
+Ne módotsunk meglévő kódot, csak adjunk kozzá újat.
+YAGNI.
+"Don't over engineer".
 #### The Liskov Substitution Principle (Episode 11)
+Duck typing.
+"Representative rule", négyzet-téglalap példa.
+Ha csak lehet, ne typecheck-eljünk.
 #### The Interface Segregation Principle (Episode 12)
+"Fat classes" probléma.
+Az interface-ek jelentősebbek, mint maguk az implementációk.
+Ne kelljen a hívónak olyan dogokról tudnia, ami nem a feladata, hogy tudjon.
 #### The Dependency Inversion Principle (Episode 13)
+Plugin architaktúra, függőségek megfordítása.
+A leftöbb framework ezt az elvet használja.
+Magas szintű modulok ne függjenek alacsony szintű moduloktól.
+DB és UI kezelés plugin-két legyen az alpalmazásban.
 #### Solid Case Study (Episode 14)
-#### SOLID Components (Episode 15)
-#### Component Cohesion (Episode 16)
-#### Component Coupling (Episode 17)
-#### Component Case Study (Episode 18)
-
-
+Az architektúra elnevezése a use-case-k alapján.
+Builder-ek és factory-k elősegítik a modulok közti szeparációt.
+Osztály diagramok használata segíti a csapatban a megértést.
 
 ### JPA //TODO
 
