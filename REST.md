@@ -308,7 +308,813 @@ POST localhost:8080/api/appusers/2?username=gipszjakab&email=gj2@example.com&pas
 
 ## Team
 
+### GET /api/teams
+Visszaadja az összes nyilvántartott csapatot (team)
+
+Példa:
+```
+GET localhost:8080/api/teams
+```
+
+```
+[
+    {
+        "id": 28,
+        "name": "TesztTeam",
+        "adminAppUsers": [
+            {
+                "id": 25,
+                "email": "teszt@elek.bme.hu",
+                "username": "tesztelek",
+                "password": null,
+                "events": null,
+                "todos": null,
+                "team": null
+            }
+        ],
+        "appUsers": [],
+        "organization": {
+            "id": 26,
+            "name": "TesztSzervezet",
+            "teams": null,
+            "headQuarter": {
+                "id": 27,
+                "name": "tesz hely",
+                "googleCode": "ABC123",
+                "longitude": 111.0,
+                "latitude": 222.0,
+                "organization": null
+            }
+        }
+    }
+]
+```
+
+### GET /api/teams/{id}
+Visszaadja az adott ID-jú csapat adatait.
+#### Path paraméterek:
+ - id : ID
+#### Kivételek:
+- Hibás ID esetén Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+{
+    "id": 28,
+    "name": "GipszTeam",
+    "adminAppUsers": [
+        {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ],
+    "appUsers": [],
+    "organization": {
+        "id": 26,
+        "name": "TesztSzervezet",
+        "teams": null,
+        "headQuarter": {
+            "id": 27,
+            "name": "tesz hely",
+            "googleCode": "ABC123",
+            "longitude": 111.0,
+            "latitude": 222.0,
+            "organization": null
+        }
+    }
+}
+```
+
+
+
+
+### PUT /api/teams
+Létrehoz egy csapatot.
+#### Paraméterek:
+ - name : csapat neve
+ - creator_id : a létrehozó felhasználó ID-ja
+ - organization_id : létrehozó szervezet ID-ja
+
+#### Kivételek:
+ - Hibás ID-k illetve már foglalt csapatnév esetén Bad Request hibakódot küldünk.
+ - Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+PUT localhost:8080/api/teams?name=TesztTeam2&creator_id=25&organization_id=26
+```
+
+```
+{
+        "id": 28,
+        "name": "TesztTeam",
+        "adminAppUsers": [
+            {
+                "id": 25,
+                "email": "teszt@elek.bme.hu",
+                "username": "tesztelek",
+                "password": null,
+                "events": null,
+                "todos": null,
+                "team": null
+            }
+        ],
+        "appUsers": [],
+        "organization": {
+            "id": 26,
+            "name": "TesztSzervezet",
+            "teams": null,
+            "headQuarter": {
+                "id": 27,
+                "name": "tesz hely",
+                "googleCode": "ABC123",
+                "longitude": 111.0,
+                "latitude": 222.0,
+                "organization": null
+            }
+        }
+    }
+```
+
+### POST /api/teams/{id}/join
+Csapathoz való csatlakozás
+#### Path paraméterek:
+ - id : csapat ID-ja
+#### Paraméterek:
+ - user_id : csatlakozó felhasználó ID-ja
+#### Kivételek:
+- Hibás ID-k esetén Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+POST localhost:8080/api/teams/28/join?user_id=29
+```
+
+```
+{
+    "id": 28,
+    "name": "TesztTeam",
+    "adminAppUsers": [
+        {
+            "id": 25,
+            "email": "teszt@elek.bme.hu",
+            "username": "tesztelek",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ],
+    "appUsers": [
+        {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ],
+    "organization": {
+        "id": 26,
+        "name": "TesztSzervezet",
+        "teams": null,
+        "headQuarter": {
+            "id": 27,
+            "name": "tesz hely",
+            "googleCode": "ABC123",
+            "longitude": 111.0,
+            "latitude": 222.0,
+            "organization": null
+        }
+    }
+}
+```
+
+### POST /api/teams/{id}/rename
+Csapat átnevezése
+#### Path paraméterek:
+- id : csapat ID-ja
+#### Paraméterek:
+- name : csapat új neve
+#### Kivételek:
+- Hibás ID esetén Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+POST localhost:8080/api/teams/28/rename?name=GipszTeam
+```
+
+```
+{
+    "id": 28,
+    "name": "GipszTeam",
+    "adminAppUsers": [
+        {
+            "id": 25,
+            "email": "teszt@elek.bme.hu",
+            "username": "tesztelek",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ],
+    "appUsers": [
+        {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ],
+    "organization": {
+        "id": 26,
+        "name": "TesztSzervezet",
+        "teams": null,
+        "headQuarter": {
+            "id": 27,
+            "name": "tesz hely",
+            "googleCode": "ABC123",
+            "longitude": 111.0,
+            "latitude": 222.0,
+            "organization": null
+        }
+    }
+}
+```
+
+### POST /api/teams/{id}/leave
+Csapat elhagyása
+#### Path paraméterek:
+- id : csapat ID-ja
+#### Paraméterek:
+- user_id : a csapatot elhagyó felhasználó ID-ja
+#### Kivételek:
+- Hibás ID vagy ha a falhsználó nem tagja a csapatnak, akkor Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+POST localhost:8080/api/teams/28/leave?user_id=29
+```
+
+```
+{
+    "id": 28,
+    "name": "GipszTeam",
+    "adminAppUsers": [
+        {
+            "id": 25,
+            "email": "teszt@elek.bme.hu",
+            "username": "tesztelek",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ],
+    "appUsers": [],
+    "organization": {
+        "id": 26,
+        "name": "TesztSzervezet",
+        "teams": null,
+        "headQuarter": {
+            "id": 27,
+            "name": "tesz hely",
+            "googleCode": "ABC123",
+            "longitude": 111.0,
+            "latitude": 222.0,
+            "organization": null
+        }
+    }
+}
+```
+
+
+### POST /api/teams/{id}/admin/add
+Admin felvétele a csoportba
+#### Path paraméterek:
+- id : csapat ID-ja
+#### Paraméterek:
+- user_id : a felveendő admin ID-ja
+#### Kivételek:
+- Hibás ID esetén Bad Request hibakódoit küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+POST localhost:8080/api/teams/28/admin/add?user_id=29
+```
+
+```
+{
+    "id": 28,
+    "name": "GipszTeam",
+    "adminAppUsers": [
+        {
+            "id": 25,
+            "email": "teszt@elek.bme.hu",
+            "username": "tesztelek",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        },
+        {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ],
+    "appUsers": [],
+    "organization": {
+        "id": 26,
+        "name": "TesztSzervezet",
+        "teams": null,
+        "headQuarter": {
+            "id": 27,
+            "name": "tesz hely",
+            "googleCode": "ABC123",
+            "longitude": 111.0,
+            "latitude": 222.0,
+            "organization": null
+        }
+    }
+}
+```
+
+
+### POST /api/teams/{id}/admin/remove
+Admin eltávolítása a csapatból
+#### Path paraméterek:
+- id : csapat ID-ja
+#### Paraméterek:
+- user_id : a eltávolítandó admin ID-ja
+#### Kivételek:
+- Hibás ID vagy ha nem adminja a csapatnak, akkor Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+POST localhost:8080/api/teams/28/admin/remove?user_id=25
+```
+
+```
+{
+    "id": 28,
+    "name": "GipszTeam",
+    "adminAppUsers": [
+        {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ],
+    "appUsers": [],
+    "organization": {
+        "id": 26,
+        "name": "TesztSzervezet",
+        "teams": null,
+        "headQuarter": {
+            "id": 27,
+            "name": "tesz hely",
+            "googleCode": "ABC123",
+            "longitude": 111.0,
+            "latitude": 222.0,
+            "organization": null
+        }
+    }
+}
+```
+
+
 ## Event
+
+### GET /api/events
+Visszaadja az összes eseményt (event)
+
+Példa:
+```
+GET localhost:8080/api/events
+```
+
+```
+[
+    {
+        "id": 30,
+        "name": "GipszEvent",
+        "team": {
+            "id": 28,
+            "name": "GipszTeam",
+            "adminAppUsers": null,
+            "appUsers": null,
+            "organization": {
+                "id": 26,
+                "name": "TesztSzervezet",
+                "teams": null,
+                "headQuarter": {
+                    "id": 27,
+                    "name": "tesz hely",
+                    "googleCode": "ABC123",
+                    "longitude": 111.0,
+                    "latitude": 222.0,
+                    "organization": null
+                }
+            }
+        },
+        "time": null,
+        "creator": {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        },
+        "todos": [],
+        "participants": [
+            {
+                "id": 29,
+                "email": "gipsz@jakab.hu",
+                "username": "gipszjakab",
+                "password": null,
+                "events": null,
+                "todos": null,
+                "team": null
+            }
+        ]
+    }
+]
+```
+
+### GET /api/events/{id}
+Visszaadja az adott ID-jú esemény adatait
+#### Path paraméterek:
+ - id : az esemény Id-ja
+#### Kivételek:
+- Hibás ID esetén Bad Request hibakódot küldünk.
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+GET localhost:8080/api/events/30
+```
+
+```
+{
+    "id": 30,
+    "name": "GipszEvent",
+    "team": {
+        "id": 28,
+        "name": "GipszTeam",
+        "adminAppUsers": null,
+        "appUsers": null,
+        "organization": {
+            "id": 26,
+            "name": "TesztSzervezet",
+            "teams": null,
+            "headQuarter": {
+                "id": 27,
+                "name": "tesz hely",
+                "googleCode": "ABC123",
+                "longitude": 111.0,
+                "latitude": 222.0,
+                "organization": null
+            }
+        }
+    },
+    "time": null,
+    "creator": {
+        "id": 29,
+        "email": "gipsz@jakab.hu",
+        "username": "gipszjakab",
+        "password": null,
+        "events": null,
+        "todos": null,
+        "team": null
+    },
+    "todos": [],
+    "participants": [
+        {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ]
+}
+```
+
+
+### POST /api/events
+Létrehoz egy eseményt
+#### Paraméterek:
+ - name : esemény neve
+ - team_id : csapat ID-ja, melyhez az esemény rendelve lesz
+ - creator_id : az eseményt létrehozó felhasználó ID-ja
+#### Kivételek:
+ - Hibás ID-k illetve olyan létrehozó ID-ja esetén aki nem tagja a csapatnak, akkor Bad Request hibakódot küldünk.
+ - Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+POST localhost:8080/api/events?name=GipszEvent&team_id=28&creator_id=29
+```
+
+```
+{
+    "id": 30,
+    "name": "GipszEvent",
+    "team": {
+        "id": 28,
+        "name": "GipszTeam",
+        "adminAppUsers": null,
+        "appUsers": null,
+        "organization": {
+            "id": 26,
+            "name": "TesztSzervezet",
+            "teams": null,
+            "headQuarter": {
+                "id": 27,
+                "name": "tesz hely",
+                "googleCode": "ABC123",
+                "longitude": 111.0,
+                "latitude": 222.0,
+                "organization": null
+            }
+        }
+    },
+    "time": null,
+    "creator": {
+        "id": 29,
+        "email": "gipsz@jakab.hu",
+        "username": "gipszjakab",
+        "password": null,
+        "events": null,
+        "todos": null,
+        "team": null
+    },
+    "todos": [],
+    "participants": [
+        {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ]
+}
+```
+
+
+### POST /api/events/{id}/participant/add
+Részvevő felvétele az eseménybe
+#### Path paraméterek:
+ - id : esemény ID-ja
+#### Paraméterek:
+ - user_id : csatlakozó felhasználó ID-ja
+#### Kivételek:
+ - Hibás ID-k esetén Bad Request hibakódot küldünk.
+ - Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+POST localhost:8080/api/events/30/participant/add?user_id=25
+```
+
+```
+{
+    "id": 30,
+    "name": "GipszEvent",
+    "team": {
+        "id": 28,
+        "name": "GipszTeam",
+        "adminAppUsers": null,
+        "appUsers": null,
+        "organization": {
+            "id": 26,
+            "name": "TesztSzervezet",
+            "teams": null,
+            "headQuarter": {
+                "id": 27,
+                "name": "tesz hely",
+                "googleCode": "ABC123",
+                "longitude": 111.0,
+                "latitude": 222.0,
+                "organization": null
+            }
+        }
+    },
+    "time": null,
+    "creator": {
+        "id": 29,
+        "email": "gipsz@jakab.hu",
+        "username": "gipszjakab",
+        "password": null,
+        "events": null,
+        "todos": null,
+        "team": null
+    },
+    "todos": [],
+    "participants": [
+        {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        },
+        {
+            "id": 25,
+            "email": "teszt@elek.bme.hu",
+            "username": "tesztelek",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ]
+}
+```
+
+
+### POST /api/events/{id}/participant/remove
+Részvevő eltávolítása az eseményből
+#### Path paraméterek:
+ - id : esemény ID-ja
+#### Paraméterek:
+ - user_id : eltávolítandó felhasználó ID-ja
+#### Kivételek:
+ - Hibás ID-k esetén Bad Request hibakódot küldünk.
+ - Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+POST localhost:8080/api/events/30/participant/remove?user_id=25
+```
+
+```
+{
+    "id": 30,
+    "name": "GipszEvent",
+    "team": {
+        "id": 28,
+        "name": "GipszTeam",
+        "adminAppUsers": null,
+        "appUsers": null,
+        "organization": {
+            "id": 26,
+            "name": "TesztSzervezet",
+            "teams": null,
+            "headQuarter": {
+                "id": 27,
+                "name": "tesz hely",
+                "googleCode": "ABC123",
+                "longitude": 111.0,
+                "latitude": 222.0,
+                "organization": null
+            }
+        }
+    },
+    "time": null,
+    "creator": {
+        "id": 29,
+        "email": "gipsz@jakab.hu",
+        "username": "gipszjakab",
+        "password": null,
+        "events": null,
+        "todos": null,
+        "team": null
+    },
+    "todos": [],
+    "participants": [
+        {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ]
+}
+```
+
+
+### POST /app/events/{id}/time
+Időpont beállítása az eseményhez
+#### Path paraméterek:
+ - id : esemény ID-ja
+#### Paraméterek:
+ - year : év
+ - month : hónap
+ - day : nap
+ - hour : óra
+ - minute : perc
+#### Kivételek:
+ - Hibás ID-k esetén Bad Request hibakódot küldünk.
+ - Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+POST localhost:8080/api/events/30/time?year=2021&month=12&day=21&hour=9&minute=43
+```
+
+```
+{
+    "id": 30,
+    "name": "GipszEvent",
+    "team": {
+        "id": 28,
+        "name": "GipszTeam",
+        "adminAppUsers": null,
+        "appUsers": null,
+        "organization": {
+            "id": 26,
+            "name": "TesztSzervezet",
+            "teams": null,
+            "headQuarter": {
+                "id": 27,
+                "name": "tesz hely",
+                "googleCode": "ABC123",
+                "longitude": 111.0,
+                "latitude": 222.0,
+                "organization": null
+            }
+        }
+    },
+    "time": "2021-12-21T09:43:00",
+    "creator": {
+        "id": 29,
+        "email": "gipsz@jakab.hu",
+        "username": "gipszjakab",
+        "password": null,
+        "events": null,
+        "todos": null,
+        "team": null
+    },
+    "todos": [],
+    "participants": [
+        {
+            "id": 29,
+            "email": "gipsz@jakab.hu",
+            "username": "gipszjakab",
+            "password": null,
+            "events": null,
+            "todos": null,
+            "team": null
+        }
+    ]
+}
+```
+
+### DELETE /api/events/{id}
+Törli az adott ID-jú eseményt
+#### Path paraméterek:
+ - id : esemény ID
+#### Kivételek:
+- Szerver hiba esetén Internal Server Error hibakódot küldünk.
+
+Példa:
+```
+DELETE localhost:8080/api/events/30
+```
+
+```
+200 OK
+```
+
 
 ## Todo
 
