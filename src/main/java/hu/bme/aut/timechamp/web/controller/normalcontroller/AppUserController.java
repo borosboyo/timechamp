@@ -24,6 +24,7 @@ public class AppUserController {
 
         model.put("appUsers", appUsers);
         model.put("newAppUser", new AppUserParameters());
+        model.put("thUtils", ThUtils.getInstance());
         return "appUserPage";
     }
 

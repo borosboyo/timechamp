@@ -23,6 +23,7 @@ public class EventController {
 
         model.put("events", events);
         model.put("newEvent", new EventParameters());
+        model.put("thUtils", ThUtils.getInstance());
         return "eventPage";
     }
 

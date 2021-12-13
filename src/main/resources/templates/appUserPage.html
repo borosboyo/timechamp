@@ -39,9 +39,9 @@
                         <th th:text="${appuser.email}">Name</th>
                         <th th:text="${appuser.username}">Username</th>
                         <th th:text="${appuser.password}">Password</th>
-                        <th th:text="${appuser.events}">Events</th>
-                        <th th:text="${appuser.todos}">Todos</th>
-                        <th th:text="${appuser.team}">Team</th>
+                        <th th:text="${thUtils.listEventIds(appuser.events)}">Events</th>
+                        <th th:text="${thUtils.listTodoIds(appuser.todos)}">Todos</th>
+                        <th th:text="${thUtils.getTeamName(appuser.team)}">Team</th>
                     </tr>
                 </table>
             </div>
