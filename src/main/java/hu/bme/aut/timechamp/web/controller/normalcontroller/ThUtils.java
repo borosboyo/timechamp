@@ -62,6 +62,9 @@ public class ThUtils {
     }
 
     public static String getLocalDateTime(LocalDateTime time) {
+        if(time == null){
+            return "";
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd. HH:mm");
 
         return time.format(formatter);

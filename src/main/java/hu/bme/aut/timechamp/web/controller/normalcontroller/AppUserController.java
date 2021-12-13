@@ -24,6 +24,7 @@ public class AppUserController {
 
         model.put("appUsers", appUsers);
         model.put("newAppUser", new AppUserParameters());
+        model.put("updateAppUser", new AppUserParameters());
         model.put("thUtils", ThUtils.getInstance());
         return "appUserPage";
     }
@@ -34,10 +35,17 @@ public class AppUserController {
         return "redirect:/appUsers";
     }
 
+    @PostMapping("/updateAppUser")
+    public String updateAppUser(AppUserParameters appUserParameters){
+        appUserService.updateById(appUserParameters.getId(), appUserParameters.getEmail(),appUserParameters.getUsername(),appUserParameters.getPassword());
+        return "redirect:/appUsers";
+    }
+
     @Setter
     @Getter
     static
     class AppUserParameters {
+        private long id;
         private String email;
         private String username;
         private String password;
