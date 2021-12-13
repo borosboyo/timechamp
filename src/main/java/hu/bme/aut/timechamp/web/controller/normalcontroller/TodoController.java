@@ -23,6 +23,7 @@ public class TodoController {
 
         model.put("todos", todos);
         model.put("newTodo", new TodoParameters());
+        model.put("thUtils", ThUtils.getInstance());
         return "todoPage";
     }
 
