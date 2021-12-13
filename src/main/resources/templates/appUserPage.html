@@ -76,21 +76,21 @@
                     <h5 class="card-title">Update User</h5>
                     <form class="p-2" th:action="@{/updateAppUser}" th:object="${updateAppUser}" method="post">
                         <div class="form-group row text-start">
-                            <label for="id" class="col-form-label">ID:</label>
-                            <input class="form-control" th:field="*{id}" id="id"/><br/>
+                            <label for="id2" class="col-form-label">ID:</label>
+                            <input class="form-control" th:field="*{id}" id="id2"/><br/>
                         </div>
                         <div class="form-group row text-start">
-                            <label for="email" class="col-form-label">Email:</label>
-                            <input class="form-control" th:field="*{email}" id="email"/><br/>
+                            <label for="email2" class="col-form-label">Email:</label>
+                            <input class="form-control" th:field="*{email}" id="email2"/><br/>
                         </div>
                         <div class="form-group row text-start">
-                            <label for="username" class="col-form-label">Username:</label>
-                                <input class="form-control" th:field="*{username}" id="username"/><br/>
+                            <label for="username2" class="col-form-label">Username:</label>
+                                <input class="form-control" th:field="*{username}" id="username2"/><br/>
                         </div>
 
                         <div class="form-group row text-start">
-                            <label for="password" class="col-form-label">Password:</label>
-                            <input class="form-control" th:field="*{password}" id="password"/><br/>
+                            <label for="password2" class="col-form-label">Password:</label>
+                            <input class="form-control" th:field="*{password}" id="password2"/><br/>
                         </div>
                         <input type="submit" class="btn btn-primary mt-2" value="Update"/>
                     </form>

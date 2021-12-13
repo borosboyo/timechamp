@@ -74,12 +74,12 @@
                             <h5 class="card-title">Rename Team</h5>
                             <form class="p-2" th:action="@{/renameTeam}" th:object="${renameTeam}" method="post">
                                 <div class="form-group row text-start">
-                                    <label for="id" class="col-form-label">Team ID:</label>
-                                    <input th:field="*{id}" id="id"/><br/>
+                                    <label for="id2" class="col-form-label">Team ID:</label>
+                                    <input th:field="*{id}" id="id2"/><br/>
                                 </div>
                                 <div class="form-group row text-start">
-                                    <label for="name" class="col-form-label">Name:</label>
-                                    <input th:field="*{name}" id="name"/><br/>
+                                    <label for="name2" class="col-form-label">Name:</label>
+                                    <input th:field="*{name}" id="name2"/><br/>
                                 </div>
                                 <input type="submit" class="btn btn-primary mt-2" value="Add"/>
                             </form>
@@ -92,13 +92,13 @@
                             <h5 class="card-title">Join team</h5>
                             <form class="p-2" th:action="@{/joinTeam}" th:object="${joinTeam}" method="post">
                                 <div class="form-group row text-start">
-                                    <label for="id" class="col-form-label">Team ID:</label>
-                                    <input th:field="*{teamId}" id="id"/><br/>
+                                    <label for="id3" class="col-form-label">Team ID:</label>
+                                    <input th:field="*{teamId}" id="id3"/><br/>
                                 </div>
     
                                 <div class="form-group row text-start">
-                                    <label for="userId" class="col-form-label">User ID:</label>
-                                    <input th:field="*{userId}" id="userId"/><br/>
+                                    <label for="userId3" class="col-form-label">User ID:</label>
+                                    <input th:field="*{userId}" id="userId3"/><br/>
                                 </div>
                     
                                 <input type="submit" class="btn btn-primary mt-2" value="Add"/>
@@ -111,13 +111,13 @@
                             <h5 class="card-title">Leave Team</h5>
                             <form class="p-2" th:action="@{/leaveTeam}" th:object="${leaveTeam}" method="post">
                                 <div class="form-group row text-start">
-                                    <label for="id" class="col-form-label">Team ID:</label>
-                                    <input th:field="*{teamId}" id="id"/><br/>
+                                    <label for="id4" class="col-form-label">Team ID:</label>
+                                    <input th:field="*{teamId}" id="id4"/><br/>
                                 </div>
     
                                 <div class="form-group row text-start">
-                                    <label for="userId" class="col-form-label">User ID:</label>
-                                    <input th:field="*{userId}" id="userId"/><br/>
+                                    <label for="userId5" class="col-form-label">User ID:</label>
+                                    <input th:field="*{userId}" id="userId5"/><br/>
                                 </div>
                     
                                 <input type="submit" class="btn btn-primary mt-2" value="Remove"/>
@@ -131,13 +131,13 @@
                             <h5 class="card-title">Add Team Admin</h5>
                             <form class="p-2" th:action="@{/addTeamAdmin}" th:object="${addAdmin}" method="post">
                                 <div class="form-group row text-start">
-                                    <label for="id" class="col-form-label">Team ID:</label>
-                                    <input th:field="*{teamId}" id="id"/><br/>
+                                    <label for="id6" class="col-form-label">Team ID:</label>
+                                    <input th:field="*{teamId}" id="id6"/><br/>
                                 </div>
     
                                 <div class="form-group row text-start">
-                                    <label for="userId" class="col-form-label">User ID:</label>
-                                    <input th:field="*{userId}" id="userId"/><br/>
+                                    <label for="userId7" class="col-form-label">User ID:</label>
+                                    <input th:field="*{userId}" id="userId7"/><br/>
                                 </div>
                     
                                 <input type="submit" class="btn btn-primary mt-2" value="Add"/>
@@ -150,13 +150,13 @@
                             <h5 class="card-title">Remove Team Admin</h5>
                             <form class="p-2" th:action="@{/removeTeamAdmin}" th:object="${removeAdmin}" method="post">
                                 <div class="form-group row text-start">
-                                    <label for="id" class="col-form-label">Team ID:</label>
-                                    <input th:field="*{teamId}" id="id"/><br/>
+                                    <label for="id8" class="col-form-label">Team ID:</label>
+                                    <input th:field="*{teamId}" id="id8"/><br/>
                                 </div>
     
                                 <div class="form-group row text-start">
-                                    <label for="userId" class="col-form-label">User ID:</label>
-                                    <input th:field="*{userId}" id="userId"/><br/>
+                                    <label for="userId8" class="col-form-label">User ID:</label>
+                                    <input th:field="*{userId}" id="userId8"/><br/>
                                 </div>
                     
                                 <input type="submit" class="btn btn-primary mt-2" value="Remove"/>
