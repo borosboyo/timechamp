@@ -53,26 +53,20 @@
                 <div class="card-body">
                     <h5 class="card-title">Register User</h5>
                     <form class="p-2" th:action="@{/createAppUser}" th:object="${newAppUser}" method="post">
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-2 col-form-label">Email:</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" th:field="*{email}" id="email"/><br/>
-                            </div>
+                        <div class="form-group row text-start">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input class="form-control" th:field="*{email}" id="email"/><br/>
                         </div>
-                        <div class="form-group row">
-                            <label for="username" class="col-sm-2 col-form-label">Username:</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" th:field="*{username}" id="username"/><br/>
-                            </div>
+                        <div class="form-group row text-start">
+                            <label for="username" class="col-form-label">Username:</label>
+                            <input class="form-control" th:field="*{username}" id="username"/><br/>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-sm-2 col-form-label">Password:</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" th:field="*{password}" id="password"/><br/>
-                            </div>
+                        <div class="form-group row text-start">
+                            <label for="password" class="col-form-label">Password:</label>
+                            <input class="form-control" th:field="*{password}" id="password"/><br/>
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Add"/>
+                        <input type="submit" class="btn btn-primary mt-2" value="Add"/>
                     </form>
                 </div>
             </div>
@@ -81,32 +75,24 @@
                 <div class="card-body">
                     <h5 class="card-title">Update User</h5>
                     <form class="p-2" th:action="@{/updateAppUser}" th:object="${updateAppUser}" method="post">
-                        <div class="form-group row">
-                            <label for="id" class="col-sm-2 col-form-label">ID:</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" th:field="*{id}" id="id"/><br/>
-                            </div>
+                        <div class="form-group row text-start">
+                            <label for="id" class="col-form-label">ID:</label>
+                            <input class="form-control" th:field="*{id}" id="id"/><br/>
                         </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-2 col-form-label">Email:</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" th:field="*{email}" id="email"/><br/>
-                            </div>
+                        <div class="form-group row text-start">
+                            <label for="email" class="col-form-label">Email:</label>
+                            <input class="form-control" th:field="*{email}" id="email"/><br/>
                         </div>
-                        <div class="form-group row">
-                            <label for="username" class="col-sm-2 col-form-label">Username:</label>
-                            <div class="col-sm-10">
+                        <div class="form-group row text-start">
+                            <label for="username" class="col-form-label">Username:</label>
                                 <input class="form-control" th:field="*{username}" id="username"/><br/>
-                            </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-sm-2 col-form-label">Password:</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" th:field="*{password}" id="password"/><br/>
-                            </div>
+                        <div class="form-group row text-start">
+                            <label for="password" class="col-form-label">Password:</label>
+                            <input class="form-control" th:field="*{password}" id="password"/><br/>
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Update"/>
+                        <input type="submit" class="btn btn-primary mt-2" value="Update"/>
                     </form>
                 </div>
             </div>
