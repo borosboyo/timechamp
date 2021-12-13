@@ -24,6 +24,7 @@ public class OrganizationController {
 
         model.put("organizations", organizations);
         model.put("newOrganization", new OrganizationParameters());
+        model.put("ThUtils", ThUtils.getInstance());
         return "organizationPage";
     }
 

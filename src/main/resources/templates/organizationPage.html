@@ -34,8 +34,8 @@
                     <tr th:each ="organization : ${organizations}">
                         <th th:text="${organization.id}">ID</th>
                         <th th:text="${organization.name}">Name</th>
-                        <th th:text="${organization.teams}">Google Code</th>
-                        <th th:text="${organization.headQuarter}">latitude</th>
+                        <th th:text="${ThUtils.listTeamNames(organization.teams)}">Teams</th>
+                        <th th:text="${ThUtils.getPlaceName(organization.headQuarter)}">Headquarter</th>
                     </tr>
                 </table>
             </div>
