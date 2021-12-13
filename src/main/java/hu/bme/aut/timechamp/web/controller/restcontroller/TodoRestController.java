@@ -42,8 +42,8 @@ public class TodoRestController {
     }
 
     @PostMapping("/{id}/description")
-    public TodoDto setDescription(@PathVariable long id, @RequestParam String description) {
-        return RestUtils.executeRestRequest(() -> todoService.setDescription(id, description));
+    public TodoDto setDescription(@PathVariable long id, @RequestParam String text) {
+        return RestUtils.executeRestRequest(() -> todoService.setDescription(id, text));
     }
 
     @DeleteMapping("/{id}")
