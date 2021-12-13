@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +22,7 @@ public class EventController {
         List<EventDto> events = eventService.findAll();
 
         model.put("events", events);
-        model.put("newEvent", new EventDto());
+        model.put("newEvent", new EventParameters());
         return "eventPage";
     }
 
@@ -34,12 +32,11 @@ public class EventController {
         return "redirect:/events";
     }
 
-    @DeleteMapping("/removeEvent")
-    public String removeEvent(long id){
+    @RequestMapping(value = "/removeEvent", method = RequestMethod.GET)
+    public String removeEvent(@RequestParam(name="eventId") int id){
         eventService.removeEvent(id);
         return "redirect:/events";
     }
-
 
     @Setter
     @Getter

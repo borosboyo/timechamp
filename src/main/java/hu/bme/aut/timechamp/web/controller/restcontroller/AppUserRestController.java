@@ -31,8 +31,8 @@ public class AppUserRestController {
     }
 
     @PostMapping("/{id}")
-    public AppUserDto updateAppUserDetails(@PathVariable long id, @RequestBody AppUserDto appUserDto){
-        if(appUserService.updateById(id, appUserDto.getEmail(), appUserDto.getUsername(), appUserDto.getPassword())){
+    public AppUserDto updateAppUserDetails(@PathVariable long id, @RequestParam String email, @RequestParam String username, @RequestParam String password){
+        if(appUserService.updateById(id, email, username, password)){
             return appUserService.findById(id);
         }
         throw new ResponseStatusException(HttpStatus.NOT_MODIFIED);
