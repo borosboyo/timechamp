@@ -69,6 +69,103 @@ Minden információ az objektumról akkor kerül megadásra, amikor létrehozzuk
 ##### 18. Prefer interfaces to abstract classes
 Java csak single-inheritencet enged meg, korlátozva az absztrakt osztályok használatát. Meglévő osztályokat könnyű retrofitelni interface-el.
 
+
+#### 5. Chapter 5 - Generics
+
+##### Item 26: Don't use raw types
+Raw type-al a hibák csak runtime-ban derülnek ki. 
+Generics-el a deklaráció tartalmazza a típust, és fordítási időben derülnek ki a problémák.
+
+##### Item 27: Eliminate unchecked warnings
+Generics-ekkel való dolgozás során a sok warning-ot kaphatunk.
+Ha tudjuk bizonyítani, hogy a kódunk typesafe, akkor annotációval eliminálhatjuk a warning-ot.
+A túl sok felesleges warning elnyomhatja a fontos warning-okat.
+
+##### Item 28: Prefer lists to arrays
+Listák használata esetén a hibák túlnyomó többsége compile időben már megjelenik, míg tömbök esetén csak futás időben.
+Listákhoz sok hasznos interface van, otpimalizált implementációkkal.
+
+##### Item 29: Favor generic types
+Kliensként a használatuk ehyszerű, bár generikus osztályokat írni egy kicsit bonyolultabb.
+Primitíveket csak csomagolt formában lehet használni.
+
+##### Item 30: Favor generic methods
+Generikus metódusok használata sokkal biztonságosabb, mint azoké, melyeknél explicit típuskonverziókat kell végezni.
+
+##### Item 31: Use bounded wildcards to increase API flexibility
+A legnagyobb rugalmasság érdekében használjunk wildcard típusokat a bemeneti paramétereken, 
+amelyek pruducer-ek vagy consumer-ek.
+PECS: producer-extends, consumer-super.
+
+##### Item 33: Consider typesafe heterogeneous containers
+Mappoknál a kulcs legyen a típusparaméteres, ne a tároló.
+Típusbiztos heterogén tároló minta.
+
+
+#### Chapter 6 - Enums and Annotations
+
+##### Item 34: Use enums instead of `int` constants
+Az enum típus egy olyan típus, melynek értékei fix konstansok lehetnek.
+Enumokat nem lehet példányosítani, se nem lszármaztatni.
+Használjunk enumokat, ha olyan kostans listára van szükégünk, melynek értékét már fordítási időben is ismerjük.
+
+##### Item 35: Use instance fields instead of ordinals
+Soha ne használjuk ki az enumok ordinalitását, sorrendjét.
+
+##### Item 36: Use `EnumSet` instead of bit fields
+A konstansok bitenkéni vagyolását váltja ki, egy biztonságosabb alternatívát nyújtva.
+
+##### Item 37: use `EnumMap` instead of ordinal indexing
+Szinte soha nem megengedhető, hogy enum ordinalitást használjunk, inább `EnumMap`-ot használjunk.
+
+##### Item 38: Emulate extensible enums with interfaces
+Bár nem lehet leszármaztatni enumokból, de lehet úgy helyettesíteni, hogy írunk egy interface-t az enumhoz, 
+amely implementálja az interface-t.
+
+##### Item 39: Prefer annotations to naming patterns
+Az annotációk sokkal hasznosabbak, mint az elnevezési típusok.
+Illik a java által biztosított annotációkat kihasználni.
+
+##### Item 40: Consistently use the `Override` annotation
+Minding rakjuk ki az `@Override` annotációt, ha felülírunk egy ősosztály függvényét.
+
+##### Item 41: Use marker interfaces to define types
+A marker inerface-k egy olyan típust határoznak meg, melyeket a megjelölt osztály 
+pédányai valósítanak meg.
+A marker interface-ket lehet örökölni, míg annotációt nem.
+
+
+#### Chapter 7 - Lambdas and Streams
+
+##### Item 42: Prefer lambdas to anonymous classes
+Labdák használata olvashatóbb kódot eredményez.
+Törekednünk kell a tömörségre, de ha a kód túl tömör, 
+akkor már kevésbé érthető.
+
+##### Item 43: Prefer method references to lambdas
+Ha a metódusreferenciák tömörebbek akkor használjuk azokat, különben használjunk lambdákat.
+
+##### Item 44: Favor the use of standard functional interfaces
+Használjuk a standard funkcionális interface-eket, amikor csak lehet.
+Ha sajátot hozunk létre, akkor használjuk a `@FunctionalInterface` annotációt.
+
+##### Item 45: Use streams judiciously
+A streamek hasznosak, de túlhasználni őket értelmetlenné teheti a kódot.
+
+##### Item 46: Prefer side-effect-free functions in streams
+Törekedjünk a "pure function"-ok írására és használatára
+
+##### Item 47: Prefer Collection to Stream as a return type
+Ha egy olyan függvényünk van amely elemek sorozatával tér vissza, 
+készüljünk fel rá, hogy egyes felhasználók steram-ként dolgozzák fel,
+míg mások iterálható elemekként.
+
+##### Item 48: Use caution when making streams parallel
+Csak akkor páhuzamosítsunk pipeline-t, biztosan meg vagyunk győződve arról, 
+biztonságos lesz és gyorasbb.
+
+
+
 ### Clean code by Uncle Bob
 #### Code smells (Episode 1)
 #### Naming (Episode 2)
